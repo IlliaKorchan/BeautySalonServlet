@@ -10,8 +10,8 @@
 <html>
     <body>
     <h3>Hi!</h3>
-    <c:forEach var="users" items="${requestScope.users}">
-        Имя: <c:out value="${users.user.login}"/>
+    <c:forEach var="user" items="${requestScope.users}">
+        Имя: <c:out value="${user.login}"/>
     </c:forEach>
     </body>
 </html>

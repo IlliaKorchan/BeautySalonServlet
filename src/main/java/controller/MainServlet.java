@@ -19,7 +19,7 @@ public class MainServlet extends HttpServlet {
 
         List<User> users = DaoFactory.getInstance().createUserDao().findAll();
         req.setAttribute("users", users );
-        req.getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
     }
 
 //    @Override
