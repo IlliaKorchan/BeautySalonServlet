@@ -33,7 +33,6 @@ public class JDBCAppointmentDao implements AppointmentDao {
             statement.setInt(5, entity.getProcedureId());
 
             statement.execute();
-            close();
         } catch (SQLException e) {
             System.out.println("Unable to create appointment!");
         }
@@ -49,8 +48,7 @@ public class JDBCAppointmentDao implements AppointmentDao {
             appointmentMapper.makeUnique(appointments, appointment);
 
             resultSet.close();
-            close();
-            return Optional.of(appointment);
+            return Optional.ofNullable(appointment);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -67,7 +65,6 @@ public class JDBCAppointmentDao implements AppointmentDao {
                 appointmentMapper.makeUnique(appointments, appointment);
             }
             resultSet.close();
-            close();
             return new ArrayList<>(appointments.values());
         } catch (SQLException e) {
             e.printStackTrace();

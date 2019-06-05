@@ -10,8 +10,8 @@
 <html>
     <body>
     <h3>Hi!</h3>
-    <c:forEach var="user" items="${requestScope.users}">
-        Имя: <c:out value="${user.login}"/>
-    </c:forEach>
+    <form method="get" action="${pageContext.request.contextPath}/api/login">
+        <input class="button" type="submit" value="Войти">
+    </form>
     </body>
 </html>

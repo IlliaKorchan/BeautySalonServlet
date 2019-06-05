@@ -32,7 +32,6 @@ public class JDBCProcedureDao implements ProcedureDao {
             statement.setInt(2, entity.getTime());
 
             statement.execute();
-            close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -48,7 +47,6 @@ public class JDBCProcedureDao implements ProcedureDao {
             procedureMapper.makeUnique(procedures, procedure);
 
             resultSet.close();
-            close();
             return Optional.of(procedure);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,7 +64,6 @@ public class JDBCProcedureDao implements ProcedureDao {
                 procedureMapper.makeUnique(procedures, procedure);
             }
             resultSet.close();
-            close();
             return new ArrayList<>(procedures.values());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,7 +80,6 @@ public class JDBCProcedureDao implements ProcedureDao {
             statement.setInt(3, entity.getId());
 
             statement.execute();
-            close();
         } catch (SQLException e) {
             System.out.println("Unable to update procedure!");
         }

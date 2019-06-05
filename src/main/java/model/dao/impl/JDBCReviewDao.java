@@ -38,7 +38,6 @@ public class JDBCReviewDao implements ReviewDao {
             statement.setString(3, entity.getText());
 
             statement.execute();
-            close();
         } catch (SQLException e) {
             System.out.println("Unable to create review!");
         }
@@ -69,7 +68,6 @@ public class JDBCReviewDao implements ReviewDao {
                 reviewMapper.makeUnique(reviews, review);
             }
             resultSet.close();
-            close();
             return new ArrayList<>(reviews.values());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,7 +83,6 @@ public class JDBCReviewDao implements ReviewDao {
             statement.setInt(2, entity.getId());
 
             statement.execute();
-            close();
         } catch (SQLException e) {
             System.out.println("Unable to update review!");
         }
@@ -105,8 +102,6 @@ public class JDBCReviewDao implements ReviewDao {
             reviewMapper.makeUnique(reviews, review);
 
             resultSet.close();
-            close();
-
             return Optional.ofNullable(review);
         } catch (SQLException e) {
             e.printStackTrace();

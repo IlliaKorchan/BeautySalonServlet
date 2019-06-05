@@ -6,6 +6,7 @@ public interface QueryContainer {
                          " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     String FIND_USER_BY_ID = "SELECT * FROM users WHERE user_id = ?";
     String FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE user_login = ?";
+    String FIND_USER_BY_LOGIN_AND_PASSWORD = "SELECT * FROM users WHERE user_login = ?, user_password = ?";
     String FIND_ALL_USERS = "SELECT * FROM users";
     String DELETE_USER_BY_ID = "DELETE FROM users WHERE user_id = ?";
     String UPDATE_USER = "UPDATE users SET user_name = ?, user_surname = ?, user_password = ?, user_gender = ?," +

@@ -35,7 +35,6 @@ public class JDBCUserDao implements UserDao {
             statement.setLong(9, entity.getAmountOfMoney());
 
             statement.execute();
-            close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -64,6 +63,18 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
+    public Optional<User> findByLoginAndPassword(String login, String password) {
+        try (PreparedStatement statement = connection.prepareStatement(FIND_USER_BY_LOGIN_AND_PASSWORD)) {
+            statement.setString(1, login);
+            statement.setString(2, password);
+            return findUser(statement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
     public List<User> findAll() {
         try (PreparedStatement statement = connection.prepareStatement(FIND_ALL_USERS)) {
             ResultSet resultSet = statement.executeQuery();
@@ -73,7 +84,6 @@ public class JDBCUserDao implements UserDao {
                 userMapper.makeUnique(users, user);
             }
             resultSet.close();
-            close();
             return new ArrayList<>(users.values());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -97,7 +107,6 @@ public class JDBCUserDao implements UserDao {
             statement.setInt(10, entity.getId());
 
             statement.execute();
-            close();
         } catch (SQLException e) {
             System.out.println("Unable to update user!");
         }
@@ -117,7 +126,6 @@ public class JDBCUserDao implements UserDao {
         User user = userMapper.extractFromResultSet(resultSet);
         userMapper.makeUnique(users, user);
         resultSet.close();
-        close();
         return Optional.ofNullable(user);
     }
 }
