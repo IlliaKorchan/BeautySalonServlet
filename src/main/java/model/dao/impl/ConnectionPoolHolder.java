@@ -15,8 +15,6 @@ public class ConnectionPoolHolder {
                     ds.setUrl("jdbc:mysql://localhost:3306/beauty_salon?useSSL=false&serverTimezone=UTC");
                     ds.setUsername("root");
                     ds.setPassword("root");
-                    ds.setMinIdle(5);
-                    ds.setMaxIdle(10);
                     ds.setMaxOpenPreparedStatements(100);
                     dataSource = ds;
                 }

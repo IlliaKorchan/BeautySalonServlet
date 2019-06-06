@@ -8,21 +8,25 @@ import java.util.Map;
 
 public class UserMapper implements ObjectMapper<User> {
     @Override
-    public User extractFromResultSet(ResultSet rs) throws SQLException {
-        User user = new User();
-
-        user.setId(rs.getInt("user_id"));
-        user.setName(rs.getString("user_name"));
-        user.setSurname(rs.getString("user_surname"));
-        user.setLogin(rs.getString("user_login"));
-        user.setPassword(rs.getString("user_password"));
-        user.setGender(rs.getString("user_gender"));
-        user.setEmail(rs.getString("user_email"));
-        user.setRole(rs.getString("user_role"));
-        user.setActive(rs.getBoolean("user_active"));
-        user.setAmountOfMoney(rs.getLong("user_amount_money"));
-
-        return user;
+    public User extractFromResultSet(ResultSet rs) {
+        try {
+            if (rs.next()) {
+                int id = rs.getInt("user_id");
+                String name = rs.getString("user_name");
+                String surname = rs.getString("user_surname");
+                String login = rs.getString("user_login");
+                String password = rs.getString("user_password");
+                String gender = rs.getString("user_gender");
+                String email = rs.getString("user_email");
+                String role = rs.getString("user_role");
+                Boolean active = rs.getBoolean("user_active");
+                Long amountOfMoney = rs.getLong("user_amount_money");
+                return new User(id, name, surname, login, password, gender, email, role, active, amountOfMoney);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

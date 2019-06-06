@@ -5,10 +5,13 @@ import model.dao.mapper.UserMapper;
 import model.entities.User;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.List;
+import java.util.Objects;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
-import java.util.Optional;
+
+
 import static controller.QueryContainer.*;
 
 public class JDBCUserDao implements UserDao {
@@ -51,23 +54,30 @@ public class JDBCUserDao implements UserDao {
         }
     }
 
-    @Override
-    public Optional<User> findByLogin(String login) {
-        try (PreparedStatement statement = connection.prepareStatement(FIND_USER_BY_LOGIN)) {
-            statement.setString(1, login);
-            return findUser(statement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+//    @Override
+//    public Optional<User> findByLogin(String login) {
+//        try (PreparedStatement statement = connection.prepareStatement(FIND_USER_BY_LOGIN)) {
+//            statement.setString(1, login);
+//            return findUser(statement);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 
     @Override
-    public Optional<User> findByLoginAndPassword(String login, String password) {
+    public User findByLoginAndPassword(String login, String password) {
         try (PreparedStatement statement = connection.prepareStatement(FIND_USER_BY_LOGIN_AND_PASSWORD)) {
             statement.setString(1, login);
             statement.setString(2, password);
-            return findUser(statement);
+            ResultSet resultSet = statement.executeQuery();
+            User user = userMapper.extractFromResultSet(resultSet);
+
+            if (Objects.nonNull(user)) {
+                userMapper.makeUnique(users, user);
+            }
+            resultSet.close();
+            return user;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

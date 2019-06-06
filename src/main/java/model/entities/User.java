@@ -1,7 +1,7 @@
 package model.entities;
 
 public class User {
-    private Integer id;
+    private int id;
     private String name;
     private String surname;
     private String login;
@@ -15,7 +15,7 @@ public class User {
     public User() {
     }
 
-    public User(Integer id, String name, String surname, String login, String password,
+    public User(int id, String name, String surname, String login, String password,
                 String gender, String email, String role, Boolean active, Long amountOfMoney) {
         this.id = id;
         this.name = name;
@@ -29,11 +29,11 @@ public class User {
         this.amountOfMoney = amountOfMoney;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -10,7 +10,7 @@
 <html>
     <body>
     <h3>Hi!</h3>
-    <form method="get" action="${pageContext.request.contextPath}/api/login">
+    <form method="get" action="${pageContext.request.contextPath}/salon/login">
         <input class="button" type="submit" value="Войти">
     </form>
     </body>
