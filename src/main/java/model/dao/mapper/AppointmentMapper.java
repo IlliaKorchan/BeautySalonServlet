@@ -3,26 +3,31 @@ package model.dao.mapper;
 import model.entities.Appointment;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Map;
 
 public class AppointmentMapper implements ObjectMapper<Appointment> {
     @Override
     public Appointment extractFromResultSet(ResultSet rs) throws SQLException {
-        Appointment appointment = new Appointment();
 
-        appointment.setId(rs.getInt("appointment_id"));
-        appointment.setUserId(rs.getInt("appointment_user_id"));
-        appointment.setMasterId(rs.getInt("appointment_master_id"));
-        appointment.setDate(rs.getDate("appointment_date").toLocalDate());
-        appointment.setTime(rs.getTime("appointment_time").toLocalTime());
-        appointment.setProcedureId(rs.getInt("appointment_procedure_id"));
+        if (rs.next()) {
+            Integer id = rs.getInt("appointment_id");
+            Integer userId = rs.getInt("appointment_user_id");
+            Integer masterId = rs.getInt("appointment_master_id");
+            LocalDate date = rs.getDate("appointment_date").toLocalDate();
+            LocalTime time = rs.getTime("appointment_time").toLocalTime();
+            Integer procedureId = rs.getInt("appointment_procedure_id");
 
-        return appointment;
+            return new Appointment(id, userId, masterId, date, time, procedureId);
+        }
+        return null;
     }
 
     @Override
     public Appointment makeUnique(Map<Integer, Appointment> cache, Appointment appointment) {
         cache.putIfAbsent(appointment.getId(), appointment);
+
         return cache.get(appointment.getId());
     }
 }

@@ -9,9 +9,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <body>
-    <h3>Hi!</h3>
-    <form method="get" action="${pageContext.request.contextPath}/salon/login">
-        <input class="button" type="submit" value="Войти">
-    </form>
+        <h3>Hi!</h3>
+        <form method="get" action="${pageContext.request.contextPath}/salon/login">
+            <input class="button" type="submit" value="Войти">
+        </form>
     </body>
 </html>

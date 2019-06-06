@@ -6,20 +6,18 @@ import model.entities.Appointment;
 
 import java.sql.*;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-import static controller.QueryContainer.*;
+import static controller.QueryContainer.CREATE_APPOINTMENT;
+import static controller.QueryContainer.FIND_ALL_APPOINTMENTS;
+import static controller.QueryContainer.FIND_APPOINTMENT_BY_ID;
 
 public class JDBCAppointmentDao implements AppointmentDao {
     private Connection connection;
     private AppointmentMapper appointmentMapper = new AppointmentMapper();
     private Map<Integer, Appointment> appointments = new HashMap<>();
 
-    public JDBCAppointmentDao(Connection connection) {
+    JDBCAppointmentDao(Connection connection) {
         this.connection = connection;
     }
 
@@ -34,21 +32,24 @@ public class JDBCAppointmentDao implements AppointmentDao {
 
             statement.execute();
         } catch (SQLException e) {
-            System.out.println("Unable to create appointment!");
+            e.printStackTrace();
         }
     }
 
     @Override
-    public Optional<Appointment> findById(int id) {
+    public Appointment findById(int id) {
         try (PreparedStatement statement = connection.prepareStatement(FIND_APPOINTMENT_BY_ID)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
             Appointment appointment = appointmentMapper.extractFromResultSet(resultSet);
-            appointmentMapper.makeUnique(appointments, appointment);
 
+            if (Objects.nonNull(appointment)) {
+                appointmentMapper.makeUnique(appointments, appointment);
+            }
             resultSet.close();
-            return Optional.ofNullable(appointment);
+
+            return appointment;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

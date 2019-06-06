@@ -11,22 +11,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+import java.util.Objects;
 
-import static controller.QueryContainer.*;
+import static controller.QueryContainer.CREATE_REVIEW;
+import static controller.QueryContainer.FIND_ALL_REVIEWS;
+import static controller.QueryContainer.UPDATE_REVIEW;
+import static controller.QueryContainer.FIND_REVIEW_BY_MASTER_ID;
+import static controller.QueryContainer.FIND_REVIEW_BY_CLIENT_ID;
+import static controller.QueryContainer.FIND_REVIEW_BY_ID;
+
 
 public class JDBCReviewDao implements ReviewDao {
     private Connection connection;
     private ReviewMapper reviewMapper;
     private Map<Integer, Review> reviews;
 
-    public JDBCReviewDao(Connection connection, ReviewMapper reviewMapper, Map<Integer, Review> reviews) {
-        this.connection = connection;
-        this.reviewMapper = reviewMapper;
-        this.reviews = reviews;
-    }
-
-    public JDBCReviewDao(Connection connection) {
+    JDBCReviewDao(Connection connection) {
         this.connection = connection;
     }
 
@@ -39,22 +39,22 @@ public class JDBCReviewDao implements ReviewDao {
 
             statement.execute();
         } catch (SQLException e) {
-            System.out.println("Unable to create review!");
+            e.printStackTrace();
         }
     }
 
     @Override
-    public Optional<Review> findById(int id) {
+    public Review findById(int id) {
         return findReview(FIND_REVIEW_BY_ID, id);
     }
 
     @Override
-    public Optional<Review> findByClientId(int clientId) {
+    public Review findByClientId(int clientId) {
         return findReview(FIND_REVIEW_BY_CLIENT_ID, clientId);
     }
 
     @Override
-    public Optional<Review> findByMasterId(int masterId) {
+    public Review findByMasterId(int masterId) {
         return findReview(FIND_REVIEW_BY_MASTER_ID, masterId);
     }
 
@@ -68,6 +68,7 @@ public class JDBCReviewDao implements ReviewDao {
                 reviewMapper.makeUnique(reviews, review);
             }
             resultSet.close();
+
             return new ArrayList<>(reviews.values());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,30 +80,36 @@ public class JDBCReviewDao implements ReviewDao {
     public void update(Review entity) {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_REVIEW)) {
             statement.setString(1, entity.getText());
-
             statement.setInt(2, entity.getId());
 
             statement.execute();
         } catch (SQLException e) {
-            System.out.println("Unable to update review!");
+            e.printStackTrace();
         }
     }
 
     @Override
     public void close() {
-
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public Optional<Review> findReview(String query, int id) {
+    public Review findReview(String query, int id) {
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
             Review review = reviewMapper.extractFromResultSet(resultSet);
-            reviewMapper.makeUnique(reviews, review);
 
+            if (Objects.nonNull(review)) {
+                reviewMapper.makeUnique(reviews, review);
+            }
             resultSet.close();
-            return Optional.ofNullable(review);
+
+            return review;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

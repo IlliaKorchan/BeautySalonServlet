@@ -10,7 +10,7 @@ public interface GenericDao<T> extends AutoCloseable {
 
     void create(T entity);
 
-    Optional<T> findById(int id);
+    T findById(int id);
 
     List<T> findAll();
 
@@ -20,7 +20,6 @@ public interface GenericDao<T> extends AutoCloseable {
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, id);
             statement.execute();
-            close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

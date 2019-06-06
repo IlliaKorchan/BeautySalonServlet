@@ -9,8 +9,6 @@ public interface QueryContainer {
     String FIND_USER_BY_LOGIN_AND_PASSWORD = "SELECT * FROM users WHERE user_login = ? AND user_password = ?";
     String FIND_ALL_USERS = "SELECT * FROM users";
     String DELETE_USER_BY_ID = "DELETE FROM users WHERE user_id = ?";
-    String UPDATE_USER = "UPDATE users SET user_name = ?, user_surname = ?, user_password = ?, user_gender = ?," +
-                         " user_email = ?, user_role = ?, user_active = ?, user_amount_money = ?";
 
     String CREATE_APPOINTMENT = "INSERT INTO appointments(appointment_user_id, appointment_master_id, " +
                                 "appointment_date, appointment_time, appointment_procedure_id) " +

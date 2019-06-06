@@ -8,20 +8,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-import static controller.QueryContainer.*;
+import static controller.QueryContainer.CREATE_PROCEDURE;
+import static controller.QueryContainer.FIND_ALL_PROCEDURES;
+import static controller.QueryContainer.UPDATE_PROCEDURE;
+import static controller.QueryContainer.FIND_PROCEDURE_BY_ID;
+
 
 public class JDBCProcedureDao implements ProcedureDao {
     private Connection connection;
     private ProcedureMapper procedureMapper = new ProcedureMapper();
     private Map<Integer, Procedure> procedures = new HashMap<>();
 
-    public JDBCProcedureDao(Connection connection) {
+    JDBCProcedureDao(Connection connection) {
         this.connection = connection;
     }
 
@@ -38,16 +38,19 @@ public class JDBCProcedureDao implements ProcedureDao {
     }
 
     @Override
-    public Optional<Procedure> findById(int id) {
+    public Procedure findById(int id) {
         try (PreparedStatement statement = connection.prepareStatement(FIND_PROCEDURE_BY_ID)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
 
             Procedure procedure = procedureMapper.extractFromResultSet(resultSet);
-            procedureMapper.makeUnique(procedures, procedure);
 
+            if (Objects.nonNull(procedure)) {
+                procedureMapper.makeUnique(procedures, procedure);
+            }
             resultSet.close();
-            return Optional.of(procedure);
+
+            return procedure;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -64,6 +67,7 @@ public class JDBCProcedureDao implements ProcedureDao {
                 procedureMapper.makeUnique(procedures, procedure);
             }
             resultSet.close();
+
             return new ArrayList<>(procedures.values());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -74,14 +78,14 @@ public class JDBCProcedureDao implements ProcedureDao {
     @Override
     public void update(Procedure entity) {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_PROCEDURE)) {
+
             statement.setLong(1, entity.getPrice());
             statement.setInt(2, entity.getTime());
-
             statement.setInt(3, entity.getId());
 
             statement.execute();
         } catch (SQLException e) {
-            System.out.println("Unable to update procedure!");
+            e.printStackTrace();
         }
     }
 

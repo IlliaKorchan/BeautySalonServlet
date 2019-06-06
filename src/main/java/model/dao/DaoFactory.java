@@ -1,8 +1,6 @@
 package model.dao;
 
 import model.dao.impl.JDBCDaoFactory;
-import model.entities.Appointment;
-import model.entities.Procedure;
 
 public abstract class DaoFactory {
     private static DaoFactory daoFactory;
@@ -13,14 +11,14 @@ public abstract class DaoFactory {
     public abstract ReviewDao createReviewDao();
 
     public static DaoFactory getInstance(){
-        if( daoFactory == null ){
+        if (daoFactory == null) {
             synchronized (DaoFactory.class){
-                if(daoFactory==null){
-                    DaoFactory temp = new JDBCDaoFactory();
-                    daoFactory = temp;
+                if (daoFactory == null) {
+                    daoFactory = new JDBCDaoFactory();
                 }
             }
         }
+
         return daoFactory;
     }
 }
