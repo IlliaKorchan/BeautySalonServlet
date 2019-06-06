@@ -13,5 +13,8 @@
         <form method="get" action="${pageContext.request.contextPath}/salon/login">
             <input class="button" type="submit" value="Войти">
         </form>
+        <form method="get" action="${pageContext.request.contextPath}/registration">
+            <input class="button" type="submit" value="Зарегистрироваться">
+        </form>
     </body>
 </html>

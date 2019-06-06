@@ -3,6 +3,8 @@ package controller.servlet;
 import controller.command.Command;
 import controller.command.Login;
 import controller.command.Logout;
+import controller.command.Registration;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,7 @@ public class MainServlet extends HttpServlet {
         commands = new HashMap<>();
         commands.put("login", new Login());
         commands.put("logout", new Logout());
+        commands.put("registration", new Registration());
     }
 
     @Override
