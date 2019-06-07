@@ -47,9 +47,9 @@ public class AuthenticationFilter implements Filter {
             moveToMenu(request, response, role);
 
         } else {
-            request.setAttribute("message", (Objects.nonNull(login)) && Objects.nonNull(password) ?
-                                                            "Користувач з таким іменем/паролем не знайдений!" :
-                                                            "Для перегляду цієї сторінки необхідно авторизуватися!");
+//            request.setAttribute("message", (Objects.nonNull(login)) && Objects.nonNull(password) ?
+//                                                            "Користувач з таким іменем/паролем не знайдений!" :
+//                                                            "Для перегляду цієї сторінки необхідно авторизуватися!");
             request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         }
     }
