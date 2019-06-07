@@ -1,9 +1,9 @@
-package controller;
+package string.containers;
 
 public interface QueryContainer {
     String CREATE_USER = "INSERT INTO users(user_name, user_surname, user_login, user_password, user_gender," +
-                         " user_email, user_role, user_active, user_amount_money)" +
-                         " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                         " user_email, user_role, user_amount_money)" +
+                         " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     String FIND_USER_BY_ID = "SELECT * FROM users WHERE user_id = ?";
     String FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE user_login = ?";
     String FIND_USER_BY_LOGIN_AND_PASSWORD = "SELECT * FROM users WHERE user_login = ? AND user_password = ?";

@@ -15,13 +15,15 @@ public class AuthenticationFilter implements Filter {
     public void init(FilterConfig filterConfig){}
 
     @Override
-    public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse,
+    public void doFilter(final ServletRequest servletRequest,
+                         final ServletResponse servletResponse,
                          final FilterChain filterChain) throws IOException, ServletException {
 
         final HttpServletRequest request = (HttpServletRequest) servletRequest;
         final HttpServletResponse response = (HttpServletResponse) servletResponse;
         final String login = request.getParameter("login");
         final String password = request.getParameter("password");
+        System.out.println(request.getAttribute(""));
 
         @SuppressWarnings("unchecked")
         final AtomicReference<UserDao> userDao = (AtomicReference<UserDao>) request.getServletContext()

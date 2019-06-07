@@ -22,6 +22,15 @@
         <url-pattern>/salon/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>RegistrationFilter</filter-name>
+        <filter-class>controller.filter.RegistrationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RegistrationFilter</filter-name>
+        <url-pattern>/register/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>MainServlet</servlet-name>
         <servlet-class>controller.servlet.MainServlet</servlet-class>

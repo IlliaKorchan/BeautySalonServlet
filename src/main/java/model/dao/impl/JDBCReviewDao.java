@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static controller.QueryContainer.CREATE_REVIEW;
-import static controller.QueryContainer.FIND_ALL_REVIEWS;
-import static controller.QueryContainer.UPDATE_REVIEW;
-import static controller.QueryContainer.FIND_REVIEW_BY_MASTER_ID;
-import static controller.QueryContainer.FIND_REVIEW_BY_CLIENT_ID;
-import static controller.QueryContainer.FIND_REVIEW_BY_ID;
+import static string.containers.QueryContainer.FIND_ALL_REVIEWS;
+import static string.containers.QueryContainer.FIND_REVIEW_BY_ID;
+import static string.containers.QueryContainer.UPDATE_REVIEW;
+import static string.containers.QueryContainer.CREATE_REVIEW;
+import static string.containers.QueryContainer.FIND_REVIEW_BY_CLIENT_ID;
+import static string.containers.QueryContainer.FIND_REVIEW_BY_MASTER_ID;
 
 
 public class JDBCReviewDao implements ReviewDao {
@@ -97,7 +97,7 @@ public class JDBCReviewDao implements ReviewDao {
         }
     }
 
-    public Review findReview(String query, int id) {
+    private Review findReview(String query, int id) {
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();

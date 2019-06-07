@@ -10,11 +10,7 @@ import java.util.Objects;
 import java.util.HashMap;
 import java.util.Map;
 
-import static controller.QueryContainer.FIND_ALL_USERS;
-import static controller.QueryContainer.FIND_USER_BY_LOGIN_AND_PASSWORD;
-import static controller.QueryContainer.CREATE_USER;
-import static controller.QueryContainer.FIND_USER_BY_ID;
-import static controller.QueryContainer.FIND_USER_BY_LOGIN;
+import static string.containers.QueryContainer.*;
 
 
 public class JDBCUserDao implements UserDao {
@@ -36,7 +32,7 @@ public class JDBCUserDao implements UserDao {
             statement.setString(5, entity.getGender());
             statement.setString(6, entity.getEmail());
             statement.setString(7, entity.getRole());
-            statement.setLong(9, 0L);
+            statement.setLong(8, 0L);
 
             statement.execute();
         } catch (SQLException e) {
@@ -129,7 +125,7 @@ public class JDBCUserDao implements UserDao {
         }
     }
 
-    public User findUser(PreparedStatement statement) throws SQLException {
+    private User findUser(PreparedStatement statement) throws SQLException {
         ResultSet resultSet = statement.executeQuery();
 
         User user = userMapper.extractFromResultSet(resultSet);

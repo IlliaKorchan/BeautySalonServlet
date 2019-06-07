@@ -6,11 +6,16 @@ import model.entities.Appointment;
 
 import java.sql.*;
 import java.sql.Date;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
-import static controller.QueryContainer.CREATE_APPOINTMENT;
-import static controller.QueryContainer.FIND_ALL_APPOINTMENTS;
-import static controller.QueryContainer.FIND_APPOINTMENT_BY_ID;
+import static string.containers.QueryContainer.CREATE_APPOINTMENT;
+import static string.containers.QueryContainer.FIND_ALL_APPOINTMENTS;
+import static string.containers.QueryContainer.FIND_APPOINTMENT_BY_ID;
+
 
 public class JDBCAppointmentDao implements AppointmentDao {
     private Connection connection;
