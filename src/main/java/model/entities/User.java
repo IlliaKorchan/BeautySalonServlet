@@ -15,6 +15,16 @@ public class User {
     public User() {
     }
 
+    public User(String name, String surname, String login, String password, String gender, String email, String role) {
+        this.name = name;
+        this.surname = surname;
+        this.login = login;
+        this.password = password;
+        this.gender = gender;
+        this.email = email;
+        this.role = role;
+    }
+
     public User(Integer id, String name, String surname, String login, String password,
                 String gender, String email, String role, Boolean active, Long amountOfMoney) {
         this.id = id;

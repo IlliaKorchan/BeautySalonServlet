@@ -36,8 +36,7 @@ public class JDBCUserDao implements UserDao {
             statement.setString(5, entity.getGender());
             statement.setString(6, entity.getEmail());
             statement.setString(7, entity.getRole());
-            statement.setBoolean(8, entity.getActive());
-            statement.setLong(9, entity.getAmountOfMoney());
+            statement.setLong(9, 0L);
 
             statement.execute();
         } catch (SQLException e) {

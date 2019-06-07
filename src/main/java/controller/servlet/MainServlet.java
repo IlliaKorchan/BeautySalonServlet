@@ -1,9 +1,6 @@
 package controller.servlet;
 
-import controller.command.Command;
-import controller.command.Login;
-import controller.command.Logout;
-import controller.command.Registration;
+import controller.command.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
