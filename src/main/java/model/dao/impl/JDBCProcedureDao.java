@@ -29,8 +29,9 @@ public class JDBCProcedureDao implements ProcedureDao {
     @Override
     public void create(Procedure entity) {
         try (PreparedStatement statement = connection.prepareStatement(CREATE_PROCEDURE)) {
-            statement.setLong(1, entity.getPrice());
-            statement.setInt(2, entity.getTime());
+            statement.setString(1, entity.getName());
+            statement.setLong(2, entity.getPrice());
+            statement.setInt(3, entity.getTime());
 
             statement.execute();
         } catch (SQLException e) {

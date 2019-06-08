@@ -2,14 +2,16 @@ package model.entities;
 
 public class Procedure {
     private Integer id;
+    private String name;
     private Long price;
     private Integer time;
 
     public Procedure() {
     }
 
-    public Procedure(Integer id, Long price, Integer time) {
+    public Procedure(Integer id, String name, Long price, Integer time) {
         this.id = id;
+        this.name = name;
         this.price = price;
         this.time = time;
     }
@@ -36,5 +38,13 @@ public class Procedure {
 
     public void setTime(Integer time) {
         this.time = time;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

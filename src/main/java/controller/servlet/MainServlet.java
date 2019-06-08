@@ -19,6 +19,7 @@ public class MainServlet extends HttpServlet {
         commands.put("login", new Login());
         commands.put("logout", new Logout());
         commands.put("registration", new Registration());
+        commands.put("client-appoinments", new ClientAppointments());
     }
 
     @Override

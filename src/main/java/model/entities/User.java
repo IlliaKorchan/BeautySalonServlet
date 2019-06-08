@@ -2,8 +2,10 @@ package model.entities;
 
 public class User {
     private Integer id;
-    private String name;
-    private String surname;
+    private String nameUkr;
+    private String nameEn;
+    private String surnameUkr;
+    private String surnameEn;
     private String login;
     private String password;
     private String gender;
@@ -15,9 +17,12 @@ public class User {
     public User() {
     }
 
-    public User(String name, String surname, String login, String password, String gender, String email, String role) {
-        this.name = name;
-        this.surname = surname;
+    public User(String nameUkr, String nameEn, String surnameUkr, String surnameEn, String login,
+                String password, String gender, String email, String role) {
+        this.nameUkr = nameUkr;
+        this.nameEn = nameEn;
+        this.surnameUkr = surnameUkr;
+        this.surnameEn = surnameEn;
         this.login = login;
         this.password = password;
         this.gender = gender;
@@ -25,11 +30,13 @@ public class User {
         this.role = role;
     }
 
-    public User(Integer id, String name, String surname, String login, String password,
-                String gender, String email, String role, Boolean active, Long amountOfMoney) {
+    public User(Integer id, String nameUkr, String nameEn, String surnameUkr, String surnameEn, String login,
+                String password, String gender, String email, String role, Boolean active, Long amountOfMoney) {
         this.id = id;
-        this.name = name;
-        this.surname = surname;
+        this.nameUkr = nameUkr;
+        this.nameEn = nameEn;
+        this.surnameUkr = surnameUkr;
+        this.surnameEn = surnameEn;
         this.login = login;
         this.password = password;
         this.gender = gender;
@@ -47,20 +54,36 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNameUkr() {
+        return nameUkr;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameUkr(String nameUkr) {
+        this.nameUkr = nameUkr;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getNameEn() {
+        return nameEn;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setNameEn(String nameEn) {
+        this.nameEn = nameEn;
+    }
+
+    public String getSurnameUkr() {
+        return surnameUkr;
+    }
+
+    public void setSurnameUkr(String surnameUkr) {
+        this.surnameUkr = surnameUkr;
+    }
+
+    public String getSurnameEn() {
+        return surnameEn;
+    }
+
+    public void setSurnameEn(String surnameEn) {
+        this.surnameEn = surnameEn;
     }
 
     public String getLogin() {

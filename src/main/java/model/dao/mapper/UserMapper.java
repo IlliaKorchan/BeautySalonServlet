@@ -12,8 +12,10 @@ public class UserMapper implements ObjectMapper<User> {
 
         if (rs.next()) {
             Integer id = rs.getInt("user_id");
-            String name = rs.getString("user_name");
-            String surname = rs.getString("user_surname");
+            String nameUkr = rs.getString("user_name_ukr");
+            String nameEn = rs.getString("user_name_en");
+            String surnameUkr = rs.getString("user_surname_ukr");
+            String surnameEn = rs.getString("user_surname_en");
             String login = rs.getString("user_login");
             String password = rs.getString("user_password");
             String gender = rs.getString("user_gender");
@@ -22,7 +24,8 @@ public class UserMapper implements ObjectMapper<User> {
             Boolean active = rs.getBoolean("user_active");
             Long amountOfMoney = rs.getLong("user_amount_money");
 
-            return new User(id, name, surname, login, password, gender, email, role, active, amountOfMoney);
+            return new User(id, nameUkr, nameEn, surnameUkr, surnameEn,
+                            login, password, gender, email, role, active, amountOfMoney);
         }
         return null;
     }

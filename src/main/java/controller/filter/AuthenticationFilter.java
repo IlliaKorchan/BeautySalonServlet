@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.Objects;
 
@@ -63,10 +64,19 @@ public class AuthenticationFilter implements Filter {
      */
     private void moveToMenu(final HttpServletRequest request, final HttpServletResponse response,
                             final String role) throws ServletException, IOException {
-
-                request.getRequestDispatcher("/WEB-INF/view/menu/" + role + "-menu.jsp").forward(request, response);
+        setUserName(request,(User) request.getSession().getAttribute("user"));
+        request.getRequestDispatcher("/WEB-INF/view/menu/" + role + "-menu.jsp").forward(request, response);
     }
 
     @Override
     public void destroy() {}
+
+    private void setUserName(HttpServletRequest request, User user) {
+        Locale locale = request.getLocale();
+        System.out.println(request.getSession().getAttribute("language"));
+        request.getSession().setAttribute("name", (locale.getLanguage().equals("uk")) ? user.getNameUkr()
+                                                                                         : user.getNameEn());
+        request.getSession().setAttribute("surname", (locale.getLanguage().equals("uk")) ? user.getSurnameUkr()
+                                                                                            : user.getSurnameEn());
+    }
 }

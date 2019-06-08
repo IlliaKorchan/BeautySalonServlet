@@ -11,11 +11,12 @@ public class ProcedureMapper implements ObjectMapper<Procedure> {
     public Procedure extractFromResultSet(ResultSet rs) throws SQLException {
 
         if (rs.next()) {
+            String name = rs.getString("procedure_name");
             Integer id = rs.getInt("procedure_id");
             Long price = rs.getLong("procedure_price");
             Integer time = rs.getInt("procedure_time");
 
-            return new Procedure(id, price, time);
+            return new Procedure(id,name, price, time);
         }
         return null;
     }
