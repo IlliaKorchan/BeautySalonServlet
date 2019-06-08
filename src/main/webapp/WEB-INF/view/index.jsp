@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Илья Корчан
@@ -7,8 +6,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/fmt' prefix='fmt'%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="language"
+       value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+       scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="message"/>
+
 <!doctype html>
-<html lang="en">
+<html lang="${language}">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -19,7 +26,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
 
-    <title>Салон красоты "Красота"</title>
+    <title><fmt:message key="title.index"/></title>
 </head>
 
 <body>
@@ -30,20 +37,33 @@
     </a>
     <a href="${pageContext.request.contextPath}/salon/login" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" >
-        Войти
+        <fmt:message key="button.sign-in"/>
     </a>
+    <form>
+        <label for="language"></label>
+        <select id="language" name="language"
+                onchange="submit()" style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
+            <option value="en" ${language == 'en' ? 'selected' : ''} style="color: deeppink">English</option>
+            <option value="uk" ${language == 'uk' ? 'selected' : ''} style="color: deeppink">Українська</option>
+        </select>
+    </form>
 </nav>
+
 <br>
 <div class="container">
         <form method="get" action="${pageContext.request.contextPath}/salon/login">
-            <p align="center"><button class="btn btn-success" style="background-color: #FFA9EB" type="submit">Войти</button></p>
+            <p align="center"><button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
+                <fmt:message key="button.sign-in"/>
+            </button>
+            </p>
         </form>
 
         <br>
         <form method="get" action="${pageContext.request.contextPath}/registration">
-            <p align="center"><button class="btn btn-success" style="background-color: #FFA9EB" type="submit">Зарегистрироваться</button></p>
+            <p align="center"><button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
+                <fmt:message key="button.sign-up"/>
+            </button></p>
         </form>
-
 
 </div>
 

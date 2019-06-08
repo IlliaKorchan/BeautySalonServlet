@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: koill
@@ -7,6 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/fmt' prefix='fmt'%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="language"
+       value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+       scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="message"/>
 <link rel="stylesheet" href="../../css/styles.css"/>
 <!doctype html>
 <html lang="en">
@@ -20,7 +26,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
 
-    <title>Регистрация</title>
+    <title><fmt:message key="title.registration"/></title>
 </head>
 
 <body>
@@ -31,32 +37,40 @@
         </a>
         <a href="${pageContext.request.contextPath}/salon/login" class="navbar-brand letter"
                                                                 style="color: deeppink; font-size:11pt" >
-            Войти
+            <fmt:message key="button.sign-in"/>
         </a>
+        <form>
+            <label for="language"></label>
+            <select id="language" name="language"
+                    onchange="submit()" style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
+                <option value="en" ${language == 'en' ? 'selected' : ''} style="color: deeppink">English</option>
+                <option value="uk" ${language == 'uk' ? 'selected' : ''} style="color: deeppink">Українська</option>
+            </select>
+        </form>
     </nav>
     <br>
     <form method="post" action="${requestScope.request.contextPath}/register">
         <p align="center">
         <div class="form-col" align="center">
             <div class="col">
-                <a class="navbar-brand letter" style="color: deeppink; font-size:11pt">Имя:</a>
+                <a class="navbar-brand letter" style="color: deeppink; font-size:11pt"><fmt:message key="field.user.name"/>:</a>
                 <input type="text" required placeholder="name" name="userName"><br>
-                <a class="navbar-brand letter" style="color: deeppink; font-size:11pt">Фамилия:</a>
+                <a class="navbar-brand letter" style="color: deeppink; font-size:11pt"><fmt:message key="field.user.surname"/>:</a>
                 <input type="text" required placeholder="surname" name="userSurname"><br>
-                <a class="navbar-brand letter" style="color: deeppink; font-size:11pt">Логин:</a>
+                <a class="navbar-brand letter" style="color: deeppink; font-size:11pt"><fmt:message key="field.user.login"/>:</a>
                 <input type="text" required placeholder="login" name="userLogin"><br>
-                <a class="navbar-brand letter" style="color: deeppink; font-size:11pt">Пароль:</a>
+                <a class="navbar-brand letter" style="color: deeppink; font-size:11pt"><fmt:message key="field.user.password"/>:</a>
                 <input type="password" required placeholder="password" name="userPassword"><br>
-                <a class="navbar-brand letter" style="color: deeppink; font-size:11pt">Пол:</a>
+                <a class="navbar-brand letter" style="color: deeppink; font-size:11pt"><fmt:message key="field.user.gender"/>:</a>
                 <select name="userGender">
-                    <option value="male">male</option>
-                    <option value="female">female</option>
+                    <option value="male"><fmt:message key="field.user.gender.male"/></option>
+                    <option value="female"><fmt:message key="field.user.gender.female"/></option>
                 </select><br>
-                <a class="navbar-brand letter" style="color: deeppink; font-size:11pt">E-mail:</a>
+                <a class="navbar-brand letter" style="color: deeppink; font-size:11pt"><fmt:message key="field.user.email"/>:</a>
                 <input type="text" required placeholder="email" name="userEmail"><br>
-                <small id="help" class="form-text text-muted">Все поля являются обязательными для заполнения!</small>
+                <small id="help" class="form-text text-muted"><fmt:message key="warn.required.fields"/></small>
 
-                <button class="btn btn-success" style="background-color: #FFA9EB">Зарегистрироваться</button>
+                <button class="btn btn-success" style="background-color: #FFA9EB"><fmt:message key="button.sign-up"/></button>
             </div>
         </div>
     </form>
