@@ -151,9 +151,11 @@ public class JDBCUserDao implements UserDao {
 
     private User findUser(PreparedStatement statement) throws SQLException {
         ResultSet resultSet = statement.executeQuery();
+        User user = null;
 
-        User user = userMapper.extractFromResultSet(resultSet);
-
+        if (resultSet.next()) {
+         user = userMapper.extractFromResultSet(resultSet);
+        }
         if (Objects.nonNull(user)) {
             userMapper.makeUnique(users, user);
         }

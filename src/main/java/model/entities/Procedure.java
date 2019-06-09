@@ -2,16 +2,18 @@ package model.entities;
 
 public class Procedure {
     private Integer id;
-    private String name;
+    private String nameUkr;
+    private String nameEn;
     private Long price;
     private Integer time;
 
     public Procedure() {
     }
 
-    public Procedure(Integer id, String name, Long price, Integer time) {
+    public Procedure(Integer id, String nameUkr, String nameEn, Long price, Integer time) {
         this.id = id;
-        this.name = name;
+        this.nameUkr = nameUkr;
+        this.nameEn = nameEn;
         this.price = price;
         this.time = time;
     }
@@ -40,11 +42,19 @@ public class Procedure {
         this.time = time;
     }
 
-    public String getName() {
-        return name;
+    public String getNameUkr() {
+        return nameUkr;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameUkr(String nameUkr) {
+        this.nameUkr = nameUkr;
+    }
+
+    public void setNameEn(String nameEn) {
+        this.nameEn = nameEn;
+    }
+
+    public String getNameEn() {
+        return nameEn;
     }
 }

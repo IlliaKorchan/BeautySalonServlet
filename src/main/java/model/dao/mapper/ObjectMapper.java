@@ -6,5 +6,5 @@ import java.util.Map;
 
 public interface ObjectMapper<T> {
     T extractFromResultSet(ResultSet rs) throws SQLException;
-    T makeUnique(Map<Integer, T> cache, T teacher);
+    T makeUnique(Map<Integer, T> cache, T entity);
 }

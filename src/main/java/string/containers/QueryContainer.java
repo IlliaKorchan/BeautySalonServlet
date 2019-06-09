@@ -17,6 +17,16 @@ public interface QueryContainer {
     String FIND_APPOINTMENT_BY_ID = "SELECT * FROM appointments WHERE appointment_id = ?";
     String FIND_ALL_APPOINTMENTS = "SELECT * FROM appointments";
     String DELETE_APPOINTMENT_BY_ID = "DELETE FROM appointments WHERE appointment_id = ?";
+    String FIND_ALL_CLIENT_APPOINTMENTS_UKR = "SELECT appointments.appointment_id, users.user_surname_ukr AS master_surname, appointment_date, appointment_time, " +
+            "procedures.procedure_name_ukr AS procedure_name, procedures.procedure_price FROM appointments JOIN users " +
+            "ON appointments.appointment_master_id = users.user_id JOIN procedures " +
+            "ON appointments.appointment_procedure_id = procedures.procedure_id " +
+            "WHERE appointments.appointment_user_id = ?";
+    String FIND_ALL_CLIENT_APPOINTMENTS_EN = "SELECT appointments.appointment_id, users.user_surname_en AS master_surname, appointment_date, appointment_time, " +
+            "procedures.procedure_name_en AS procedure_name, procedures.procedure_price FROM appointments JOIN users " +
+            "ON appointments.appointment_master_id = users.user_id JOIN procedures " +
+            "ON appointments.appointment_procedure_id = procedures.procedure_id " +
+            "WHERE appointments.appointment_user_id = ?";
 
     String CREATE_PROCEDURE = "INSERT INTO procedures(procedure_name, procedure_price, procedure_time) " +
                               "VALUES (?, ?, ?)";

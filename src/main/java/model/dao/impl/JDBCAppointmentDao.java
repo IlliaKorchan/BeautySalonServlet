@@ -46,8 +46,11 @@ public class JDBCAppointmentDao implements AppointmentDao {
         try (PreparedStatement statement = connection.prepareStatement(FIND_APPOINTMENT_BY_ID)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
+            Appointment appointment = null;
 
-            Appointment appointment = appointmentMapper.extractFromResultSet(resultSet);
+            if (resultSet.next()) {
+                appointment = appointmentMapper.extractFromResultSet(resultSet);
+            }
 
             if (Objects.nonNull(appointment)) {
                 appointmentMapper.makeUnique(appointments, appointment);

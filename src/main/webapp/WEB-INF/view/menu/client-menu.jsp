@@ -62,7 +62,7 @@
         <fmt:message key="field.user.login"/>: ${sessionScope.user.login}<br>
         <fmt:message key="field.user.gender"/>: <fmt:message key="${sessionScope.user.gender}"/><br>
         <fmt:message key="field.user.email"/>: ${sessionScope.user.email}<br>
-        <br><br>
+        <br>
         <form method="get" action="${pageContext.request.contextPath}/salon/change-password">
         <p align="center"><button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
         <fmt:message key="button.edit.password"/>

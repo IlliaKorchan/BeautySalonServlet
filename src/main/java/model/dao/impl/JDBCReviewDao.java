@@ -106,9 +106,11 @@ public class JDBCReviewDao implements ReviewDao {
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
+            Review review = null;
 
-            Review review = reviewMapper.extractFromResultSet(resultSet);
-
+            if (resultSet.next()) {
+                review = reviewMapper.extractFromResultSet(resultSet);
+            }
             if (Objects.nonNull(review)) {
                 reviewMapper.makeUnique(reviews, review);
             }

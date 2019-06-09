@@ -10,15 +10,14 @@ public class ProcedureMapper implements ObjectMapper<Procedure> {
     @Override
     public Procedure extractFromResultSet(ResultSet rs) throws SQLException {
 
-        if (rs.next()) {
-            String name = rs.getString("procedure_name");
-            Integer id = rs.getInt("procedure_id");
-            Long price = rs.getLong("procedure_price");
-            Integer time = rs.getInt("procedure_time");
+        String nameUkr = rs.getString("procedure_name_ukr");
+        String nameEn = rs.getString("procedure_name_en");
+        Integer id = rs.getInt("procedure_id");
+        Long price = rs.getLong("procedure_price");
+        Integer time = rs.getInt("procedure_time");
 
-            return new Procedure(id,name, price, time);
-        }
-        return null;
+        return new Procedure(id, nameUkr, nameEn, price, time);
+
     }
 
     @Override

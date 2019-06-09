@@ -36,4 +36,9 @@ public class JDBCDaoFactory extends DaoFactory {
     public ReviewDao createReviewDao() {
         return new JDBCReviewDao(getConnection());
     }
+
+
+    public ClientAppointmentDao createClientAppointmentDao() {
+        return new JDBCClientAppointmentDao(getConnection());
+    }
 }

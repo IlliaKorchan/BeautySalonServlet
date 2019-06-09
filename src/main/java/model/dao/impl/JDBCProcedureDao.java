@@ -29,7 +29,8 @@ public class JDBCProcedureDao implements ProcedureDao {
     @Override
     public void create(Procedure entity) {
         try (PreparedStatement statement = connection.prepareStatement(CREATE_PROCEDURE)) {
-            statement.setString(1, entity.getName());
+            statement.setString(1, entity.getNameUkr());
+            statement.setString(2, entity.getNameEn());
             statement.setLong(2, entity.getPrice());
             statement.setInt(3, entity.getTime());
 
@@ -44,8 +45,11 @@ public class JDBCProcedureDao implements ProcedureDao {
         try (PreparedStatement statement = connection.prepareStatement(FIND_PROCEDURE_BY_ID)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
+            Procedure procedure = null;
 
-            Procedure procedure = procedureMapper.extractFromResultSet(resultSet);
+            if (resultSet.next()) {
+               procedure = procedureMapper.extractFromResultSet(resultSet);
+            }
 
             if (Objects.nonNull(procedure)) {
                 procedureMapper.makeUnique(procedures, procedure);

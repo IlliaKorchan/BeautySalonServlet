@@ -9,6 +9,7 @@ public abstract class DaoFactory {
     public abstract AppointmentDao createAppointmentDao();
     public abstract ProcedureDao createProcedureDao();
     public abstract ReviewDao createReviewDao();
+    public abstract ClientAppointmentDao createClientAppointmentDao();
 
     public static DaoFactory getInstance(){
         if (daoFactory == null) {
