@@ -97,6 +97,17 @@ public class JDBCUserDao implements UserDao {
         }
     }
 
+
+    public void delete(int id) {
+        try (PreparedStatement statement = connection.prepareStatement(DELETE_USER_BY_ID)) {
+            statement.setInt(1, id);
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     @Override
     public void update(User entity) {
 //        try (PreparedStatement statement = connection.prepareStatement(UPDATE_USER)) {
@@ -116,6 +127,17 @@ public class JDBCUserDao implements UserDao {
 //        } catch (SQLException e) {
 //            System.out.println("Unable to update user!");
 //        }
+    }
+
+    public void updatePassword(Integer id, String newPassword) {
+        try (PreparedStatement statement = connection.prepareStatement(UPDATE_USER_PASSWORD)) {
+            statement.setInt(1, id);
+            statement.setString(2, newPassword);
+
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

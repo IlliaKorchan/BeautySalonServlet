@@ -1,13 +1,14 @@
 package string.containers;
 
 public interface QueryContainer {
-    String CREATE_USER = "INSERT INTO users(user_name, user_surname, user_login, user_password, user_gender," +
-                         " user_email, user_role, user_amount_money)" +
-                         " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    String CREATE_USER = "INSERT INTO users(user_name_ukr, user_name_en, user_surname_ukr,user_surname_en, user_login," +
+                         " user_password, user_gender, user_email, user_role, user_amount_money)" +
+                         " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     String FIND_USER_BY_ID = "SELECT * FROM users WHERE user_id = ?";
     String FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE user_login = ?";
     String FIND_USER_BY_LOGIN_AND_PASSWORD = "SELECT * FROM users WHERE user_login = ? AND user_password = ?";
     String FIND_ALL_USERS = "SELECT * FROM users";
+    String UPDATE_USER_PASSWORD = "UPDATE users SET user_password = ? WHERE user_id = ?";
     String DELETE_USER_BY_ID = "DELETE FROM users WHERE user_id = ?";
 
     String CREATE_APPOINTMENT = "INSERT INTO appointments(appointment_user_id, appointment_master_id, " +
@@ -17,8 +18,8 @@ public interface QueryContainer {
     String FIND_ALL_APPOINTMENTS = "SELECT * FROM appointments";
     String DELETE_APPOINTMENT_BY_ID = "DELETE FROM appointments WHERE appointment_id = ?";
 
-    String CREATE_PROCEDURE = "INSERT INTO procedures(procedure_price, procedure_time) " +
-                              "VALUES (?, ?)";
+    String CREATE_PROCEDURE = "INSERT INTO procedures(procedure_name, procedure_price, procedure_time) " +
+                              "VALUES (?, ?, ?)";
     String FIND_PROCEDURE_BY_ID = "SELECT * FROM procedures WHERE procedure_id = ?";
     String FIND_ALL_PROCEDURES = "SELECT * FROM procedures";
     String UPDATE_PROCEDURE = "UPDATE procedures SET procedure_price = ?, procedure_time = ? WHERE procedure_id = ?";

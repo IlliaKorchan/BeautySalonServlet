@@ -9,7 +9,7 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/fmt' prefix='fmt'%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="language"
-       value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+       value="${not empty param.language ? param.language : not empty language ? language : 'en'}"
        scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="message"/>
@@ -54,6 +54,29 @@
         </form>
     </nav>
     <br>
+    <p align="center">
+        <fmt:message key="field.user.name"/>: ${sessionScope.user.nameUkr}<br>
+        <fmt:message key="field.user.name"/>: ${sessionScope.user.nameEn}<br>
+        <fmt:message key="field.user.surname"/>: ${sessionScope.user.surnameUkr}<br>
+        <fmt:message key="field.user.surname"/>: ${sessionScope.user.surnameEn}<br>
+        <fmt:message key="field.user.login"/>: ${sessionScope.user.login}<br>
+        <fmt:message key="field.user.gender"/>: <fmt:message key="${sessionScope.user.gender}"/><br>
+        <fmt:message key="field.user.email"/>: ${sessionScope.user.email}<br>
+        <br><br>
+        <form method="get" action="${pageContext.request.contextPath}/salon/change-password">
+        <p align="center"><button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
+        <fmt:message key="button.edit.password"/>
+        </button>
+        </p>
+        </form>
+        <form method="get" action="${pageContext.request.contextPath}/salon/delete-account">
+        <p align="center">
+        <button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
+        <fmt:message key="button.delete.account"/>
+        </button>
+        </p>
+        </form>
+    </p>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

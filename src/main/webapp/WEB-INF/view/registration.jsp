@@ -9,7 +9,7 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/fmt' prefix='fmt'%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="language"
-       value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+       value="${not empty param.language ? param.language : not empty language ? language : 'en'}"
        scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="message"/>
@@ -72,6 +72,7 @@
                 </select><br>
                 <a class="navbar-brand letter" style="color: deeppink; font-size:11pt"><fmt:message key="field.user.email"/>:</a>
                 <input type="text" required placeholder="email" name="userEmail"><br>
+                <fmt:message key="${requestScope.warning}"/>
                 <small id="help" class="form-text text-muted"><fmt:message key="warn.required.fields"/></small>
 
                 <button class="btn btn-success" style="background-color: #FFA9EB"><fmt:message key="button.sign-up"/></button>

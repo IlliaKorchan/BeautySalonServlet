@@ -19,7 +19,10 @@ public class MainServlet extends HttpServlet {
         commands.put("login", new Login());
         commands.put("logout", new Logout());
         commands.put("registration", new Registration());
-        commands.put("client-appoinments", new ClientAppointments());
+        commands.put("client-appointments", new ClientAppointments());
+        commands.put("delete-account", new DeleteAccount());
+        commands.put("change-password", new ChangePassword());
+        commands.put("change-password-commit", new ChangePasswordCommit());
     }
 
     @Override
@@ -32,5 +35,10 @@ public class MainServlet extends HttpServlet {
         String page = command.execute(req);
 
         req.getRequestDispatcher(page).forward(req,resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
     }
 }

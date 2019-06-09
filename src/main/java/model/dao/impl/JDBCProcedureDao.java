@@ -78,6 +78,11 @@ public class JDBCProcedureDao implements ProcedureDao {
     }
 
     @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
     public void update(Procedure entity) {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_PROCEDURE)) {
 

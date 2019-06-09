@@ -97,6 +97,11 @@ public class JDBCAppointmentDao implements AppointmentDao {
     }
 
     @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
     public void close() {
         try {
             connection.close();

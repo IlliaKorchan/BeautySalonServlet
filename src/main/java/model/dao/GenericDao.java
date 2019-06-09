@@ -16,14 +16,7 @@ public interface GenericDao<T> extends AutoCloseable {
 
     void update(T entity);
 
-    default void delete(Connection connection, String query, int id) {
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, id);
-            statement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    void delete(int id);
 
     void close();
 }

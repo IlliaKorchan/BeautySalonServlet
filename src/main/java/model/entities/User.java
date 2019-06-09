@@ -18,7 +18,7 @@ public class User {
     }
 
     public User(String nameUkr, String nameEn, String surnameUkr, String surnameEn, String login,
-                String password, String gender, String email, String role) {
+                String password, String gender, String email, String role, Long amountOfMoney) {
         this.nameUkr = nameUkr;
         this.nameEn = nameEn;
         this.surnameUkr = surnameUkr;
@@ -28,6 +28,7 @@ public class User {
         this.gender = gender;
         this.email = email;
         this.role = role;
+        this.amountOfMoney = amountOfMoney;
     }
 
     public User(Integer id, String nameUkr, String nameEn, String surnameUkr, String surnameEn, String login,

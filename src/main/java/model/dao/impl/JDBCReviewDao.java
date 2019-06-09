@@ -89,6 +89,11 @@ public class JDBCReviewDao implements ReviewDao {
     }
 
     @Override
+    public void delete(int id) {
+
+    }
+
+    @Override
     public void close() {
         try {
             connection.close();

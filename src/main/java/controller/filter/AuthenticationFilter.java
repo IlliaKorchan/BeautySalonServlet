@@ -2,6 +2,7 @@ package controller.filter;
 
 import model.dao.UserDao;
 import model.entities.User;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +14,8 @@ import java.util.Objects;
 
 public class AuthenticationFilter implements Filter {
     @Override
-    public void init(FilterConfig filterConfig){}
+    public void init(FilterConfig filterConfig) {
+    }
 
     @Override
     public void doFilter(final ServletRequest servletRequest,
@@ -25,9 +27,8 @@ public class AuthenticationFilter implements Filter {
         final String login = request.getParameter("login");
         final String password = request.getParameter("password");
 
-        @SuppressWarnings("unchecked")
-        final AtomicReference<UserDao> userDao = (AtomicReference<UserDao>) request.getServletContext()
-                                                                                    .getAttribute("userDao");
+        @SuppressWarnings("unchecked") final AtomicReference<UserDao> userDao = (AtomicReference<UserDao>) request.getServletContext()
+                .getAttribute("userDao");
 
         final HttpSession session = request.getSession();
 
@@ -64,19 +65,20 @@ public class AuthenticationFilter implements Filter {
      */
     private void moveToMenu(final HttpServletRequest request, final HttpServletResponse response,
                             final String role) throws ServletException, IOException {
-        setUserName(request,(User) request.getSession().getAttribute("user"));
+        setUserName(request, (User) request.getSession().getAttribute("user"));
         request.getRequestDispatcher("/WEB-INF/view/menu/" + role + "-menu.jsp").forward(request, response);
     }
 
     @Override
-    public void destroy() {}
+    public void destroy() {
+    }
 
     private void setUserName(HttpServletRequest request, User user) {
-        Locale locale = request.getLocale();
-        System.out.println(request.getSession().getAttribute("language"));
-        request.getSession().setAttribute("name", (locale.getLanguage().equals("uk")) ? user.getNameUkr()
-                                                                                         : user.getNameEn());
-        request.getSession().setAttribute("surname", (locale.getLanguage().equals("uk")) ? user.getSurnameUkr()
-                                                                                            : user.getSurnameEn());
+        String language = (String) request.getSession().getAttribute("language");
+        System.out.println("string " + language);
+        request.getSession().setAttribute("name", (language.equals("uk")) ? user.getNameUkr()
+                                                                             : user.getNameEn());
+        request.getSession().setAttribute("surname", (language.equals("uk")) ? user.getSurnameUkr()
+                : user.getSurnameEn());
     }
 }
