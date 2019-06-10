@@ -38,7 +38,20 @@ public interface QueryContainer {
     String CREATE_REVIEW = "INSERT INTO reviews(review_client_id, review_appointment_id, review_text TEXT) " +
                            "VALUES (?, ?, ?)";
     String FIND_REVIEW_BY_ID = "SELECT * FROM reviews WHERE review_id = ?";
-    String FIND_REVIEW_BY_CLIENT_ID = "SELECT * FROM reviews WHERE review_client_id = ?";
+    String FIND_REVIEWS_BY_CLIENT_ID_UKR = "SELECT reviews.review_id, appointments.appointment_date, procedures.procedure_name_ukr" +
+            " AS procedure_name, users.user_surname_ukr AS master_surname, reviews.review_text " +
+            "FROM reviews JOIN appointments ON reviews.review_appointment_id = appointments.appointment_id " +
+            "JOIN procedures ON appointments.appointment_procedure_id = procedures.procedure_id " +
+            "JOIN users ON appointments.appointment_master_id = users.user_id " +
+            "WHERE reviews.review_client_id = ?";
+
+    String FIND_REVIEWS_BY_CLIENT_ID_EN = "SELECT reviews.review_id, appointments.appointment_date, procedures.procedure_name_en" +
+            " AS procedure_name, users.user_surname_en AS master_surname, reviews.review_text " +
+            "FROM reviews JOIN appointments ON reviews.review_appointment_id = appointments.appointment_id " +
+            "JOIN procedures ON appointments.appointment_procedure_id = procedures.procedure_id " +
+            "JOIN users ON appointments.appointment_master_id = users.user_id " +
+            "WHERE reviews.review_client_id = ?";
+
     String FIND_REVIEW_BY_MASTER_ID = "SELECT * FROM reviews JOIN appointments" +
                                       " ON reviews.review_appointment_id = appointments.appointment_id" +
                                       " WHERE appointments.appointment_master_id = ?";

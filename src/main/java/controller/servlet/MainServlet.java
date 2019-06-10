@@ -24,6 +24,7 @@ public class MainServlet extends HttpServlet {
         commands.put("change-password", new ChangePassword());
         commands.put("change-password-commit", new ChangePasswordCommit());
         commands.put("client-procedures", new Procedures());
+        commands.put("client-reviews", new ClientReviews());
     }
 
     @Override

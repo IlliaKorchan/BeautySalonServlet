@@ -17,7 +17,6 @@ import static string.containers.QueryContainer.FIND_ALL_REVIEWS;
 import static string.containers.QueryContainer.FIND_REVIEW_BY_ID;
 import static string.containers.QueryContainer.UPDATE_REVIEW;
 import static string.containers.QueryContainer.CREATE_REVIEW;
-import static string.containers.QueryContainer.FIND_REVIEW_BY_CLIENT_ID;
 import static string.containers.QueryContainer.FIND_REVIEW_BY_MASTER_ID;
 
 
@@ -49,8 +48,14 @@ public class JDBCReviewDao implements ReviewDao {
     }
 
     @Override
-    public Review findByClientId(int clientId) {
-        return findReview(FIND_REVIEW_BY_CLIENT_ID, clientId);
+    public List<Review> findByClientId(int clientId, String query) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, clientId);
+            return findListReviews(statement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -61,15 +66,7 @@ public class JDBCReviewDao implements ReviewDao {
     @Override
     public List<Review> findAll() {
         try (PreparedStatement statement = connection.prepareStatement(FIND_ALL_REVIEWS)) {
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                Review review = reviewMapper.extractFromResultSet(resultSet);
-                reviewMapper.makeUnique(reviews, review);
-            }
-            resultSet.close();
-
-            return new ArrayList<>(reviews.values());
+            return findListReviews(statement);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -121,6 +118,22 @@ public class JDBCReviewDao implements ReviewDao {
             e.printStackTrace();
             return null;
         }
+    }
 
+    private List<Review> findListReviews(PreparedStatement statement) {
+        try  {
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Review review = reviewMapper.extractFromResultSet(resultSet);
+                reviewMapper.makeUnique(reviews, review);
+            }
+            resultSet.close();
+
+            return new ArrayList<>(reviews.values());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

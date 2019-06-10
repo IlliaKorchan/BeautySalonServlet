@@ -40,7 +40,7 @@
         style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.user.appoint"/></a>
         <a href="${pageContext.request.contextPath}/salon/client-procedures" class="navbar-brand letter"
         style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.procedures"/></a>
-        <a href="${pageContext.request.contextPath}/salon/reviews" class="navbar-brand letter"
+        <a href="${pageContext.request.contextPath}/salon/client-reviews" class="navbar-brand letter"
         style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.user.review"/></a>
         <a href="${pageContext.request.contextPath}/logout" class="navbar-brand letter"
         style="color: deeppink; font-size:11pt"><fmt:message key="navbar.logout"/></a>
