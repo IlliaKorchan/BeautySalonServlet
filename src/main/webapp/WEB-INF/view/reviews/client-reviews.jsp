@@ -38,7 +38,7 @@
         style="color: deeppink; font-size:11pt"><fmt:message key="navbar.my.appointments"/></a>
         <a href="${pageContext.request.contextPath}/salon/make-appointment" class="navbar-brand letter"
         style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.user.appoint"/></a>
-        <a href="${pageContext.request.contextPath}/salon/client-procedures" class="navbar-brand letter"
+        <a href="${pageContext.request.contextPath}/salon/procedures" class="navbar-brand letter"
         style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.procedures"/></a>
         <a href="${pageContext.request.contextPath}/salon/client-reviews" class="navbar-brand letter"
         style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.user.review"/></a>
@@ -59,7 +59,7 @@
             <ul>
             <li><fmt:message key="appointment.date"/>: <c:out value="${review.date}"/></li>
             <li><fmt:message key="appointment.procedure.name"/>: <c:out value="${review.procedureName}"/></li>
-            <li><fmt:message key="appointment.master.name"/>: <c:out value="${review.masterSurname}"/></li>
+            <li><fmt:message key="appointment.master.name"/>: <c:out value="${review.surname}"/></li>
             <li><fmt:message key="review.text"/>: <c:out value="${review.text}"/></li>
             </ul>
             <hr/>

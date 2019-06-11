@@ -27,6 +27,7 @@ public class MainServlet extends HttpServlet {
         commands.put("client-reviews", new ClientReviews());
         commands.put("make-appointment", new MakeAppointment());
         commands.put("master-schedule", new MasterSchedule());
+        commands.put("admin-reviews", new AdminReviews());
     }
 
     @Override

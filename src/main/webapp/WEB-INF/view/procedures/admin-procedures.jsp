@@ -38,7 +38,7 @@ To change this template use File | Settings | File Templates.
        style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.procedures"/></a>
     <a href="${pageContext.request.contextPath}/salon/appointments-administrating" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.admin.appointments"/></a>
-    <a href="${pageContext.request.contextPath}/salon/reviews-administrating" class="navbar-brand letter"
+    <a href="${pageContext.request.contextPath}/salon/admin-reviews" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.admin.reviews"/></a>
     <a href="${pageContext.request.contextPath}/logout" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt"><fmt:message key="navbar.logout"/></a>

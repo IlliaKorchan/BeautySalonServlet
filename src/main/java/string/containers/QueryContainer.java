@@ -38,14 +38,14 @@ public interface QueryContainer {
                            "VALUES (?, ?, ?)";
     String FIND_REVIEW_BY_ID = "SELECT * FROM reviews WHERE review_id = ?";
     String FIND_REVIEWS_BY_CLIENT_ID_UKR = "SELECT reviews.review_id, appointments.appointment_date, procedures.procedure_name_ukr" +
-            " AS procedure_name, users.user_surname_ukr AS master_surname, reviews.review_text " +
+            " AS procedure_name, users.user_surname_ukr AS surname, reviews.review_text " +
             "FROM reviews JOIN appointments ON reviews.review_appointment_id = appointments.appointment_id " +
             "JOIN procedures ON appointments.appointment_procedure_id = procedures.procedure_id " +
             "JOIN users ON appointments.appointment_master_id = users.user_id " +
             "WHERE reviews.review_client_id = ?";
 
     String FIND_REVIEWS_BY_CLIENT_ID_EN = "SELECT reviews.review_id, appointments.appointment_date, procedures.procedure_name_en" +
-            " AS procedure_name, users.user_surname_en AS master_surname, reviews.review_text " +
+            " AS procedure_name, users.user_surname_en AS surname, reviews.review_text " +
             "FROM reviews JOIN appointments ON reviews.review_appointment_id = appointments.appointment_id " +
             "JOIN procedures ON appointments.appointment_procedure_id = procedures.procedure_id " +
             "JOIN users ON appointments.appointment_master_id = users.user_id " +
@@ -77,7 +77,20 @@ public interface QueryContainer {
             " ON appointments.appointment_procedure_id = procedures.procedure_id" +
             " WHERE appointments.appointment_master_id = ? AND appointments.appointment_date = ?";
 
-    String FIND_MASTER_BY_SURNAME_UKR = "SELECT * FROM users WHERE users.user_surname_ukr = ?";
-    String FIND_MASTER_BY_SURNAME_EN = "SELECT * FROM users WHERE users.user_surname_en = ?";
+    String FIND_REVIEWS_BY_MASTER_ID_UKR = "SELECT reviews.review_id, appointments.appointment_date, procedures.procedure_name_ukr" +
+            " AS procedure_name, users.user_surname_ukr AS surname, reviews.review_text " +
+            "FROM reviews JOIN appointments ON reviews.review_appointment_id = appointments.appointment_id " +
+            "JOIN procedures ON appointments.appointment_procedure_id = procedures.procedure_id " +
+            "JOIN users ON appointments.appointment_user_id = users.user_id " +
+            "WHERE reviews.review_master_id = ?";
+    String FIND_REVIEWS_BY_MASTER_ID_EN = "SELECT reviews.review_id, appointments.appointment_date, procedures.procedure_name_en" +
+            " AS procedure_name, users.user_surname_en AS surname, reviews.review_text " +
+            "FROM reviews JOIN appointments ON reviews.review_appointment_id = appointments.appointment_id " +
+            "JOIN procedures ON appointments.appointment_procedure_id = procedures.procedure_id " +
+            "JOIN users ON appointments.appointment_user_id = users.user_id " +
+            "WHERE reviews.review_master_id = ?";
+
+    String FIND_MASTER_BY_SURNAME_UKR = "SELECT * FROM users WHERE user_surname_ukr = ?";
+    String FIND_MASTER_BY_SURNAME_EN = "SELECT * FROM users WHERE user_surname_en = ? AND user_role = master";
 
 }

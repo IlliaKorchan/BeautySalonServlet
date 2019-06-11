@@ -43,8 +43,8 @@ public class JDBCDaoFactory extends DaoFactory {
     }
 
     @Override
-    public ClientReviewDao createClientReviewDao() {
-        return new JDBCClientReviewDao(getConnection());
+    public ReviewDtoDao createReviewDtoDao() {
+        return new JDBCReviewDtoDao(getConnection());
     }
 
     @Override

@@ -2,18 +2,18 @@ package model.entities;
 
 import java.time.LocalDate;
 
-public class ClientReviewDto {
+public class ReviewDto {
     private Integer id;
     private LocalDate date;
     private String procedureName;
-    private String masterSurname;
+    private String surname;
     private String text;
 
-    public ClientReviewDto(Integer id, LocalDate date, String procedureName, String masterSurname, String text) {
+    public ReviewDto(Integer id, LocalDate date, String procedureName, String surname, String text) {
         this.id = id;
         this.date = date;
         this.procedureName = procedureName;
-        this.masterSurname = masterSurname;
+        this.surname = surname;
         this.text = text;
     }
 
@@ -33,12 +33,12 @@ public class ClientReviewDto {
         this.procedureName = procedureName;
     }
 
-    public String getMasterSurname() {
-        return masterSurname;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setMasterSurname(String masterSurname) {
-        this.masterSurname = masterSurname;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getText() {

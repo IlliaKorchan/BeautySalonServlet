@@ -48,9 +48,9 @@ public class JDBCReviewDao implements ReviewDao {
     }
 
     @Override
-    public List<Review> findByClientId(int clientId, String query) {
+    public List<Review> findById(Integer id, String query) {
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, clientId);
+            statement.setInt(1, id);
             return findListReviews(statement);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -58,10 +58,6 @@ public class JDBCReviewDao implements ReviewDao {
         }
     }
 
-    @Override
-    public Review findByMasterId(int masterId) {
-        return findReview(FIND_REVIEW_BY_MASTER_ID, masterId);
-    }
 
     @Override
     public List<Review> findAll() {
