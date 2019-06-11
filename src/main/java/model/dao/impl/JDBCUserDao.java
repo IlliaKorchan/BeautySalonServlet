@@ -3,6 +3,7 @@ package model.dao.impl;
 import model.dao.UserDao;
 import model.dao.mapper.UserMapper;
 import model.entities.User;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,6 @@ public class JDBCUserDao implements UserDao {
             statement.setString(7, entity.getGender());
             statement.setString(8, entity.getEmail());
             statement.setString(9, entity.getRole());
-            statement.setLong(10, 0L);
 
             statement.execute();
         } catch (SQLException e) {
@@ -46,6 +46,18 @@ public class JDBCUserDao implements UserDao {
     public User findById(int id) {
         try (PreparedStatement statement = connection.prepareStatement(FIND_USER_BY_ID)) {
             statement.setInt(1, id);
+
+            return findUser(statement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public User findBySurname(String surname, String query) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, surname);
 
             return findUser(statement);
         } catch (SQLException e) {
@@ -82,15 +94,8 @@ public class JDBCUserDao implements UserDao {
     @Override
     public List<User> findAll() {
         try (PreparedStatement statement = connection.prepareStatement(FIND_ALL_USERS)) {
-            ResultSet resultSet = statement.executeQuery();
 
-            while (resultSet.next()) {
-                User user = userMapper.extractFromResultSet(resultSet);
-                userMapper.makeUnique(users, user);
-            }
-            resultSet.close();
-
-            return new ArrayList<>(users.values());
+            return findUsersList(statement);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -141,7 +146,19 @@ public class JDBCUserDao implements UserDao {
     }
 
     @Override
-    public void close()  {
+    public List<User> findByRole(String role) {
+        try (PreparedStatement statement = connection.prepareStatement(FIND_USER_BY_ROLE)) {
+            statement.setString(1, role);
+
+            return findUsersList(statement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public void close() {
         try {
             connection.close();
         } catch (SQLException e) {
@@ -154,7 +171,7 @@ public class JDBCUserDao implements UserDao {
         User user = null;
 
         if (resultSet.next()) {
-         user = userMapper.extractFromResultSet(resultSet);
+            user = userMapper.extractFromResultSet(resultSet);
         }
         if (Objects.nonNull(user)) {
             userMapper.makeUnique(users, user);
@@ -162,5 +179,18 @@ public class JDBCUserDao implements UserDao {
         resultSet.close();
 
         return user;
+    }
+
+    private List<User> findUsersList(PreparedStatement statement) throws SQLException {
+
+        ResultSet resultSet = statement.executeQuery();
+
+        while (resultSet.next()) {
+            User user = userMapper.extractFromResultSet(resultSet);
+            userMapper.makeUnique(users, user);
+        }
+        resultSet.close();
+
+        return new ArrayList<>(users.values());
     }
 }

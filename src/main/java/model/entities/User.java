@@ -12,13 +12,12 @@ public class User {
     private String email;
     private String role;
     private Boolean active;
-    private Long amountOfMoney;
 
     public User() {
     }
 
     public User(String nameUkr, String nameEn, String surnameUkr, String surnameEn, String login,
-                String password, String gender, String email, String role, Long amountOfMoney) {
+                String password, String gender, String email, String role) {
         this.nameUkr = nameUkr;
         this.nameEn = nameEn;
         this.surnameUkr = surnameUkr;
@@ -28,11 +27,10 @@ public class User {
         this.gender = gender;
         this.email = email;
         this.role = role;
-        this.amountOfMoney = amountOfMoney;
     }
 
     public User(Integer id, String nameUkr, String nameEn, String surnameUkr, String surnameEn, String login,
-                String password, String gender, String email, String role, Boolean active, Long amountOfMoney) {
+                String password, String gender, String email, String role, Boolean active) {
         this.id = id;
         this.nameUkr = nameUkr;
         this.nameEn = nameEn;
@@ -44,7 +42,6 @@ public class User {
         this.email = email;
         this.role = role;
         this.active = active;
-        this.amountOfMoney = amountOfMoney;
     }
 
     public Integer getId() {
@@ -133,14 +130,6 @@ public class User {
 
     public void setActive(Boolean active) {
         this.active = active;
-    }
-
-    public Long getAmountOfMoney() {
-        return amountOfMoney;
-    }
-
-    public void setAmountOfMoney(Long amountOfMoney) {
-        this.amountOfMoney = amountOfMoney;
     }
 }
 

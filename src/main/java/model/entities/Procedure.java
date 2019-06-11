@@ -5,17 +5,15 @@ public class Procedure {
     private String nameUkr;
     private String nameEn;
     private Long price;
-    private Integer time;
 
     public Procedure() {
     }
 
-    public Procedure(Integer id, String nameUkr, String nameEn, Long price, Integer time) {
+    public Procedure(Integer id, String nameUkr, String nameEn, Long price) {
         this.id = id;
         this.nameUkr = nameUkr;
         this.nameEn = nameEn;
         this.price = price;
-        this.time = time;
     }
 
     public Integer getId() {
@@ -32,14 +30,6 @@ public class Procedure {
 
     public void setPrice(Long price) {
         this.price = price;
-    }
-
-    public Integer getTime() {
-        return time;
-    }
-
-    public void setTime(Integer time) {
-        this.time = time;
     }
 
     public String getNameUkr() {

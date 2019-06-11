@@ -21,10 +21,9 @@ public class UserMapper implements ObjectMapper<User> {
         String email = rs.getString("user_email");
         String role = rs.getString("user_role");
         Boolean active = rs.getBoolean("user_active");
-        Long amountOfMoney = rs.getLong("user_amount_money");
 
         return new User(id, nameUkr, nameEn, surnameUkr, surnameEn,
-                login, password, gender, email, role, active, amountOfMoney);
+                login, password, gender, email, role, active);
 
     }
 

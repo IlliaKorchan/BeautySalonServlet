@@ -6,6 +6,7 @@ import model.entities.Appointment;
 
 import java.sql.*;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
@@ -110,6 +111,25 @@ public class JDBCAppointmentDao implements AppointmentDao {
             connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<Appointment> findByMasterIdAndDate(Integer id, LocalDate date, String query) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, id);
+            statement.setDate(2, Date.valueOf(date));
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Appointment appointment = appointmentMapper.extractFromResultSet(resultSet);
+                appointmentMapper.makeUnique(appointments, appointment);
+            }
+            resultSet.close();
+            return new ArrayList<>(appointments.values());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

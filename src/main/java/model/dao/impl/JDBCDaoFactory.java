@@ -46,4 +46,9 @@ public class JDBCDaoFactory extends DaoFactory {
     public ClientReviewDao createClientReviewDao() {
         return new JDBCClientReviewDao(getConnection());
     }
+
+    @Override
+    public WorkingDayDao createWorkingDayDao() {
+        return new JDBCWorkingDayDao(getConnection());
+    }
 }

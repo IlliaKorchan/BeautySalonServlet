@@ -33,15 +33,11 @@ To change this template use File | Settings | File Templates.
     <a href="${pageContext.request.contextPath}/salon/menu" class="navbar-brand">
     <img src="https://image.freepik.com/free-vector/_53876-43323.jpg" width="30" height="30" alt="logo">
     </a>
-    <a href="${pageContext.request.contextPath}/salon/users-administrating" class="navbar-brand letter"
-    style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.admin.users"/></a>
-    <a href="${pageContext.request.contextPath}/salon/masters-administrating" class="navbar-brand letter"
-    style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.admin.masters"/></a>
-    <a href="${pageContext.request.contextPath}/salon/procedures-administrating" class="navbar-brand letter"
+    <a href="${pageContext.request.contextPath}/salon/procedures" class="navbar-brand letter"
     style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.procedures"/></a>
     <a href="${pageContext.request.contextPath}/salon/appointments-administrating" class="navbar-brand letter"
     style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.admin.appointments"/></a>
-    <a href="${pageContext.request.contextPath}/salon/appointments-administrating" class="navbar-brand letter"
+    <a href="${pageContext.request.contextPath}/salon/reviews-administrating" class="navbar-brand letter"
     style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.admin.reviews"/></a>
     <a href="${pageContext.request.contextPath}/logout" class="navbar-brand letter"
     style="color: deeppink; font-size:11pt"><fmt:message key="navbar.logout"/></a>

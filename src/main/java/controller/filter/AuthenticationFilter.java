@@ -75,7 +75,7 @@ public class AuthenticationFilter implements Filter {
 
     private void setUserName(HttpServletRequest request, User user) {
         String language = (String) request.getSession().getAttribute("language");
-        System.out.println("string " + language);
+
         request.getSession().setAttribute("name", (language.equals("uk")) ? user.getNameUkr()
                                                                              : user.getNameEn());
         request.getSession().setAttribute("surname", (language.equals("uk")) ? user.getSurnameUkr()

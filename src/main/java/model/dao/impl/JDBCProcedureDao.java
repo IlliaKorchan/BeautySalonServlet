@@ -32,7 +32,6 @@ public class JDBCProcedureDao implements ProcedureDao {
             statement.setString(1, entity.getNameUkr());
             statement.setString(2, entity.getNameEn());
             statement.setLong(2, entity.getPrice());
-            statement.setInt(3, entity.getTime());
 
             statement.execute();
         } catch (SQLException e) {
@@ -91,7 +90,7 @@ public class JDBCProcedureDao implements ProcedureDao {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_PROCEDURE)) {
 
             statement.setLong(1, entity.getPrice());
-            statement.setInt(2, entity.getTime());
+
             statement.setInt(3, entity.getId());
 
             statement.execute();

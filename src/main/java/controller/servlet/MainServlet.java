@@ -23,8 +23,10 @@ public class MainServlet extends HttpServlet {
         commands.put("delete-account", new DeleteAccount());
         commands.put("change-password", new ChangePassword());
         commands.put("change-password-commit", new ChangePasswordCommit());
-        commands.put("client-procedures", new Procedures());
+        commands.put("procedures", new Procedures());
         commands.put("client-reviews", new ClientReviews());
+        commands.put("make-appointment", new MakeAppointment());
+        commands.put("master-schedule", new MasterSchedule());
     }
 
     @Override

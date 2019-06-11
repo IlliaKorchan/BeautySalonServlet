@@ -13,9 +13,8 @@ public class ProcedureMapper implements ObjectMapper<Procedure> {
         String nameUkr = rs.getString("procedure_name_ukr");
         String nameEn = rs.getString("procedure_name_en");
         Long price = rs.getLong("procedure_price");
-        Integer time = rs.getInt("procedure_time");
 
-        return new Procedure(id, nameUkr, nameEn, price, time);
+        return new Procedure(id, nameUkr, nameEn, price);
 
     }
 
