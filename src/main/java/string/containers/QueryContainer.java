@@ -82,15 +82,15 @@ public interface QueryContainer {
             "FROM reviews JOIN appointments ON reviews.review_appointment_id = appointments.appointment_id " +
             "JOIN procedures ON appointments.appointment_procedure_id = procedures.procedure_id " +
             "JOIN users ON appointments.appointment_user_id = users.user_id " +
-            "WHERE reviews.review_master_id = ?";
+            "WHERE appointments.appointment_master_id = ?";
     String FIND_REVIEWS_BY_MASTER_ID_EN = "SELECT reviews.review_id, appointments.appointment_date, procedures.procedure_name_en" +
             " AS procedure_name, users.user_surname_en AS surname, reviews.review_text " +
             "FROM reviews JOIN appointments ON reviews.review_appointment_id = appointments.appointment_id " +
             "JOIN procedures ON appointments.appointment_procedure_id = procedures.procedure_id " +
             "JOIN users ON appointments.appointment_user_id = users.user_id " +
-            "WHERE reviews.review_master_id = ?";
+            "WHERE appointments.appointment_master_id = ?";
 
-    String FIND_MASTER_BY_SURNAME_UKR = "SELECT * FROM users WHERE user_surname_ukr = ?";
-    String FIND_MASTER_BY_SURNAME_EN = "SELECT * FROM users WHERE user_surname_en = ? AND user_role = master";
+    String FIND_MASTER_BY_SURNAME_UKR = "SELECT * FROM users WHERE user_surname_ukr = ? AND user_role = 'master'";
+    String FIND_MASTER_BY_SURNAME_EN = "SELECT * FROM users WHERE user_surname_en = ? AND user_role = 'master'";
 
 }

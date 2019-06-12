@@ -25,7 +25,7 @@ To change this template use File | Settings | File Templates.
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
 
-    <title>${sessionScope.name} ${sessionScope.surname}</title>
+    <title>${sessionScope.name} ${sessionScope.name}</title>
     </head>
 
     <body>

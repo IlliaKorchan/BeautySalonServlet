@@ -9,5 +9,6 @@ public class AccountDeleteService {
         UserDao userDao = DaoFactory.getInstance().createUserDao();
         Integer id = userDao.findByLogin(user.getLogin()).getId();
         userDao.delete(id);
+        userDao.close();
     }
 }

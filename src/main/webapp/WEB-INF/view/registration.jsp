@@ -57,10 +57,10 @@
                 <input type="text" required placeholder="name" name="userNameUkr"><br>
                 <a class="navbar-brand letter" style="color: deeppink; font-size:11pt"><fmt:message key="field.user.name.en"/>:</a>
                 <input type="text" required placeholder="name" name="userNameEn"><br>
-                <a class="navbar-brand letter" style="color: deeppink; font-size:11pt"><fmt:message key="field.user.surname.ukr"/>:</a>
+                <a class="navbar-brand letter" style="color: deeppink; font-size:11pt"><fmt:message key="field.user.name.ukr"/>:</a>
                 <input type="text" required placeholder="name" name="userSurnameUkr"><br>
-                <a class="navbar-brand letter" style="color: deeppink; font-size:11pt"><fmt:message key="field.user.surname.en"/>:</a>
-                <input type="text" required placeholder="surname" name="userSurnameEn"><br>
+                <a class="navbar-brand letter" style="color: deeppink; font-size:11pt"><fmt:message key="field.user.name.en"/>:</a>
+                <input type="text" required placeholder="name" name="userSurnameEn"><br>
                 <a class="navbar-brand letter" style="color: deeppink; font-size:11pt"><fmt:message key="field.user.login"/>:</a>
                 <input type="text" required placeholder="login" name="userLogin"><br>
                 <a class="navbar-brand letter" style="color: deeppink; font-size:11pt"><fmt:message key="field.user.password"/>:</a>

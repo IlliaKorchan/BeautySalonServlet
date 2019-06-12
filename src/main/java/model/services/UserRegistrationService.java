@@ -15,6 +15,7 @@ public class UserRegistrationService {
             throw new LoginAlreadyExistsException();
         }
 
-        DaoFactory.getInstance().createUserDao().create(user);
+        userDao.create(user);
+        userDao.close();
     }
 }

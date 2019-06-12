@@ -20,7 +20,7 @@ public class ProceduresService {
         procedureDtos.forEach(procedureDto -> procedureDto.setName(language.equals("uk")
                                                                 ? procedureDto.getProcedure().getNameUkr()
                                                                 : procedureDto.getProcedure().getNameEn()));
-
+        procedureDao.close();
         return procedureDtos;
     }
 }

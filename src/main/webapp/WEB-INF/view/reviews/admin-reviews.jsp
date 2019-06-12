@@ -19,13 +19,12 @@ To change this template use File | Settings | File Templates.
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
 
-    <title>${sessionScope.name} ${sessionScope.name}</title>
+    <title><fmt:message key="title.admin.reviews"/></title>
 </head>
 
 <body>
@@ -34,10 +33,12 @@ To change this template use File | Settings | File Templates.
     <a href="${pageContext.request.contextPath}/salon/menu" class="navbar-brand">
         <img src="https://image.freepik.com/free-vector/_53876-43323.jpg" width="30" height="30" alt="logo">
     </a>
-    <a href="${pageContext.request.contextPath}/salon/master-schedule" class="navbar-brand letter"
-       style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.my.appointments"/></a>
     <a href="${pageContext.request.contextPath}/salon/procedures" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.procedures"/></a>
+    <a href="${pageContext.request.contextPath}/salon/appointments-administrating" class="navbar-brand letter"
+       style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.admin.appointments"/></a>
+    <a href="${pageContext.request.contextPath}/salon/admin-reviews" class="navbar-brand letter"
+       style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.admin.reviews"/></a>
     <a href="${pageContext.request.contextPath}/logout" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt"><fmt:message key="navbar.logout"/></a>
     <form>
@@ -50,27 +51,31 @@ To change this template use File | Settings | File Templates.
     </form>
 </nav>
 <br>
-<c:forEach var="date" items="${requestScope.dates}">
+<form method="post" action="${pageContext.request.contextPath}/salon/admin-reviews">
+    <p align="center">
+    <select id="masterSurname" name="masterSurname"
+            style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
+        <c:forEach var="master" items="${requestScope.masters}">
+            <option value="${master.name}" style="color: deeppink">${master.name}</option>
+        </c:forEach>
+    </select>
+        <br><br>
+        <button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
+            <fmt:message key="button.find"/>
+        </button>
+    </p>
+</form>
+
+<c:forEach var="review" items="${requestScope.adminReviews}">
     <ul>
-        <li><fmt:message key="appointment.master.name"/>: <c:out value="${appointment.userName}"/></li>
-        <li><fmt:message key="appointment.date"/>: <c:out value="${appointment.date}"/></li>
-        <li><fmt:message key="appointment.time"/>: <c:out value="${appointment.time}"/></li>
-        <li><fmt:message key="appointment.procedure.name"/>: <c:out value="${appointment.procedureName}"/></li>
-        <li><fmt:message key="appointment.procedure.price"/>: <c:out value="${appointment.procedurePrice}"/> <fmt:message key="currency"/></li>
+        <li><fmt:message key="appointment.date"/>: <c:out value="${review.date}"/></li>
+        <li><fmt:message key="appointment.procedure.name"/>: <c:out value="${review.procedureName}"/></li>
+        <li><fmt:message key="appointment.client.name"/>: <c:out value="${review.name}"/></li>
+        <li><fmt:message key="review.text"/>: <c:out value="${review.text}"/></li>
     </ul>
     <hr/>
 </c:forEach>
-<br>
-<c:forEach var="appointment" items="${requestScope.masterSchedule}">
-    <ul>
-        <li><fmt:message key="appointment.master.name"/>: <c:out value="${appointment.userName}"/></li>
-        <li><fmt:message key="appointment.date"/>: <c:out value="${appointment.date}"/></li>
-        <li><fmt:message key="appointment.time"/>: <c:out value="${appointment.time}"/></li>
-        <li><fmt:message key="appointment.procedure.name"/>: <c:out value="${appointment.procedureName}"/></li>
-        <li><fmt:message key="appointment.procedure.price"/>: <c:out value="${appointment.procedurePrice}"/> <fmt:message key="currency"/></li>
-    </ul>
-    <hr/>
-</c:forEach>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

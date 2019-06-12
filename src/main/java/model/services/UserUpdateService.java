@@ -14,6 +14,7 @@ public class UserUpdateService {
             UserDao userDao = DaoFactory.getInstance().createUserDao();
             Integer id = userDao.findByLoginAndPassword(user.getLogin(), user.getPassword()).getId();
             DaoFactory.getInstance().createUserDao().updatePassword(id, newPassword);
+            userDao.close();
         }
     }
 }

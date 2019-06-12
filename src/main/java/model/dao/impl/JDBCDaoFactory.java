@@ -38,8 +38,8 @@ public class JDBCDaoFactory extends DaoFactory {
     }
 
     @Override
-    public ClientAppointmentDao createClientAppointmentDao() {
-        return new JDBCClientAppointmentDao(getConnection());
+    public ClientAppointmentDtoDao createClientAppointmentDao() {
+        return new JDBCClientAppointmentDtoDao(getConnection());
     }
 
     @Override

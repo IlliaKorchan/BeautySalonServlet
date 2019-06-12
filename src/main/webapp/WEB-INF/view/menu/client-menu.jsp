@@ -25,7 +25,7 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
 
-    <title>${sessionScope.name} ${sessionScope.surname}</title>
+    <title>${sessionScope.name} ${sessionScope.name}</title>
     </head>
 
     <body>
@@ -57,8 +57,8 @@
     <p align="center">
         <fmt:message key="field.user.name"/>: ${sessionScope.user.nameUkr}<br>
         <fmt:message key="field.user.name"/>: ${sessionScope.user.nameEn}<br>
-        <fmt:message key="field.user.surname"/>: ${sessionScope.user.surnameUkr}<br>
-        <fmt:message key="field.user.surname"/>: ${sessionScope.user.surnameEn}<br>
+        <fmt:message key="field.user.name"/>: ${sessionScope.user.surnameUkr}<br>
+        <fmt:message key="field.user.name"/>: ${sessionScope.user.surnameEn}<br>
         <fmt:message key="field.user.login"/>: ${sessionScope.user.login}<br>
         <fmt:message key="field.user.gender"/>: <fmt:message key="${sessionScope.user.gender}"/><br>
         <fmt:message key="field.user.email"/>: ${sessionScope.user.email}<br>

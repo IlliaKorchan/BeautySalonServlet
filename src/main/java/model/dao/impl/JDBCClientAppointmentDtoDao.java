@@ -1,6 +1,6 @@
 package model.dao.impl;
 
-import model.dao.ClientAppointmentDao;
+import model.dao.ClientAppointmentDtoDao;
 import model.dao.mapper.ClientAppointmentMapper;
 import model.entities.ClientAppointmentDto;
 
@@ -13,12 +13,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class JDBCClientAppointmentDao implements ClientAppointmentDao {
+public class JDBCClientAppointmentDtoDao implements ClientAppointmentDtoDao {
     private Connection connection;
     private ClientAppointmentMapper clientAppointmentMapper = new ClientAppointmentMapper();
     private Map<Integer, ClientAppointmentDto> clientAppointments = new HashMap<>();
 
-    public JDBCClientAppointmentDao(Connection connection) {
+    public JDBCClientAppointmentDtoDao(Connection connection) {
         this.connection = connection;
     }
 

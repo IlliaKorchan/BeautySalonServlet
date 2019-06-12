@@ -117,7 +117,7 @@ public class JDBCUserDao implements UserDao {
     public void update(User entity) {
 //        try (PreparedStatement statement = connection.prepareStatement(UPDATE_USER)) {
 //            statement.setString(1, entity.getName());
-//            statement.setString(2, entity.getSurname());
+//            statement.setString(2, entity.getName());
 //            statement.setString(3, entity.getLogin());
 //            statement.setString(4, entity.getPassword());
 //            statement.setString(5, entity.getGender());
@@ -182,7 +182,6 @@ public class JDBCUserDao implements UserDao {
     }
 
     private List<User> findUsersList(PreparedStatement statement) throws SQLException {
-
         ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {

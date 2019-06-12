@@ -6,14 +6,14 @@ public class ReviewDto {
     private Integer id;
     private LocalDate date;
     private String procedureName;
-    private String surname;
+    private String name;
     private String text;
 
-    public ReviewDto(Integer id, LocalDate date, String procedureName, String surname, String text) {
+    public ReviewDto(Integer id, LocalDate date, String procedureName, String name, String text) {
         this.id = id;
         this.date = date;
         this.procedureName = procedureName;
-        this.surname = surname;
+        this.name = name;
         this.text = text;
     }
 
@@ -33,12 +33,12 @@ public class ReviewDto {
         this.procedureName = procedureName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getName() {
+        return name;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getText() {
