@@ -12,7 +12,7 @@ public class ClientAppointmentMapper implements ObjectMapper<ClientAppointmentDt
     @Override
     public ClientAppointmentDto extractFromResultSet(ResultSet rs) throws SQLException {
             Integer appointmentId = rs.getInt("appointment_id");
-            String masterName = rs.getString("master_surname");
+            String masterName = rs.getString("surname");
             LocalDate date = rs.getDate("appointment_date").toLocalDate();
             LocalTime time = rs.getTime("appointment_time").toLocalTime();
             String procedureName = rs.getString("procedure_name");

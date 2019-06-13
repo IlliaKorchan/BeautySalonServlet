@@ -2,12 +2,11 @@ package model.dao.impl;
 
 import model.dao.ClientAppointmentDtoDao;
 import model.dao.mapper.ClientAppointmentMapper;
+import model.entities.Appointment;
 import model.entities.ClientAppointmentDto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,7 +48,11 @@ public class JDBCClientAppointmentDtoDao implements ClientAppointmentDtoDao {
 
     @Override
     public void close() {
-
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<ClientAppointmentDto> findAll(Integer id, String query) {
@@ -64,6 +67,25 @@ public class JDBCClientAppointmentDtoDao implements ClientAppointmentDtoDao {
             }
             resultSet.close();
 
+            return new ArrayList<>(clientAppointments.values());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<ClientAppointmentDto> findByMasterIdAndDate(Integer id, LocalDate date, String query) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, id);
+            statement.setDate(2, Date.valueOf(date));
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                ClientAppointmentDto appointment = clientAppointmentMapper.extractFromResultSet(resultSet);
+                clientAppointmentMapper.makeUnique(clientAppointments, appointment);
+            }
+            resultSet.close();
             return new ArrayList<>(clientAppointments.values());
         } catch (SQLException e) {
             e.printStackTrace();

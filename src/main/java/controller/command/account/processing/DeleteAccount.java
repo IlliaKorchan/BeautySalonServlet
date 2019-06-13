@@ -1,6 +1,7 @@
-package controller.command;
+package controller.command.account.processing;
 
 
+import controller.command.Command;
 import model.entities.User;
 import model.services.AccountDeleteService;
 

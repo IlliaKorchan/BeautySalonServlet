@@ -25,7 +25,7 @@ To change this template use File | Settings | File Templates.
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
 
-    <title>${sessionScope.name} ${sessionScope.name}</title>
+    <title><fmt:message key="title.schedule"/></title>
 </head>
 
 <body>
@@ -50,27 +50,36 @@ To change this template use File | Settings | File Templates.
     </form>
 </nav>
 <br>
-<c:forEach var="date" items="${requestScope.dates}">
-    <ul>
-        <li><fmt:message key="appointment.master.name"/>: <c:out value="${appointment.userName}"/></li>
-        <li><fmt:message key="appointment.date"/>: <c:out value="${appointment.date}"/></li>
-        <li><fmt:message key="appointment.time"/>: <c:out value="${appointment.time}"/></li>
-        <li><fmt:message key="appointment.procedure.name"/>: <c:out value="${appointment.procedureName}"/></li>
-        <li><fmt:message key="appointment.procedure.price"/>: <c:out value="${appointment.procedurePrice}"/> <fmt:message key="currency"/></li>
-    </ul>
-    <hr/>
-</c:forEach>
+
+<form method="post" action="${pageContext.request.contextPath}/salon/master-schedule">
+    <p align="center" style="color: deeppink">
+        <fmt:message key="choose.date"/>
+        <select id="date" name="date"
+                style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
+            <c:forEach var="date" items="${requestScope.workingDays}">
+                <option value="${date}" style="color: deeppink">${date}</option>
+            </c:forEach>
+        </select>
+        <br><br>
+        <button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
+            <fmt:message key="button.find"/>
+        </button>
+    </p>
+</form>
 <br>
-<c:forEach var="appointment" items="${requestScope.masterSchedule}">
-    <ul>
-        <li><fmt:message key="appointment.master.name"/>: <c:out value="${appointment.userName}"/></li>
-        <li><fmt:message key="appointment.date"/>: <c:out value="${appointment.date}"/></li>
-        <li><fmt:message key="appointment.time"/>: <c:out value="${appointment.time}"/></li>
-        <li><fmt:message key="appointment.procedure.name"/>: <c:out value="${appointment.procedureName}"/></li>
-        <li><fmt:message key="appointment.procedure.price"/>: <c:out value="${appointment.procedurePrice}"/> <fmt:message key="currency"/></li>
-    </ul>
-    <hr/>
+<p style="color: deeppink">
+    <c:forEach var="appointment" items="${requestScope.appointments}">
+<ul>
+    <li><fmt:message key="appointment.client.name"/>: <c:out value="${appointment.surname}"/></li>
+    <li><fmt:message key="appointment.date"/>: <c:out value="${appointment.date}"/></li>
+    <li><fmt:message key="appointment.time"/>: <c:out value="${appointment.time}"/></li>
+    <li><fmt:message key="appointment.procedure.name"/>: <c:out value="${appointment.procedureName}"/></li>
+    <li><fmt:message key="appointment.procedure.price"/>: <c:out value="${appointment.procedurePrice}"/> <fmt:message key="currency"/></li>
+</ul>
+<hr/>
 </c:forEach>
+</p>
+<br>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

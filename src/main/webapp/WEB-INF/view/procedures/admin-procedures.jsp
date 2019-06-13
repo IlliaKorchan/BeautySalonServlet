@@ -52,14 +52,16 @@ To change this template use File | Settings | File Templates.
     </form>
 </nav>
 <br>
-
-<c:forEach var="procedure" items="${requestScope.procedures}">
-    <ul>
-        <li><fmt:message key="appointment.procedure.name"/>: <c:out value="${procedure.name}"/></li>
-        <li><fmt:message key="appointment.procedure.price"/>: <c:out value="${procedure.procedure.price}"/> <fmt:message key="currency"/></li>
-    </ul>
-    <hr/>
+<p style="color: deeppink">
+    <c:forEach var="procedure" items="${requestScope.procedures}">
+<ul>
+    <li><fmt:message key="appointment.procedure.name"/>: <c:out value="${procedure.name}"/></li>
+    <li><fmt:message key="appointment.procedure.price"/>: <c:out value="${procedure.procedure.price}"/> <fmt:message key="currency"/></li>
+</ul>
+<hr/>
 </c:forEach>
+</p>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

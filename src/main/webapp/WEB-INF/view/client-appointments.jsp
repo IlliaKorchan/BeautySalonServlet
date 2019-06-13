@@ -36,7 +36,7 @@ To change this template use File | Settings | File Templates.
     </a>
     <a href="${pageContext.request.contextPath}/salon/client-appointments" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt"><fmt:message key="navbar.my.appointments"/></a>
-    <a href="${pageContext.request.contextPath}/salon/make-appointment" class="navbar-brand letter"
+    <a href="${pageContext.request.contextPath}/salon/client-master-schedule" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.user.appoint"/></a>
     <a href="${pageContext.request.contextPath}/salon/procedures" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.procedures"/></a>
@@ -55,16 +55,18 @@ To change this template use File | Settings | File Templates.
 </nav>
 <br>
 
-<c:forEach var="appointment" items="${requestScope.clientAppointments}">
-    <ul>
-        <li><fmt:message key="appointment.master.name"/>: <c:out value="${appointment.masterName}"/></li>
-        <li><fmt:message key="appointment.date"/>: <c:out value="${appointment.date}"/></li>
-        <li><fmt:message key="appointment.time"/>: <c:out value="${appointment.time}"/></li>
-        <li><fmt:message key="appointment.procedure.name"/>: <c:out value="${appointment.procedureName}"/></li>
-        <li><fmt:message key="appointment.procedure.price"/>: <c:out value="${appointment.procedurePrice}"/> <fmt:message key="currency"/></li>
-    </ul>
-    <hr/>
+<p style="color: deeppink">
+    <c:forEach var="appointment" items="${requestScope.clientAppointments}">
+<ul>
+    <li><fmt:message key="appointment.master.name"/>: <c:out value="${appointment.surname}"/></li>
+    <li><fmt:message key="appointment.date"/>: <c:out value="${appointment.date}"/></li>
+    <li><fmt:message key="appointment.time"/>: <c:out value="${appointment.time}"/></li>
+    <li><fmt:message key="appointment.procedure.name"/>: <c:out value="${appointment.procedureName}"/></li>
+    <li><fmt:message key="appointment.procedure.price"/>: <c:out value="${appointment.procedurePrice}"/> <fmt:message key="currency"/></li>
+</ul>
+<hr/>
 </c:forEach>
+</p>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

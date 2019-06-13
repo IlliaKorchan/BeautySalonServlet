@@ -36,7 +36,7 @@ To change this template use File | Settings | File Templates.
     </a>
     <a href="${pageContext.request.contextPath}/salon/client-appointments" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt"><fmt:message key="navbar.my.appointments"/></a>
-    <a href="${pageContext.request.contextPath}/salon/make-appointment" class="navbar-brand letter"
+    <a href="${pageContext.request.contextPath}/salon/client-master-schedule" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.user.appoint"/></a>
     <a href="${pageContext.request.contextPath}/salon/client-procedures" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.procedures"/></a>
@@ -55,13 +55,15 @@ To change this template use File | Settings | File Templates.
 </nav>
 <br>
 
-<c:forEach var="procedure" items="${requestScope.procedures}">
-    <ul>
-        <li><fmt:message key="appointment.procedure.name"/>: <c:out value="${procedure.name}"/></li>
-        <li><fmt:message key="appointment.procedure.price"/>: <c:out value="${procedure.procedure.price}"/> <fmt:message key="currency"/></li>
-    </ul>
-    <hr/>
+    <c:forEach var="procedure" items="${requestScope.procedures}">
+<ul>
+    <li><fmt:message key="appointment.procedure.name"/>: <c:out value="${procedure.name}"/></li>
+    <li><fmt:message key="appointment.procedure.price"/>: <c:out value="${procedure.procedure.price}"/> <fmt:message key="currency"/></li>
+</ul>
+<hr/>
 </c:forEach>
+
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

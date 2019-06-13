@@ -7,15 +7,14 @@ import model.entities.Appointment;
 import java.sql.*;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static string.containers.QueryContainer.CREATE_APPOINTMENT;
-import static string.containers.QueryContainer.FIND_ALL_APPOINTMENTS;
-import static string.containers.QueryContainer.FIND_APPOINTMENT_BY_ID;
+import static string.containers.QueryContainer.*;
 
 
 public class JDBCAppointmentDao implements AppointmentDao {
@@ -127,6 +126,33 @@ public class JDBCAppointmentDao implements AppointmentDao {
             }
             resultSet.close();
             return new ArrayList<>(appointments.values());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public Appointment findByMasterIdAndDateAndTime(Integer id, LocalDate date, LocalTime time) {
+        try (PreparedStatement statement = connection.prepareStatement(FIND_APPOINTMENT_BY_MASTER_ID_DATE_TIME)) {
+            statement.setInt(1, id);
+            statement.setDate(2, Date.valueOf(date));
+            statement.setTime(3, Time.valueOf(time));
+
+            ResultSet resultSet = statement.executeQuery();
+
+            Appointment appointment = null;
+
+            if (resultSet.next()) {
+                appointment = appointmentMapper.extractFromResultSet(resultSet);
+            }
+
+            if (Objects.nonNull(appointment)) {
+                appointmentMapper.makeUnique(appointments, appointment);
+            }
+            resultSet.close();
+
+            return appointment;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

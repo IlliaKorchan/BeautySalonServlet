@@ -66,15 +66,17 @@ To change this template use File | Settings | File Templates.
     </p>
 </form>
 
-<c:forEach var="review" items="${requestScope.adminReviews}">
-    <ul>
-        <li><fmt:message key="appointment.date"/>: <c:out value="${review.date}"/></li>
-        <li><fmt:message key="appointment.procedure.name"/>: <c:out value="${review.procedureName}"/></li>
-        <li><fmt:message key="appointment.client.name"/>: <c:out value="${review.name}"/></li>
-        <li><fmt:message key="review.text"/>: <c:out value="${review.text}"/></li>
-    </ul>
-    <hr/>
+<p style="color: deeppink">
+    <c:forEach var="review" items="${requestScope.adminReviews}">
+<ul>
+    <li><fmt:message key="appointment.date"/>: <c:out value="${review.date}"/></li>
+    <li><fmt:message key="appointment.procedure.name"/>: <c:out value="${review.procedureName}"/></li>
+    <li><fmt:message key="appointment.client.name"/>: <c:out value="${review.name}"/></li>
+    <li><fmt:message key="review.text"/>: <c:out value="${review.text}"/></li>
+</ul>
+<hr/>
 </c:forEach>
+</p>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

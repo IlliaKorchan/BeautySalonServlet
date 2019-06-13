@@ -17,12 +17,12 @@ public interface QueryContainer {
                                 "VALUES (?, ?, ?, ?, ?)";
     String FIND_APPOINTMENT_BY_ID = "SELECT * FROM appointments WHERE appointment_id = ?";
     String FIND_ALL_APPOINTMENTS = "SELECT * FROM appointments";
-    String FIND_ALL_CLIENT_APPOINTMENTS_UKR = "SELECT appointments.appointment_id, users.user_surname_ukr AS master_surname, appointment_date, appointment_time, " +
+    String FIND_ALL_CLIENT_APPOINTMENTS_UKR = "SELECT appointments.appointment_id, users.user_surname_ukr AS surname, appointment_date, appointment_time, " +
             "procedures.procedure_name_ukr AS procedure_name, procedures.procedure_price FROM appointments JOIN users " +
             "ON appointments.appointment_master_id = users.user_id JOIN procedures " +
             "ON appointments.appointment_procedure_id = procedures.procedure_id " +
             "WHERE appointments.appointment_user_id = ?";
-    String FIND_ALL_CLIENT_APPOINTMENTS_EN = "SELECT appointments.appointment_id, users.user_surname_en AS master_surname, appointment_date, appointment_time, " +
+    String FIND_ALL_CLIENT_APPOINTMENTS_EN = "SELECT appointments.appointment_id, users.user_surname_en AS surname, appointment_date, appointment_time, " +
             "procedures.procedure_name_en AS procedure_name, procedures.procedure_price FROM appointments JOIN users " +
             "ON appointments.appointment_master_id = users.user_id JOIN procedures " +
             "ON appointments.appointment_procedure_id = procedures.procedure_id " +
@@ -62,16 +62,17 @@ public interface QueryContainer {
     String FIND_WORKING_DAYS_BY_MASTER_SURNAME_UKR = "SELECT * FROM working_days JOIN users" +
             " ON working_days.worker_day_master_id = users.user_id WHERE user_surname_ukr = ?";
 
-    String FIND_WORKING_DAYS_BY_MASTER_ID = "SELECT * FROM working_days WHERE working_day_master_id = ?";
+    String FIND_WORKING_DAYS_BY_MASTER_ID = "SELECT * FROM working_days WHERE working_day_master_id = ? " +
+            "AND working_day_date > NOW()";
     String FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_EN = "SELECT appointments.appointment_id, users.user_surname_en" +
-            " AS client_surname, appointment_date, appointment_time, procedures.procedure_name_en" +
+            " AS surname, appointment_date, appointment_time, procedures.procedure_name_en" +
             " AS procedure_name, procedures.procedure_price FROM appointments JOIN users" +
             " ON appointments.appointment_user_id = users.user_id JOIN procedures" +
             " ON appointments.appointment_procedure_id = procedures.procedure_id" +
             " WHERE appointments.appointment_master_id = ? AND appointments.appointment_date = ?";
 
     String FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_UKR = "SELECT appointments.appointment_id, users.user_surname_ukr" +
-            " AS client_surname, appointment_date, appointment_time, procedures.procedure_name_ukr" +
+            " AS surname, appointment_date, appointment_time, procedures.procedure_name_ukr" +
             " AS procedure_name, procedures.procedure_price FROM appointments JOIN users" +
             " ON appointments.appointment_user_id = users.user_id JOIN procedures" +
             " ON appointments.appointment_procedure_id = procedures.procedure_id" +
@@ -93,4 +94,6 @@ public interface QueryContainer {
     String FIND_MASTER_BY_SURNAME_UKR = "SELECT * FROM users WHERE user_surname_ukr = ? AND user_role = 'master'";
     String FIND_MASTER_BY_SURNAME_EN = "SELECT * FROM users WHERE user_surname_en = ? AND user_role = 'master'";
 
+    String FIND_APPOINTMENT_BY_MASTER_ID_DATE_TIME = "SELECT * FROM appointments WHERE appointment_master_id = ? " +
+            "AND appointment_date = ? AND appointment_time = ? ";
 }

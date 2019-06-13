@@ -25,7 +25,7 @@ To change this template use File | Settings | File Templates.
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
 
-    <title>${sessionScope.name} ${sessionScope.name}</title>
+    <title>${sessionScope.name} ${sessionScope.surname}</title>
     </head>
 
     <body>
@@ -34,7 +34,7 @@ To change this template use File | Settings | File Templates.
     <a href="${pageContext.request.contextPath}/salon/menu" class="navbar-brand">
     <img src="https://image.freepik.com/free-vector/_53876-43323.jpg" width="30" height="30" alt="logo">
     </a>
-    <a href="${pageContext.request.contextPath}/salon/client-appointments" class="navbar-brand letter"
+    <a href="${pageContext.request.contextPath}/salon/master-schedule" class="navbar-brand letter"
     style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.my.appointments"/></a>
     <a href="${pageContext.request.contextPath}/salon/procedures" class="navbar-brand letter"
     style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.procedures"/></a>
@@ -50,6 +50,21 @@ To change this template use File | Settings | File Templates.
         </form>
     </nav>
     <br>
+    <p align="center" style="color: deeppink">
+    <fmt:message key="field.user.name.ukr"/>: ${sessionScope.user.nameUkr}<br>
+    <fmt:message key="field.user.name.en"/>: ${sessionScope.user.nameEn}<br>
+    <fmt:message key="field.user.surname.ukr"/>: ${sessionScope.user.surnameUkr}<br>
+    <fmt:message key="field.user.surname.en"/>: ${sessionScope.user.surnameEn}<br>
+    <fmt:message key="field.user.login"/>: ${sessionScope.user.login}<br>
+    <fmt:message key="field.user.gender"/>: <fmt:message key="${sessionScope.user.gender}"/><br>
+    <fmt:message key="field.user.email"/>: ${sessionScope.user.email}<br>
+    <br>
+    <form method="get" action="${pageContext.request.contextPath}/salon/change-password">
+    <p align="center"><button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
+    <fmt:message key="button.edit.password"/>
+    </button>
+    </p>
+    </form>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

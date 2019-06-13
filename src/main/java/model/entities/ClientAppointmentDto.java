@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 public class ClientAppointmentDto {
     private Integer id;
-    private String masterName;
+    private String surname;
     private LocalDate date;
     private LocalTime time;
     private String procedureName;
@@ -14,10 +14,10 @@ public class ClientAppointmentDto {
     public ClientAppointmentDto() {
     }
 
-    public ClientAppointmentDto(Integer id, String masterName, LocalDate date, LocalTime time,
+    public ClientAppointmentDto(Integer id, String surname, LocalDate date, LocalTime time,
                                 String procedureName, Long procedurePrice) {
         this.id = id;
-        this.masterName = masterName;
+        this.surname = surname;
         this.date = date;
         this.time = time;
         this.procedureName = procedureName;
@@ -32,12 +32,12 @@ public class ClientAppointmentDto {
         this.id = appointmentId;
     }
 
-    public String getMasterName() {
-        return masterName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setMasterName(String masterName) {
-        this.masterName = masterName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public LocalDate getDate() {

@@ -36,7 +36,7 @@ To change this template use File | Settings | File Templates.
     </a>
     <a href="${pageContext.request.contextPath}/salon/client-appointments" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt"><fmt:message key="navbar.my.appointments"/></a>
-    <a href="${pageContext.request.contextPath}/salon/make-appointment" class="navbar-brand letter"
+    <a href="${pageContext.request.contextPath}/salon/client-master-schedule" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.user.appoint"/></a>
     <a href="${pageContext.request.contextPath}/salon/procedures" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.procedures"/></a>
@@ -54,24 +54,12 @@ To change this template use File | Settings | File Templates.
     </form>
 </nav>
 <br>
-</form>
-<form method="post" action="${pageContext.request.contextPath}/salon/make-appointment">
-    <select id="master-select" name="master-select"
-            style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
-        <c:forEach var="master" items="${requestScope.masters}">
-            <option value="${master}" style="color: deeppink">${master}</option>
-        </c:forEach>
-    </select>
-</form>
-
-<form method="post" action="${pageContext.request.contextPath}/salon/make-appointment">
-    <select id="date-select" name="date-select"
-            style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
-        <c:forEach var="date" items="${requestScope.dates}">
-            <option value="${date}" style="color: deeppink">${date}</option>
-        </c:forEach>
-    </select>
-</form>
+<p align="center">
+    <fmt:message key="appointment.make.success"/>
+    <button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
+        <fmt:message key="button.main"/>
+    </button>
+</p>
 
 
 

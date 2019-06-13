@@ -1,33 +1,51 @@
 package model.services;
 
+
+import model.dao.AppointmentDao;
+import model.dao.ClientAppointmentDtoDao;
 import model.dao.DaoFactory;
-import model.entities.Appointment;
+import model.dao.WorkingDayDao;
 import model.entities.ClientAppointmentDto;
-import model.entities.User;
+import model.entities.WorkingDay;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
-
-import static string.containers.QueryContainer.*;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class MasterScheduleService {
-    public List<Appointment> getMasterScheduleForClient(Integer id, String language) {
-        return null;
+    public List<LocalDate> findDates(Integer id) {
+        WorkingDayDao workingDayDao = DaoFactory.getInstance().createWorkingDayDao();
+
+        List<WorkingDay> masterWorkingDays = workingDayDao.findByMasterId(id);
+        List<LocalDate> dates = new ArrayList<>();
+
+        masterWorkingDays.forEach(day -> dates.add(day.getDate()));
+
+        workingDayDao.close();
+        return dates;
     }
 
-//    public List<ClientAppointmentDto> getMasterScheduleForMaster(User master, LocalDate date, String language) {
-//        String query = language.equals("uk") ? FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_UKR :
-//                                                FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_EN;
-//
-//        Integer id = DaoFactory.getInstance().createUserDao().findByLogin(master.getLogin()).getId();
-//        return DaoFactory.getInstance().createAppointmentDao().findByMasterIdAndDate(id, date, query);
-//    }
+    public List<ClientAppointmentDto> findAppointmentsForMasterByDate(Integer id, LocalDate date, String query) {
+        ClientAppointmentDtoDao appointmentDtoDao = DaoFactory.getInstance().createClientAppointmentDao();
 
-//    public List<ClientAppointmentDto> getMasterScheduleForAdmin(String masterSurname, LocalDate date, String language) {
-//        String query = language.equals("uk") ? FIND_MASTER_BY_SURNAME_UKR :
-//                                               FIND_MASTER_BY_SURNAME_EN;
-//
-//        User master = DaoFactory.getInstance().createUserDao().findBySurname(masterSurname, query);
-//        return getMasterScheduleForMaster(master, date, language);
-//    }
+        List<ClientAppointmentDto> appointments = appointmentDtoDao.findByMasterIdAndDate(id, date, query);
+
+        appointmentDtoDao.close();
+        return appointments;
+    }
+
+    public List<LocalTime> findFreeTimes(Integer id, LocalDate date) {
+        List<LocalTime> workingHours = new DayTimeService().getWorkingHours();
+        AppointmentDao appointmentDao = DaoFactory.getInstance().createAppointmentDao();
+
+        workingHours = workingHours.stream()
+                .filter(hour -> !Objects.nonNull(appointmentDao.findByMasterIdAndDateAndTime(id, date, hour)))
+                .collect(Collectors.toList());
+
+        appointmentDao.close();
+        return workingHours;
+    }
 }

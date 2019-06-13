@@ -1,6 +1,9 @@
 package controller.servlet;
 
 import controller.command.*;
+import controller.command.account.processing.*;
+import controller.command.schedule.ClientMasterSchedule;
+import controller.command.schedule.MasterSchedule;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +31,7 @@ public class MainServlet extends HttpServlet {
         commands.put("make-appointment", new MakeAppointment());
         commands.put("master-schedule", new MasterSchedule());
         commands.put("admin-reviews", new AdminReviews());
+        commands.put("client-master-schedule", new ClientMasterSchedule());
     }
 
     @Override
@@ -38,7 +42,6 @@ public class MainServlet extends HttpServlet {
         path = path.replaceAll("\\?*" , "");
         Command command = commands.getOrDefault(path , (r)->"/WEB-INF/view/index.jsp");
         String page = command.execute(req);
-
         req.getRequestDispatcher(page).forward(req,resp);
     }
 
