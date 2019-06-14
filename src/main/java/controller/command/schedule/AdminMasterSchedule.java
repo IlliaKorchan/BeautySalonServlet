@@ -1,17 +1,26 @@
 package controller.command.schedule;
 
 import controller.command.Command;
-import model.entities.User;
 import model.services.MasterScheduleService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDate;
 import java.util.Objects;
 
 import static string.containers.QueryContainer.FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_EN;
 import static string.containers.QueryContainer.FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_UKR;
 
+/**
+ * Class for processing admin request to get data about master schedule
+ * @author Illia Korchan
+ * @version 0.6.5
+ */
 public class AdminMasterSchedule implements Command {
+    /**
+     * Method, that sends list of masters to the jsp, fetches master surname, chosen by admin, date
+     * and sends it to the master schedule service
+     * @param req
+     * @return master schedule page for admin
+     */
     @Override
     public String execute(HttpServletRequest req) {
         String language = (String) req.getSession().getAttribute("language");

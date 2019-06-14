@@ -10,11 +10,11 @@ import java.util.List;
 import static string.containers.QueryContainer.*;
 
 public class ReviewsService {
-    public List<ReviewDto> getClientReviews(User user, String language) {
+    public List<ReviewDto> getClientReviews(Integer id, String language) {
         ReviewDtoDao reviewDtoDao = DaoFactory.getInstance().createReviewDtoDao();
         String query = (language.equals("uk")) ? FIND_REVIEWS_BY_CLIENT_ID_UKR : FIND_REVIEWS_BY_CLIENT_ID_EN;
 
-        List<ReviewDto> clientReviews = reviewDtoDao.findAllById(user.getId(), query);
+        List<ReviewDto> clientReviews = reviewDtoDao.findAllById(id, query);
         reviewDtoDao.close();
 
         return clientReviews;

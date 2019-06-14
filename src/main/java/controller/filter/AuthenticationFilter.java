@@ -12,11 +12,28 @@ import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.Objects;
 
+/**
+ * Class for authentication processing
+ * @author Illia Korchan
+ * @version 0.6.5
+ */
 public class AuthenticationFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) {
     }
 
+    /**
+     * Method, that receives user request, response and chain of filters. If user is already logged in,
+     * fethes role from session and redirects to the menu page according to role. If user isn`t logged in,
+     * but login and password are already entered, finds user with entered data and log in, else if user
+     * is not logged in and logging data aren`t entered, redirects to the login page.
+     * @param servletRequest
+     * @param servletResponse
+     * @param filterChain
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void doFilter(final ServletRequest servletRequest,
                          final ServletResponse servletResponse,
@@ -27,7 +44,8 @@ public class AuthenticationFilter implements Filter {
         final String login = request.getParameter("login");
         final String password = request.getParameter("password");
 
-        @SuppressWarnings("unchecked") final AtomicReference<UserDao> userDao = (AtomicReference<UserDao>) request.getServletContext()
+        @SuppressWarnings("unchecked")
+        final AtomicReference<UserDao> userDao = (AtomicReference<UserDao>) request.getServletContext()
                 .getAttribute("userDao");
 
         final HttpSession session = request.getSession();
@@ -47,12 +65,10 @@ public class AuthenticationFilter implements Filter {
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("role", role);
 
+            userDao.get().close();
             moveToMenu(request, response, role);
 
         } else {
-//            request.setAttribute("message", (Objects.nonNull(login)) && Objects.nonNull(password) ?
-//                                                            "Користувач з таким іменем/паролем не знайдений!" :
-//                                                            "Для перегляду цієї сторінки необхідно авторизуватися!");
             request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         }
     }
@@ -73,6 +89,11 @@ public class AuthenticationFilter implements Filter {
     public void destroy() {
     }
 
+    /**
+     * Method for setting logged user and his/her role to the session
+     * @param request
+     * @param user
+     */
     private void setUserName(HttpServletRequest request, User user) {
         String language = (String) request.getSession().getAttribute("language");
 

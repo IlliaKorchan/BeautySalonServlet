@@ -10,7 +10,18 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Class for processing client request to get data about master schedule
+ * @author Illia Korchan
+ * @version 0.6.5
+ */
 public class ClientMasterSchedule implements Command {
+    /**
+     * Method, that sends list of masters to the jsp and fetches master surname, chosen by client, date
+     * and sends it to the master schedule service
+     * @param req
+     * @return master schedule page for client
+     */
     @Override
     public String execute(HttpServletRequest req) {
         String language = (String) req.getSession().getAttribute("language");
