@@ -4,10 +4,8 @@ import model.dao.ReviewDao;
 import model.dao.mapper.ReviewMapper;
 import model.entities.Review;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,9 +15,14 @@ import static string.containers.QueryContainer.FIND_ALL_REVIEWS;
 import static string.containers.QueryContainer.FIND_REVIEW_BY_ID;
 import static string.containers.QueryContainer.UPDATE_REVIEW;
 import static string.containers.QueryContainer.CREATE_REVIEW;
-import static string.containers.QueryContainer.FIND_REVIEW_BY_MASTER_ID;
 
 
+/**
+ * Class for processing queries for table "reviews" from beauty_salon db
+ *
+ * @author Illia Korchan
+ * @version 0.7.0
+ */
 public class JDBCReviewDao implements ReviewDao {
     private Connection connection;
     private ReviewMapper reviewMapper;
@@ -29,12 +32,18 @@ public class JDBCReviewDao implements ReviewDao {
         this.connection = connection;
     }
 
+    /**
+     * Method for inserting new review
+     *
+     * @param entity
+     */
     @Override
     public void create(Review entity) {
         try (PreparedStatement statement = connection.prepareStatement(CREATE_REVIEW)) {
-            statement.setInt(1, entity.getClientId());
-            statement.setInt(2, entity.getAppointmentId());
-            statement.setString(3, entity.getText());
+            statement.setDate(1, Date.valueOf(entity.getDate()));
+            statement.setInt(2, entity.getClientId());
+            statement.setInt(3, entity.getMasterId());
+            statement.setString(4, entity.getText());
 
             statement.execute();
         } catch (SQLException e) {
@@ -42,61 +51,14 @@ public class JDBCReviewDao implements ReviewDao {
         }
     }
 
+    /**
+     * Method for searching for review by id
+     * @param id
+     * @return review found
+     */
     @Override
     public Review findById(int id) {
-        return findReview(FIND_REVIEW_BY_ID, id);
-    }
-
-    @Override
-    public List<Review> findById(Integer id, String query) {
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, id);
-            return findListReviews(statement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-
-    @Override
-    public List<Review> findAll() {
-        try (PreparedStatement statement = connection.prepareStatement(FIND_ALL_REVIEWS)) {
-            return findListReviews(statement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @Override
-    public void update(Review entity) {
-        try (PreparedStatement statement = connection.prepareStatement(UPDATE_REVIEW)) {
-            statement.setString(1, entity.getText());
-            statement.setInt(2, entity.getId());
-
-            statement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void delete(int id) {
-
-    }
-
-    @Override
-    public void close() {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private Review findReview(String query, int id) {
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try (PreparedStatement statement = connection.prepareStatement(FIND_REVIEW_BY_ID)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             Review review = null;
@@ -116,8 +78,13 @@ public class JDBCReviewDao implements ReviewDao {
         }
     }
 
-    private List<Review> findListReviews(PreparedStatement statement) {
-        try  {
+    /**
+     * Method for fetching all reviews from the table
+     * @return list of all reviews in db
+     */
+    @Override
+    public List<Review> findAll() {
+        try (PreparedStatement statement = connection.prepareStatement(FIND_ALL_REVIEWS)) {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
@@ -130,6 +97,39 @@ public class JDBCReviewDao implements ReviewDao {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    /**
+     * Method for updating text of review
+     * @param entity
+     */
+    @Override
+    public void update(Review entity) {
+        try (PreparedStatement statement = connection.prepareStatement(UPDATE_REVIEW)) {
+            statement.setString(1, entity.getText());
+            statement.setInt(2, entity.getId());
+
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void delete(int id) {
+
+    }
+
+    /**
+     * Method for closing connection to db
+     */
+    @Override
+    public void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

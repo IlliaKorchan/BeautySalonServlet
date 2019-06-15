@@ -6,6 +6,11 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * Factory class for creating instances of Dao classes
+ * @author Illia Korchan
+ * @version 0.7.0
+ */
 public class JDBCDaoFactory extends DaoFactory {
     private DataSource dataSource = ConnectionPoolHolder.getDataSource();
 

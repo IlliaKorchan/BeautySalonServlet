@@ -19,12 +19,13 @@ To change this template use File | Settings | File Templates.
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
 
-    <title><fmt:message key="title.admin.reviews"/></title>
+    <title><fmt:message key="navbar.user.review"/></title>
 </head>
 
 <body>
@@ -33,12 +34,14 @@ To change this template use File | Settings | File Templates.
     <a href="${pageContext.request.contextPath}/salon/menu" class="navbar-brand">
         <img src="https://image.freepik.com/free-vector/_53876-43323.jpg" width="30" height="30" alt="logo">
     </a>
+    <a href="${pageContext.request.contextPath}/salon/client-appointments" class="navbar-brand letter"
+       style="color: deeppink; font-size:11pt"><fmt:message key="navbar.my.appointments"/></a>
+    <a href="${pageContext.request.contextPath}/salon/client-master-schedule" class="navbar-brand letter"
+       style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.user.appoint"/></a>
     <a href="${pageContext.request.contextPath}/salon/procedures" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.procedures"/></a>
-    <a href="${pageContext.request.contextPath}/salon/appointments-administrating" class="navbar-brand letter"
-       style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.admin.appointments"/></a>
-    <a href="${pageContext.request.contextPath}/salon/admin-reviews" class="navbar-brand letter"
-       style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.admin.reviews"/></a>
+    <a href="${pageContext.request.contextPath}/salon/client-reviews" class="navbar-brand letter"
+       style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.user.review"/></a>
     <a href="${pageContext.request.contextPath}/logout" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt"><fmt:message key="navbar.logout"/></a>
     <form>
@@ -51,32 +54,22 @@ To change this template use File | Settings | File Templates.
     </form>
 </nav>
 <br>
-<form method="post" action="${pageContext.request.contextPath}/salon/admin-reviews">
-    <p align="center">
-    <select id="masterSurname" name="masterSurname"
-            style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
-        <c:forEach var="master" items="${requestScope.masters}">
-            <option value="${master.name}" style="color: deeppink">${master.name}</option>
-        </c:forEach>
-    </select>
+<p align="center" style="color: deeppink"><fmt:message key="navbar.user.review"/></p>
+<form method="post" action="${pageContext.request.contextPath}/salon/make-review">
+    <p align="center" style="color: deeppink">
+        <select id="masterSurname" name="masterSurname"
+                style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
+            <c:forEach var="master" items="${requestScope.masters}">
+                <option value="${master.name}" style="color: deeppink">${master.name}</option>
+            </c:forEach>
+        </select>
         <br><br>
+        <input type="text" required placeholder="text" name="reviewText"><br><br>
         <button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
-            <fmt:message key="button.find"/>
+            <fmt:message key="button.send"/>
         </button>
     </p>
 </form>
-
-<p style="color: deeppink">
-    <c:forEach var="review" items="${requestScope.adminReviews}">
-<ul>
-    <li><fmt:message key="appointment.date"/>: <c:out value="${review.date}"/></li>
-    <li><fmt:message key="appointment.client.name"/>: <c:out value="${review.name}"/></li>
-    <li><fmt:message key="review.text"/>: <c:out value="${review.text}"/></li>
-</ul>
-<hr/>
-</c:forEach>
-</p>
-
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

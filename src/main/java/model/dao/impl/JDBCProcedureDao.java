@@ -16,7 +16,11 @@ import java.util.Map;
 
 import static string.containers.QueryContainer.*;
 
-
+/**
+ * Class for processing queries for table "procedures" from beauty_salon db
+ * @author Illia Korchan
+ * @version 0.7.0
+ */
 public class JDBCProcedureDao implements ProcedureDao {
     private Connection connection;
     private ProcedureMapper procedureMapper = new ProcedureMapper();
@@ -26,6 +30,10 @@ public class JDBCProcedureDao implements ProcedureDao {
         this.connection = connection;
     }
 
+    /**
+     * Method for inserting new procedure
+     * @param entity
+     */
     @Override
     public void create(Procedure entity) {
         try (PreparedStatement statement = connection.prepareStatement(CREATE_PROCEDURE)) {
@@ -39,6 +47,11 @@ public class JDBCProcedureDao implements ProcedureDao {
         }
     }
 
+    /**
+     * Method for searching for procedure by id
+     * @param id
+     * @return procedure found
+     */
     @Override
     public Procedure findById(int id) {
         try (PreparedStatement statement = connection.prepareStatement(FIND_PROCEDURE_BY_ID)) {
@@ -62,6 +75,10 @@ public class JDBCProcedureDao implements ProcedureDao {
         }
     }
 
+    /**
+     * Method for fetching all procedures from the table
+     * @return list of all procedures in db
+     */
     @Override
     public List<Procedure> findAll() {
         try (PreparedStatement statement = connection.prepareStatement(FIND_ALL_PROCEDURES)) {
@@ -85,13 +102,15 @@ public class JDBCProcedureDao implements ProcedureDao {
 
     }
 
+    /**
+     * Method for updating all procedures from the table
+     */
     @Override
     public void update(Procedure entity) {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_PROCEDURE)) {
 
             statement.setLong(1, entity.getPrice());
-
-            statement.setInt(3, entity.getId());
+            statement.setInt(2, entity.getId());
 
             statement.execute();
         } catch (SQLException e) {
@@ -99,6 +118,9 @@ public class JDBCProcedureDao implements ProcedureDao {
         }
     }
 
+    /**
+     * Method for closing connection to db
+     */
     @Override
     public void close() {
         try {

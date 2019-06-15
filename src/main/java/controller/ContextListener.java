@@ -8,6 +8,12 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Class, that implements ServletContextListener interface and set UserDao implementation to the ServletContext
+ * to use it in authorization and registration filters
+ * @author Illia Korchan
+ * @version 0.6.6
+ */
 @WebListener
 public class ContextListener implements ServletContextListener {
 

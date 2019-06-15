@@ -13,7 +13,7 @@ public class ClientAppointmentsService {
     public List<ClientAppointmentDto> getAllClientAppointments(String language,  Integer id) {
         ClientAppointmentDtoDao clientAppointmentDtoDao = DaoFactory.getInstance().createClientAppointmentDao();
 
-        List<ClientAppointmentDto> clientAppointments = clientAppointmentDtoDao.findAll(id, language.equals("uk")
+        List<ClientAppointmentDto> clientAppointments = clientAppointmentDtoDao.findByClientId(id, language.equals("uk")
                                                                                 ? FIND_ALL_CLIENT_APPOINTMENTS_UKR
                                                                                 : FIND_ALL_CLIENT_APPOINTMENTS_EN);
         clientAppointmentDtoDao.close();

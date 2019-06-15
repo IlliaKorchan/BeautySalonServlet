@@ -6,7 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
+/**
+ * Class for processing data, received from table "users" after executing queries.
+ * @author Illia Korchan
+ * @version 0.7.0
+ */
 public class UserMapper implements ObjectMapper<User> {
+    /**
+     * Method for fetching data from result set
+     * @param rs, that contains data to fetch
+     * @return POJO object with fetched data
+     * @throws SQLException
+     */
     @Override
     public User extractFromResultSet(ResultSet rs) throws SQLException {
 
@@ -27,6 +38,13 @@ public class UserMapper implements ObjectMapper<User> {
 
     }
 
+    /**
+     * Method, that allows not to store repeating POJO objects. Method put {@param user} to {@param cache}
+     * if there is no object with the same id
+     * @param cache storage of Appointment class instances
+     * @param user POJO object, that should be added to cache
+     * @return value from {@param cache} with the key id from {@param user}
+     */
     @Override
     public User makeUnique(Map<Integer, User> cache, User user) {
         cache.putIfAbsent(user.getId(), user);

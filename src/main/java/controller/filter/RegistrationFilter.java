@@ -12,6 +12,11 @@ import java.io.IOException;
 import static string.containers.MessageContainer.*;
 import static string.containers.RegexContainer.*;
 
+/**
+ * Filter for registrating users
+ * @author Illia Korchan
+ * @version 0.6.6
+ */
 public class RegistrationFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

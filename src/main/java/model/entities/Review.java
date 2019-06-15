@@ -1,18 +1,29 @@
 package model.entities;
 
+import java.time.LocalDate;
+
 public class Review {
     private Integer id;
+    private LocalDate date;
     private Integer clientId;
-    private Integer appointmentId;
+    private Integer masterId;
     private String text;
 
     public Review() {
     }
 
-    public Review(Integer id, Integer clientId, Integer appointmentId, String text) {
+    public Review(Integer id, LocalDate date, Integer clientId, Integer masterId, String text) {
         this.id = id;
+        this.date = date;
         this.clientId = clientId;
-        this.appointmentId = appointmentId;
+        this.masterId = masterId;
+        this.text = text;
+    }
+
+    public Review(LocalDate date, Integer clientId, Integer masterId, String text) {
+        this.date = date;
+        this.clientId = clientId;
+        this.masterId = masterId;
         this.text = text;
     }
 
@@ -32,12 +43,12 @@ public class Review {
         this.clientId = clientId;
     }
 
-    public Integer getAppointmentId() {
-        return appointmentId;
+    public Integer getMasterId() {
+        return masterId;
     }
 
-    public void setAppointmentId(Integer appointmentId) {
-        this.appointmentId = appointmentId;
+    public void setMasterId(Integer masterId) {
+        this.masterId = masterId;
     }
 
     public String getText() {
@@ -46,5 +57,13 @@ public class Review {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

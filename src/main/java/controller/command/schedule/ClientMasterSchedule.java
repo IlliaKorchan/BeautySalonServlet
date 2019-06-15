@@ -5,6 +5,7 @@ import model.entities.UserDto;
 import model.services.MasterFinder;
 import model.services.MasterScheduleService;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.List;
@@ -40,7 +41,7 @@ public class ClientMasterSchedule implements Command {
                     .get();
 
             req.setAttribute("workingDays", masterScheduleService.findDates(master.getUser().getId()));
-            req.setAttribute("masterSurname", masterSurname);
+            Cookie masterCookie = new Cookie("masterSurname", masterSurname);
 
             if (Objects.nonNull(date)) {
                 req.setAttribute("freeTimes", masterScheduleService.findFreeTimes(master.getUser().getId(),

@@ -55,7 +55,7 @@ public class AuthenticationFilter implements Filter {
                 Objects.nonNull(session.getAttribute("role"))) {
 
             final String role = (String) session.getAttribute("role");
-            moveToMenu(request, response, role);
+//            moveToMenu(request, response, role);
 
         } else if (Objects.nonNull(userDao.get().findByLoginAndPassword(login, password))) {
 
@@ -65,25 +65,25 @@ public class AuthenticationFilter implements Filter {
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("role", role);
 
-            userDao.get().close();
-            moveToMenu(request, response, role);
+            setUserName(request, (User) request.getSession().getAttribute("user"));
+//            moveToMenu(request, response, role);
 
         } else {
             request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         }
     }
 
-    /**
-     * Move user to menu.
-     * If access 'admin' move to admin menu.
-     * If access 'master' move to user menu.
-     * If access 'user' move to user menu.
-     */
-    private void moveToMenu(final HttpServletRequest request, final HttpServletResponse response,
-                            final String role) throws ServletException, IOException {
-        setUserName(request, (User) request.getSession().getAttribute("user"));
-        request.getRequestDispatcher("/WEB-INF/view/menu/" + role + "-menu.jsp").forward(request, response);
-    }
+//    /**
+//     * Move user to menu.
+//     * If access 'admin' move to admin menu.
+//     * If access 'master' move to user menu.
+//     * If access 'user' move to user menu.
+//     */
+//    private void moveToMenu(final HttpServletRequest request, final HttpServletResponse response,
+//                            final String role) throws ServletException, IOException {
+//
+//        request.getRequestDispatcher("/WEB-INF/view/menu/" + role + "-menu.jsp").forward(request, response);
+//    }
 
     @Override
     public void destroy() {

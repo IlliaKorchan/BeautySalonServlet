@@ -8,6 +8,9 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * Filter for changing language
+ */
 public class LanguageFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

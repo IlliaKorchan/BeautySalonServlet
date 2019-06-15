@@ -16,7 +16,11 @@ import java.util.Objects;
 
 import static string.containers.QueryContainer.*;
 
-
+/**
+ * Class for processing queries for table "appointments" from beauty_salon db
+ * @author Illia Korchan
+ * @version 0.7.0
+ */
 public class JDBCAppointmentDao implements AppointmentDao {
     private Connection connection;
     private AppointmentMapper appointmentMapper = new AppointmentMapper();
@@ -26,6 +30,10 @@ public class JDBCAppointmentDao implements AppointmentDao {
         this.connection = connection;
     }
 
+    /**
+     * Method for inserting new appointment
+     * @param entity
+     */
     @Override
     public void create(Appointment entity) {
         try (PreparedStatement statement = connection.prepareStatement(CREATE_APPOINTMENT)) {
@@ -41,6 +49,11 @@ public class JDBCAppointmentDao implements AppointmentDao {
         }
     }
 
+    /**
+     * Method, for searching appointment by id
+     * @param id
+     * @return appointment found entity
+     */
     @Override
     public Appointment findById(int id) {
         try (PreparedStatement statement = connection.prepareStatement(FIND_APPOINTMENT_BY_ID)) {
@@ -64,6 +77,10 @@ public class JDBCAppointmentDao implements AppointmentDao {
         }
     }
 
+    /**
+     * Method for fetching all appointments from the table
+     * @return list of all appointments in db
+     */
     @Override
     public List<Appointment> findAll() {
         try (PreparedStatement statement = connection.prepareStatement(FIND_ALL_APPOINTMENTS)) {
@@ -81,29 +98,25 @@ public class JDBCAppointmentDao implements AppointmentDao {
         }
     }
 
+    /**
+     * Method for updating appointments
+     * @param entity
+     */
     @Override
-    public void update(Appointment entity) {
-//        try (PreparedStatement statement = connection.prepareStatement(UPDATE_APPOINTMENT)) {
-//            statement.setInt(1, entity.getUserId());
-//            statement.setInt(2, entity.getMasterId());
-//            statement.setDate(3, Date.valueOf(entity.getDate()));
-//            statement.setTime(4, Time.valueOf(entity.getTime()));
-//            statement.setInt(5, entity.getProcedureId());
-//
-//            statement.setInt(6, entity.getId());
-//
-//            statement.execute();
-//            close();
-//        } catch (SQLException e) {
-//            System.out.println("Unable to update appointment!");
-//        }
-    }
+    public void update(Appointment entity) { }
 
+    /**
+     * Method for deleting appointment by id
+     * @param id
+     */
     @Override
     public void delete(int id) {
 
     }
 
+    /**
+     * Method for closing connection to db
+     */
     @Override
     public void close() {
         try {
@@ -113,6 +126,13 @@ public class JDBCAppointmentDao implements AppointmentDao {
         }
     }
 
+    /**
+     * Method, that search for appointments by date of appointment and master
+     * @param id of user
+     * @param date of appointment
+     * @param query to get data
+     * @return list of appointments found
+     */
     @Override
     public List<Appointment> findByMasterIdAndDate(Integer id, LocalDate date, String query) {
         try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -132,6 +152,13 @@ public class JDBCAppointmentDao implements AppointmentDao {
         }
     }
 
+    /**
+     * Method, that search for appointments by date, time of appointment and master
+     * @param id
+     * @param date
+     * @param time
+     * @return list of appointments found
+     */
     @Override
     public Appointment findByMasterIdAndDateAndTime(Integer id, LocalDate date, LocalTime time) {
         try (PreparedStatement statement = connection.prepareStatement(FIND_APPOINTMENT_BY_MASTER_ID_DATE_TIME)) {

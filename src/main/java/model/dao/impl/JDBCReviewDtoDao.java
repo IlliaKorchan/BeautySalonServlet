@@ -13,6 +13,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class for processing queries to table "reviews" joined with data from table "users"
+ * @author Illia Korchan
+ * @version 0.7.0
+ */
 public class JDBCReviewDtoDao implements ReviewDtoDao {
     private Connection connection;
     private ReviewDtoMapper reviewDtoMapper = new ReviewDtoMapper();
@@ -32,11 +37,26 @@ public class JDBCReviewDtoDao implements ReviewDtoDao {
         return null;
     }
 
+    /**
+     * Method for searching for reviews by client/master id
+     * @param id
+     * @param query
+     * @return list of reviews found
+     */
     @Override
     public List<ReviewDto> findAllById(Integer id, String query) {
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, id);
-            return findListReviewDtos(statement);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                ReviewDto review = reviewDtoMapper.extractFromResultSet(resultSet);
+                reviewDtoMapper.makeUnique(reviewDtos, review);
+            }
+            resultSet.close();
+
+            return new ArrayList<>(reviewDtos.values());
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -58,29 +78,15 @@ public class JDBCReviewDtoDao implements ReviewDtoDao {
 
     }
 
+    /**
+     * Method for closing connection to db
+     */
     @Override
     public void close() {
         try {
             connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    private List<ReviewDto> findListReviewDtos(PreparedStatement statement) {
-        try  {
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                ReviewDto review = reviewDtoMapper.extractFromResultSet(resultSet);
-                reviewDtoMapper.makeUnique(reviewDtos, review);
-            }
-            resultSet.close();
-
-            return new ArrayList<>(reviewDtos.values());
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
         }
     }
 }

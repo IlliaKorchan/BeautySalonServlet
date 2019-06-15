@@ -2,7 +2,6 @@ package model.dao.impl;
 
 import model.dao.ClientAppointmentDtoDao;
 import model.dao.mapper.ClientAppointmentMapper;
-import model.entities.Appointment;
 import model.entities.ClientAppointmentDto;
 
 import java.sql.*;
@@ -12,6 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class for processing queries to table "appointments" joined with data from tables "procedures" and "users"
+ * @author Illia Korchan
+ * @version 0.7.0
+ */
 public class JDBCClientAppointmentDtoDao implements ClientAppointmentDtoDao {
     private Connection connection;
     private ClientAppointmentMapper clientAppointmentMapper = new ClientAppointmentMapper();
@@ -46,6 +50,9 @@ public class JDBCClientAppointmentDtoDao implements ClientAppointmentDtoDao {
 
     }
 
+    /**
+     * Method for closing connection to db
+     */
     @Override
     public void close() {
         try {
@@ -55,7 +62,14 @@ public class JDBCClientAppointmentDtoDao implements ClientAppointmentDtoDao {
         }
     }
 
-    public List<ClientAppointmentDto> findAll(Integer id, String query) {
+    /**
+     * Method for searching appointments by client id
+     * @param id
+     * @param query
+     * @return list of appointments found
+     */
+    @Override
+    public List<ClientAppointmentDto> findByClientId(Integer id, String query) {
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, id);
 
@@ -74,6 +88,12 @@ public class JDBCClientAppointmentDtoDao implements ClientAppointmentDtoDao {
         }
     }
 
+    /**
+     * Method for searching appointments by master id and date of appointment
+     * @param id
+     * @param query
+     * @return list of appointments found
+     */
     @Override
     public List<ClientAppointmentDto> findByMasterIdAndDate(Integer id, LocalDate date, String query) {
         try (PreparedStatement statement = connection.prepareStatement(query)) {

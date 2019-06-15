@@ -59,13 +59,19 @@
             <c:forEach var="review" items="${requestScope.clientReviews}">
         <ul>
             <li><fmt:message key="appointment.date"/>: <c:out value="${review.date}"/></li>
-            <li><fmt:message key="appointment.procedure.name"/>: <c:out value="${review.procedureName}"/></li>
             <li><fmt:message key="appointment.master.name"/>: <c:out value="${review.name}"/></li>
             <li><fmt:message key="review.text"/>: <c:out value="${review.text}"/></li>
         </ul>
         <hr/>
         </c:forEach>
         </p>
+
+        <form method="get" action="${pageContext.request.contextPath}/salon/make-review">
+            <p align="center"><button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
+                <fmt:message key="navbar.user.review"/>
+            </button>
+            </p>
+        </form>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

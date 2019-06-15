@@ -4,9 +4,18 @@ import org.apache.commons.dbcp.BasicDataSource;
 
 import javax.sql.DataSource;
 
+/**
+ * Connection pool class
+ * @author Illia Korchan
+ * @version 0.6.6
+ */
 class ConnectionPoolHolder {
     private static volatile DataSource dataSource;
 
+    /**
+     * Method, that creates DataSource object of database beauty_salon
+     * @return DataSource object
+     */
     static DataSource getDataSource() {
         if (dataSource == null) {
             synchronized (ConnectionPoolHolder.class) {

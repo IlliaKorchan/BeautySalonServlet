@@ -2,8 +2,8 @@ package string.containers;
 
 public interface QueryContainer {
     String CREATE_USER = "INSERT INTO users(user_name_ukr, user_name_en, user_surname_ukr,user_surname_en, user_login," +
-                         " user_password, user_gender, user_email, user_role, user_amount_money)" +
-                         " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                         " user_password, user_gender, user_email, user_role)" +
+                         " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     String FIND_USER_BY_ROLE = "SELECT * FROM users WHERE user_role = ?";
     String FIND_USER_BY_ID = "SELECT * FROM users WHERE user_id = ?";
     String FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE user_login = ?";
@@ -32,35 +32,24 @@ public interface QueryContainer {
                               "VALUES (?, ?)";
     String FIND_PROCEDURE_BY_ID = "SELECT * FROM procedures WHERE procedure_id = ?";
     String FIND_ALL_PROCEDURES = "SELECT * FROM procedures";
-    String UPDATE_PROCEDURE = "UPDATE procedures SET procedure_price = ?, procedure_time = ? WHERE procedure_id = ?";
+    String UPDATE_PROCEDURE = "UPDATE procedures SET procedure_price = ? WHERE procedure_id = ?";
 
-    String CREATE_REVIEW = "INSERT INTO reviews(review_client_id, review_appointment_id, review_text TEXT) " +
-                           "VALUES (?, ?, ?)";
+    String CREATE_REVIEW = "INSERT INTO reviews(review_date, review_client_id, review_master_id, review_text)" +
+            " VALUES (?, ?, ?, ?)";
     String FIND_REVIEW_BY_ID = "SELECT * FROM reviews WHERE review_id = ?";
-    String FIND_REVIEWS_BY_CLIENT_ID_UKR = "SELECT reviews.review_id, appointments.appointment_date, procedures.procedure_name_ukr" +
-            " AS procedure_name, users.user_surname_ukr AS surname, reviews.review_text " +
-            "FROM reviews JOIN appointments ON reviews.review_appointment_id = appointments.appointment_id " +
-            "JOIN procedures ON appointments.appointment_procedure_id = procedures.procedure_id " +
-            "JOIN users ON appointments.appointment_master_id = users.user_id " +
+    String FIND_REVIEWS_BY_CLIENT_ID_UKR = "SELECT reviews.review_id, reviews.review_date, users.user_surname_ukr AS surname," +
+            " reviews.review_text FROM reviews JOIN users ON reviews.review_master_id = users.user_id " +
             "WHERE reviews.review_client_id = ?";
 
-    String FIND_REVIEWS_BY_CLIENT_ID_EN = "SELECT reviews.review_id, appointments.appointment_date, procedures.procedure_name_en" +
-            " AS procedure_name, users.user_surname_en AS surname, reviews.review_text " +
-            "FROM reviews JOIN appointments ON reviews.review_appointment_id = appointments.appointment_id " +
-            "JOIN procedures ON appointments.appointment_procedure_id = procedures.procedure_id " +
-            "JOIN users ON appointments.appointment_master_id = users.user_id " +
+    String FIND_REVIEWS_BY_CLIENT_ID_EN = "SELECT reviews.review_id, reviews.review_date, users.user_surname_en AS surname," +
+            " reviews.review_text FROM reviews JOIN users ON reviews.review_master_id = users.user_id " +
             "WHERE reviews.review_client_id = ?";
 
-    String FIND_REVIEW_BY_MASTER_ID = "SELECT * FROM reviews JOIN appointments" +
-                                      " ON reviews.review_appointment_id = appointments.appointment_id" +
-                                      " WHERE appointments.appointment_master_id = ?";
     String FIND_ALL_REVIEWS = "SELECT * FROM reviews";
     String UPDATE_REVIEW = "UPDATE reviews SET review_text = ? WHERE review_id = ?";
 
     String CREATE_WORKING_DAY = "INSERT INTO working_days(working_day_master_id, working_day_date) VALUES (?, ?)";
     String FIND_ALL_WORKING_DAYS = "SELECT * FROM working_days";
-    String FIND_WORKING_DAYS_BY_MASTER_SURNAME_UKR = "SELECT * FROM working_days JOIN users" +
-            " ON working_days.worker_day_master_id = users.user_id WHERE user_surname_ukr = ?";
 
     String FIND_WORKING_DAYS_BY_MASTER_ID = "SELECT * FROM working_days WHERE working_day_master_id = ? " +
             "AND working_day_date > NOW()";
@@ -78,18 +67,12 @@ public interface QueryContainer {
             " ON appointments.appointment_procedure_id = procedures.procedure_id" +
             " WHERE appointments.appointment_master_id = ? AND appointments.appointment_date = ?";
 
-    String FIND_REVIEWS_BY_MASTER_ID_UKR = "SELECT reviews.review_id, appointments.appointment_date, procedures.procedure_name_ukr" +
-            " AS procedure_name, users.user_surname_ukr AS surname, reviews.review_text " +
-            "FROM reviews JOIN appointments ON reviews.review_appointment_id = appointments.appointment_id " +
-            "JOIN procedures ON appointments.appointment_procedure_id = procedures.procedure_id " +
-            "JOIN users ON appointments.appointment_user_id = users.user_id " +
-            "WHERE appointments.appointment_master_id = ?";
-    String FIND_REVIEWS_BY_MASTER_ID_EN = "SELECT reviews.review_id, appointments.appointment_date, procedures.procedure_name_en" +
-            " AS procedure_name, users.user_surname_en AS surname, reviews.review_text " +
-            "FROM reviews JOIN appointments ON reviews.review_appointment_id = appointments.appointment_id " +
-            "JOIN procedures ON appointments.appointment_procedure_id = procedures.procedure_id " +
-            "JOIN users ON appointments.appointment_user_id = users.user_id " +
-            "WHERE appointments.appointment_master_id = ?";
+    String FIND_REVIEWS_BY_MASTER_ID_UKR = "SELECT reviews.review_id, reviews.review_date, users.user_surname_ukr AS surname," +
+            " reviews.review_text FROM reviews JOIN users ON reviews.review_client_id = users.user_id " +
+            "WHERE reviews.review_master_id = ?";
+    String FIND_REVIEWS_BY_MASTER_ID_EN = "SELECT reviews.review_id, reviews.review_date, users.user_surname_en AS surname," +
+            " reviews.review_text FROM reviews JOIN users ON reviews.review_client_id = users.user_id " +
+            "WHERE reviews.review_master_id = ?";
 
     String FIND_MASTER_BY_SURNAME_UKR = "SELECT * FROM users WHERE user_surname_ukr = ? AND user_role = 'master'";
     String FIND_MASTER_BY_SURNAME_EN = "SELECT * FROM users WHERE user_surname_en = ? AND user_role = 'master'";

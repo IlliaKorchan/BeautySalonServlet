@@ -13,9 +13,15 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Main servlet, for processing all requests
+ */
 public class MainServlet extends HttpServlet {
     private Map<String, Command> commands;
 
+    /**
+     * Init method, that initialize servlet object and fills commands map
+     */
     @Override
     public void init() {
         commands = new HashMap<>();
@@ -32,8 +38,17 @@ public class MainServlet extends HttpServlet {
         commands.put("master-schedule", new MasterSchedule());
         commands.put("admin-reviews", new AdminReviews());
         commands.put("client-master-schedule", new ClientMasterSchedule());
+        commands.put("make-review", new MakeReview());
     }
 
+    /**
+     * DoGet method, that fetches URI from request, split it and send request to appropriate implementation of
+     * interface Command
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -45,6 +60,13 @@ public class MainServlet extends HttpServlet {
         req.getRequestDispatcher(page).forward(req,resp);
     }
 
+    /**
+     * DoPost method, that redirects any request to the DoGet method
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);
