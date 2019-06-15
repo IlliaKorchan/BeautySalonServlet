@@ -3,6 +3,7 @@ package controller.filter;
 import model.entities.User;
 import model.exceptions.LoginAlreadyExistsException;
 import model.services.UserRegistrationService;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -47,9 +48,9 @@ public class RegistrationFilter implements Filter {
         checkByRegex(request, response, password.matches(LOGIN_PASSWORD_REGEX), PASSWORD_INCORRECT);
         checkByRegex(request, response, email.matches(EMAIL_REGEX), EMAIL_INCORRECT);
 
-
+        final String hashPassword = BCrypt.hashpw(password, BCrypt.gensalt());
         User user = new User(nameUkr, nameEn, surnameUkr, surnameEn,
-                login, password, gender, email, "client");
+                login, hashPassword, gender, email, "client");
 
         try {
             new UserRegistrationService().register(user);

@@ -2,6 +2,7 @@ package controller.filter;
 
 import model.dao.UserDao;
 import model.entities.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +44,7 @@ public class AuthenticationFilter implements Filter {
         final HttpServletResponse response = (HttpServletResponse) servletResponse;
         final String login = request.getParameter("login");
         final String password = request.getParameter("password");
-
+        
         @SuppressWarnings("unchecked")
         final AtomicReference<UserDao> userDao = (AtomicReference<UserDao>) request.getServletContext()
                 .getAttribute("userDao");
@@ -54,36 +55,37 @@ public class AuthenticationFilter implements Filter {
                 Objects.nonNull(session.getAttribute("user")) &&
                 Objects.nonNull(session.getAttribute("role"))) {
 
-            final String role = (String) session.getAttribute("role");
-//            moveToMenu(request, response, role);
+            filterChain.doFilter(request, response);
 
-        } else if (Objects.nonNull(userDao.get().findByLoginAndPassword(login, password))) {
+        } else if (Objects.nonNull(userDao.get().findByLogin(login))) {
+            final User user = userDao.get().findByLogin(login);
+            System.out.println(BCrypt.checkpw(password, user.getPassword()));
+            if (BCrypt.checkpw(password, user.getPassword())) {
+                System.out.println("Зашло");
+                final String role = user.getRole();
 
-            final User user = userDao.get().findByLoginAndPassword(login, password);
-            final String role = user.getRole();
+                request.getSession().setAttribute("user", user);
+                request.getSession().setAttribute("role", role);
 
-            request.getSession().setAttribute("user", user);
-            request.getSession().setAttribute("role", role);
-
-            setUserName(request, (User) request.getSession().getAttribute("user"));
-//            moveToMenu(request, response, role);
-
+                setUserName(request, (User) request.getSession().getAttribute("user"));
+                moveToMenu(request, response, role);
+            }
         } else {
             request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         }
     }
 
-//    /**
-//     * Move user to menu.
-//     * If access 'admin' move to admin menu.
-//     * If access 'master' move to user menu.
-//     * If access 'user' move to user menu.
-//     */
-//    private void moveToMenu(final HttpServletRequest request, final HttpServletResponse response,
-//                            final String role) throws ServletException, IOException {
-//
-//        request.getRequestDispatcher("/WEB-INF/view/menu/" + role + "-menu.jsp").forward(request, response);
-//    }
+    /**
+     * Move user to menu.
+     * If access 'admin' move to admin menu.
+     * If access 'master' move to user menu.
+     * If access 'user' move to user menu.
+     */
+    private void moveToMenu(final HttpServletRequest request, final HttpServletResponse response,
+                            final String role) throws ServletException, IOException {
+
+        request.getRequestDispatcher("/WEB-INF/view/menu/" + role + "-menu.jsp").forward(request, response);
+    }
 
     @Override
     public void destroy() {
@@ -92,7 +94,7 @@ public class AuthenticationFilter implements Filter {
     /**
      * Method for setting logged user and his/her role to the session
      * @param request
-     * @param user
+     * @param user logged in
      */
     private void setUserName(HttpServletRequest request, User user) {
         String language = (String) request.getSession().getAttribute("language");
