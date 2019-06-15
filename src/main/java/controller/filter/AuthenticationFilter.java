@@ -44,7 +44,7 @@ public class AuthenticationFilter implements Filter {
         final HttpServletResponse response = (HttpServletResponse) servletResponse;
         final String login = request.getParameter("login");
         final String password = request.getParameter("password");
-        
+
         @SuppressWarnings("unchecked")
         final AtomicReference<UserDao> userDao = (AtomicReference<UserDao>) request.getServletContext()
                 .getAttribute("userDao");
@@ -59,9 +59,8 @@ public class AuthenticationFilter implements Filter {
 
         } else if (Objects.nonNull(userDao.get().findByLogin(login))) {
             final User user = userDao.get().findByLogin(login);
-            System.out.println(BCrypt.checkpw(password, user.getPassword()));
+
             if (BCrypt.checkpw(password, user.getPassword())) {
-                System.out.println("Зашло");
                 final String role = user.getRole();
 
                 request.getSession().setAttribute("user", user);

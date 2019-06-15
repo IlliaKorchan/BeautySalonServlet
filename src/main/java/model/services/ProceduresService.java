@@ -8,7 +8,9 @@ import model.entities.ClientProcedureDto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProceduresService {
+
+public class ProceduresService implements ProceduresFinder{
+    @Override
     public List<ClientProcedureDto> getAllProcedures(String language) {
 
         ProcedureDao procedureDao = DaoFactory.getInstance().createProcedureDao();

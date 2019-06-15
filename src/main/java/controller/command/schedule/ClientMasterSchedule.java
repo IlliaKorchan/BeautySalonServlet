@@ -2,7 +2,7 @@ package controller.command.schedule;
 
 import controller.command.Command;
 import model.entities.UserDto;
-import model.services.MasterFinder;
+import model.services.MasterFinderService;
 import model.services.MasterScheduleService;
 
 import javax.servlet.http.Cookie;
@@ -28,7 +28,7 @@ public class ClientMasterSchedule implements Command {
         String language = (String) req.getSession().getAttribute("language");
 
         MasterScheduleService masterScheduleService = new MasterScheduleService();
-        List<UserDto> masters = new MasterFinder().findAll(language);
+        List<UserDto> masters = new MasterFinderService().findAll(language);
 
         req.setAttribute("masters", masters);
 

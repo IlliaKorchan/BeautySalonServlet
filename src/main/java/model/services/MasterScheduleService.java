@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class MasterScheduleService {
+public class MasterScheduleService implements MasterSchedule {
+    @Override
     public List<LocalDate> findDates(Integer id) {
         WorkingDayDao workingDayDao = DaoFactory.getInstance().createWorkingDayDao();
 
@@ -28,6 +29,7 @@ public class MasterScheduleService {
         return dates;
     }
 
+    @Override
     public List<ClientAppointmentDto> findAppointmentsForMasterByDate(Integer id, LocalDate date, String query) {
         ClientAppointmentDtoDao appointmentDtoDao = DaoFactory.getInstance().createClientAppointmentDao();
 
@@ -37,6 +39,7 @@ public class MasterScheduleService {
         return appointments;
     }
 
+    @Override
     public List<LocalTime> findFreeTimes(Integer id, LocalDate date) {
         List<LocalTime> workingHours = new DayTimeService().getWorkingHours();
         AppointmentDao appointmentDao = DaoFactory.getInstance().createAppointmentDao();

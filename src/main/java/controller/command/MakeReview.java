@@ -3,7 +3,7 @@ package controller.command;
 import model.entities.User;
 import model.entities.UserDto;
 import model.services.CreateReviewService;
-import model.services.MasterFinder;
+import model.services.MasterFinderService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -27,7 +27,7 @@ public class MakeReview implements Command {
         User user = (User) req.getSession().getAttribute("user");
         String role = (String) req.getSession().getAttribute("role");
 
-        List<UserDto> masters = new MasterFinder().findAll(language);
+        List<UserDto> masters = new MasterFinderService().findAll(language);
 
         req.setAttribute("masters", masters);
 

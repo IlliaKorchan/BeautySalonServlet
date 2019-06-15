@@ -9,7 +9,7 @@ import java.util.List;
 import static string.containers.QueryContainer.FIND_ALL_CLIENT_APPOINTMENTS_EN;
 import static string.containers.QueryContainer.FIND_ALL_CLIENT_APPOINTMENTS_UKR;
 
-public class ClientAppointmentsService {
+public class ClientAppointmentsService implements ClientAppointmentsFinder {
     public List<ClientAppointmentDto> getAllClientAppointments(String language,  Integer id) {
         ClientAppointmentDtoDao clientAppointmentDtoDao = DaoFactory.getInstance().createClientAppointmentDao();
 

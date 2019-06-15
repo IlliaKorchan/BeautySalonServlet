@@ -27,6 +27,7 @@ public class MainServlet extends HttpServlet {
         commands = new HashMap<>();
         commands.put("login", new Login());
         commands.put("logout", new Logout());
+        commands.put("menu", new Menu());
         commands.put("registration", new Registration());
         commands.put("client-appointments", new ClientAppointments());
         commands.put("delete-account", new DeleteAccount());

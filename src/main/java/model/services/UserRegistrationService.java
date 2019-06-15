@@ -7,7 +7,8 @@ import model.exceptions.LoginAlreadyExistsException;
 
 import java.util.Objects;
 
-public class UserRegistrationService {
+public class UserRegistrationService implements UserRegistration {
+    @Override
     public void register(User user) throws LoginAlreadyExistsException {
         UserDao userDao = DaoFactory.getInstance().createUserDao();
 

@@ -1,7 +1,7 @@
 package controller.command;
 
 import model.entities.UserDto;
-import model.services.MasterFinder;
+import model.services.MasterFinderService;
 import model.services.ReviewsService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +24,7 @@ public class AdminReviews implements Command {
     public String execute(HttpServletRequest req) {
         String language = (String) req.getSession().getAttribute("language");
 
-        List<UserDto> masters = new MasterFinder().findAll(language);
+        List<UserDto> masters = new MasterFinderService().findAll(language);
         req.setAttribute("masters", masters);
 
         String masterSurname = req.getParameter("masterSurname");
