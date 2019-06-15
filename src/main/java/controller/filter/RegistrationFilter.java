@@ -2,7 +2,7 @@ package controller.filter;
 
 import model.entities.User;
 import model.exceptions.LoginAlreadyExistsException;
-import model.services.UserRegistrationService;
+import model.services.impl.UserRegistrationService;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.*;

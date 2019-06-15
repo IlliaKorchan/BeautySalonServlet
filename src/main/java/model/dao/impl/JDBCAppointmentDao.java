@@ -77,6 +77,25 @@ public class JDBCAppointmentDao implements AppointmentDao {
         }
     }
 
+    @Override
+    public List<Appointment> findByMasterId(Integer id) {
+        try (PreparedStatement statement = connection.prepareStatement(FIND_APPOINTMENTS_BY_MASTER_ID)) {
+            statement.setInt(1, id);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Appointment appointment = appointmentMapper.extractFromResultSet(resultSet);
+                appointmentMapper.makeUnique(appointments, appointment);
+            }
+            resultSet.close();
+            return new ArrayList<>(appointments.values());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     /**
      * Method for fetching all appointments from the table
      * @return list of all appointments in db

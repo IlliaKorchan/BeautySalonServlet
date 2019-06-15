@@ -3,7 +3,7 @@ package controller.command.account.processing;
 import controller.command.Command;
 import model.entities.User;
 import model.exceptions.IncorrectPasswordException;
-import model.services.UserUpdateService;
+import model.services.impl.UserUpdateService;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.http.HttpServletRequest;

@@ -1,6 +1,6 @@
 package controller.command;
 
-import model.services.ProceduresService;
+import model.services.impl.ProceduresService;
 
 import javax.servlet.http.HttpServletRequest;
 

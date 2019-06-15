@@ -1,8 +1,8 @@
 package controller.command;
 
 import model.entities.UserDto;
-import model.services.MasterFinderService;
-import model.services.ReviewsService;
+import model.services.impl.MasterFinderService;
+import model.services.impl.ReviewsService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

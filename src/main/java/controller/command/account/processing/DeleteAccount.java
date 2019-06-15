@@ -2,7 +2,7 @@ package controller.command.account.processing;
 
 import controller.command.Command;
 import model.entities.User;
-import model.services.AccountDeleteService;
+import model.services.impl.AccountDeleteService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

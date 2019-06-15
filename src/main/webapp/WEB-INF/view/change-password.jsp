@@ -39,8 +39,8 @@
     <br>
     <form method="post" action="${pageContext.request.contextPath}/salon/change-password-commit">
         <p align="center">
-            <input type="password" required placeholder="password" name="current-password"><br>
-            <input type="password" required placeholder="new password" name="new-password"><br><br>
+            <fmt:message key="field.enter.current.password"/>: <input type="password" required placeholder="password" name="current-password"><br>
+            <fmt:message key="field.enter.new.password"/>: <input type="password" required placeholder="new password" name="new-password"><br><br>
             <button class="btn btn-success" style="background-color: #FFA9EB"><fmt:message key="button.edit.password"/></button>
         </p>
     </form>

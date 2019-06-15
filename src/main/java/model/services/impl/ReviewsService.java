@@ -1,9 +1,10 @@
-package model.services;
+package model.services.impl;
 
 import model.dao.DaoFactory;
 import model.dao.ReviewDtoDao;
 import model.entities.ReviewDto;
 import model.entities.User;
+import model.services.ReviewsFinder;
 
 import java.util.List;
 

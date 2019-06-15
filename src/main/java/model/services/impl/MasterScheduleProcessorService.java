@@ -1,12 +1,11 @@
-package model.services;
+package model.services.impl;
 
-
-import model.dao.AppointmentDao;
-import model.dao.ClientAppointmentDtoDao;
-import model.dao.DaoFactory;
-import model.dao.WorkingDayDao;
+import model.dao.*;
 import model.entities.ClientAppointmentDto;
+import model.entities.MasterAppointmentsDto;
+import model.entities.UserDto;
 import model.entities.WorkingDay;
+import model.services.MasterScheduleProcessor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class MasterScheduleService implements MasterSchedule {
+public class MasterScheduleProcessorService implements MasterScheduleProcessor {
     @Override
     public List<LocalDate> findDates(Integer id) {
         WorkingDayDao workingDayDao = DaoFactory.getInstance().createWorkingDayDao();
@@ -50,5 +49,23 @@ public class MasterScheduleService implements MasterSchedule {
 
         appointmentDao.close();
         return workingHours;
+    }
+
+    public List<MasterAppointmentsDto> getSchedule(String language) {
+        List<MasterAppointmentsDto> schedule = new ArrayList<>();
+        List<UserDto> masters = new MasterFinderService().findAll(language);
+
+        AppointmentDao appointmentDao = DaoFactory.getInstance().createAppointmentDao();
+        WorkingDayDao workingDayDao = DaoFactory.getInstance().createWorkingDayDao();
+        masters.forEach(master -> schedule.add(new MasterAppointmentsDto(master,
+                                                                        workingDayDao.findByMasterId(master.getUser()
+                                                                                                            .getId()),
+                                                                        appointmentDao.findByMasterId(master.getUser()
+                                                                                                            .getId()))));
+
+        appointmentDao.close();
+        workingDayDao.close();
+
+        return schedule;
     }
 }

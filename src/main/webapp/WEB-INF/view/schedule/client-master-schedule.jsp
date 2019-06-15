@@ -54,9 +54,9 @@ To change this template use File | Settings | File Templates.
     </form>
 </nav>
 <br>
-<fmt:message key="choose.date"/>
+
 <form method="post" action="${pageContext.request.contextPath}/salon/client-master-schedule">
-    <p align="center" style="color: deeppink">
+    <p align="center" style="color: deeppink"><fmt:message key="choose.master"/><br>
         <select id="masterSurname" name="masterSurname"
                 style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
             <c:forEach var="master" items="${requestScope.masters}">
@@ -71,9 +71,9 @@ To change this template use File | Settings | File Templates.
 </form>
 
 <form method="post" action="${pageContext.request.contextPath}/salon/client-master-schedule">
-    <p align="center">
+    <p style="color: deeppink" align="center"><fmt:message key="choose.date"/><br>
         <select id="date" name="date"
-                style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
+                style="font-size: 11pt; background-color: #FFE3F5; color: deeppink" onchange="">
             <c:forEach var="day" items="${requestScope.workingDays}">
                 <option value="${day}" style="color: deeppink">${day}</option>
             </c:forEach>
@@ -86,7 +86,16 @@ To change this template use File | Settings | File Templates.
 </form>
 
 <form method="post" action="${pageContext.request.contextPath}/salon/make-appointment">
-    <p align="center">
+    <p align="center"><fmt:message key="choose.procedure"/><br>
+        <select id="selectedProcedure" name="selectedProcedure"
+                style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
+            <c:forEach var="procedure" items="${requestScope.procedures}">
+                <option value="${procedure.name}" style="color: deeppink">${procedure.name}</option>
+            </c:forEach>
+        </select>
+        <br><br>
+    </p>
+    <p align="center"><fmt:message key="choose.time"/><br>
         <select id="time" name="time"
                 style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
             <c:forEach var="time" items="${requestScope.freeTimes}">
@@ -95,7 +104,7 @@ To change this template use File | Settings | File Templates.
         </select>
         <br><br>
         <button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
-            <fmt:message key="button.find"/>
+            <fmt:message key="navbar.user.appoint"/>
         </button>
     </p>
 </form>

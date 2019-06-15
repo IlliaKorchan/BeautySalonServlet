@@ -1,7 +1,7 @@
 package controller.command;
 
 import model.entities.User;
-import model.services.ReviewsService;
+import model.services.impl.ReviewsService;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -1,11 +1,12 @@
-package model.services;
+package model.services.impl;
 
 import model.dao.DaoFactory;
 import model.dao.UserDao;
 import model.entities.User;
 import model.exceptions.IncorrectPasswordException;
+import model.services.UserUpdater;
 
-public class UserUpdateService implements UserUpdater{
+public class UserUpdateService implements UserUpdater {
     public void updatePassword(User user, String currentPassword, String newPassword)
                                                     throws IncorrectPasswordException {
         if (!user.getPassword().equals(currentPassword)) {

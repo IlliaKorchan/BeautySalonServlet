@@ -1,8 +1,9 @@
-package model.services;
+package model.services.impl;
 
 import model.dao.ClientAppointmentDtoDao;
 import model.dao.DaoFactory;
 import model.entities.ClientAppointmentDto;
+import model.services.ClientAppointmentsFinder;
 
 import java.util.List;
 

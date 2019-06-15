@@ -6,7 +6,6 @@ public class ClientProcedureDto {
 
     public ClientProcedureDto(Procedure procedure) {
         this.procedure = procedure;
-        this.name = name;
     }
 
     public Procedure getProcedure() {

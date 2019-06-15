@@ -2,8 +2,8 @@ package controller.command;
 
 import model.entities.User;
 import model.entities.UserDto;
-import model.services.CreateReviewService;
-import model.services.MasterFinderService;
+import model.services.impl.CreateReviewService;
+import model.services.impl.MasterFinderService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

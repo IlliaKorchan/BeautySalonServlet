@@ -28,6 +28,8 @@ public interface QueryContainer {
             "ON appointments.appointment_procedure_id = procedures.procedure_id " +
             "WHERE appointments.appointment_user_id = ?";
 
+    String FIND_APPOINTMENTS_BY_MASTER_ID = "SELECT * FROM appointments WHERE appointment_master_id = ?";
+
     String CREATE_PROCEDURE = "INSERT INTO procedures(procedure_name, procedure_price) " +
                               "VALUES (?, ?)";
     String FIND_PROCEDURE_BY_ID = "SELECT * FROM procedures WHERE procedure_id = ?";

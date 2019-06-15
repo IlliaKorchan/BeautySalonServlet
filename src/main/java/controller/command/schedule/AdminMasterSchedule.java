@@ -1,7 +1,7 @@
 package controller.command.schedule;
 
 import controller.command.Command;
-import model.services.MasterScheduleService;
+import model.services.impl.MasterScheduleProcessorService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
@@ -24,7 +24,7 @@ public class AdminMasterSchedule implements Command {
     @Override
     public String execute(HttpServletRequest req) {
         String language = (String) req.getSession().getAttribute("language");
-        MasterScheduleService masterScheduleService = new MasterScheduleService();
+        MasterScheduleProcessorService masterScheduleService = new MasterScheduleProcessorService();
 
         String masterSurname = req.getParameter("masterSurname");
 

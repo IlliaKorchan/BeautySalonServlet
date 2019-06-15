@@ -1,15 +1,15 @@
-package model.services;
+package model.services.impl;
 
 import model.dao.DaoFactory;
 import model.dao.ProcedureDao;
 import model.entities.Procedure;
 import model.entities.ClientProcedureDto;
+import model.services.ProceduresFinder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class ProceduresService implements ProceduresFinder{
+public class ProceduresService implements ProceduresFinder {
     @Override
     public List<ClientProcedureDto> getAllProcedures(String language) {
 

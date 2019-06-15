@@ -1,7 +1,7 @@
 package controller.command;
 
 import model.entities.User;
-import model.services.ClientAppointmentsService;
+import model.services.impl.ClientAppointmentsService;
 
 import javax.servlet.http.HttpServletRequest;
 

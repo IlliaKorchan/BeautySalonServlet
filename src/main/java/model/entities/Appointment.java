@@ -11,8 +11,6 @@ public class Appointment {
     private LocalTime time;
     private Integer procedureId;
 
-    public Appointment() {
-    }
 
     public Appointment(Integer id, Integer userId, Integer masterId, LocalDate date, LocalTime time, Integer procedureId) {
         this.id = id;
@@ -35,16 +33,8 @@ public class Appointment {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
     public Integer getMasterId() {
         return masterId;
-    }
-
-    public void setMasterId(Integer masterId) {
-        this.masterId = masterId;
     }
 
     public LocalDate getDate() {
@@ -65,9 +55,5 @@ public class Appointment {
 
     public Integer getProcedureId() {
         return procedureId;
-    }
-
-    public void setProcedureId(Integer procedureId) {
-        this.procedureId = procedureId;
     }
 }

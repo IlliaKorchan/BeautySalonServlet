@@ -2,7 +2,8 @@ package controller.command.schedule;
 
 import controller.command.Command;
 import model.entities.User;
-import model.services.MasterScheduleService;
+import model.services.MasterScheduleProcessor;
+import model.services.impl.MasterScheduleProcessorService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
@@ -27,7 +28,7 @@ public class MasterSchedule implements Command {
     public String execute(HttpServletRequest req) {
         Integer id = ((User) req.getSession().getAttribute("user")).getId();
         String language = (String) req.getSession().getAttribute("language");
-        MasterScheduleService masterScheduleService = new MasterScheduleService();
+        MasterScheduleProcessor masterScheduleService = new MasterScheduleProcessorService();
 
         req.setAttribute("workingDays", masterScheduleService.findDates(id));
 
