@@ -118,6 +118,29 @@ public class JDBCProcedureDao implements ProcedureDao {
         }
     }
 
+    public Procedure findByName(String name, String query) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, name);
+
+            ResultSet resultSet = statement.executeQuery();
+            Procedure procedure = null;
+
+            if (resultSet.next()) {
+                procedure = procedureMapper.extractFromResultSet(resultSet);
+            }
+
+            if (Objects.nonNull(procedure)) {
+                procedureMapper.makeUnique(procedures, procedure);
+            }
+            resultSet.close();
+
+            return procedure;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     /**
      * Method for closing connection to db
      */

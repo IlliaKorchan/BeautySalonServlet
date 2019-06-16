@@ -21,6 +21,14 @@ public class Appointment {
         this.procedureId = procedureId;
     }
 
+    public Appointment(Integer userId, Integer masterId, LocalDate date, LocalTime time, Integer procedureId) {
+        this.userId = userId;
+        this.masterId = masterId;
+        this.date = date;
+        this.time = time;
+        this.procedureId = procedureId;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -33,6 +33,8 @@ public interface QueryContainer {
     String CREATE_PROCEDURE = "INSERT INTO procedures(procedure_name, procedure_price) " +
                               "VALUES (?, ?)";
     String FIND_PROCEDURE_BY_ID = "SELECT * FROM procedures WHERE procedure_id = ?";
+    String FIND_PROCEDURE_BY_NAME_UKR = "SELECT * FROM procedures WHERE procedure_name_ukr = ?";
+    String FIND_PROCEDURE_BY_NAME_EN = "SELECT * FROM procedures WHERE procedure_name_en = ?";
     String FIND_ALL_PROCEDURES = "SELECT * FROM procedures";
     String UPDATE_PROCEDURE = "UPDATE procedures SET procedure_price = ? WHERE procedure_id = ?";
 

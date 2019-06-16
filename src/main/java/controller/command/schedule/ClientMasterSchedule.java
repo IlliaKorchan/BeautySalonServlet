@@ -28,15 +28,13 @@ public class ClientMasterSchedule implements Command {
     @Override
     public String execute(HttpServletRequest req) {
         String language = (String) req.getSession().getAttribute("language");
+        String masterSurname = req.getParameter("masterSurname");
+        String date = req.getParameter("date");
 
         MasterScheduleProcessorService masterScheduleService = new MasterScheduleProcessorService();
         List<UserDto> masters = new MasterFinderService().findAll(language);
 
         req.setAttribute("masters", masters);
-
-        String masterSurname = req.getParameter("masterSurname");
-        String date = req.getParameter("date");
-        System.out.println(date);
 
         if (Objects.nonNull(masterSurname) || Objects.nonNull(req.getSession().getAttribute("master"))) {
             if (masterSurname != null) {

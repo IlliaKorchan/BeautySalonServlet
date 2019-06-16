@@ -54,15 +54,14 @@ To change this template use File | Settings | File Templates.
     </form>
 </nav>
 <br>
-<p align="center">
-    <fmt:message key="appointment.make.success"/>
-    <button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
-        <fmt:message key="button.main"/>
-    </button>
-</p>
-
-
-
+<form method="get" action="${pageContext.request.contextPath}/menu">
+    <p align="center">
+        <fmt:message key="appointment.make.success"/><br>
+        <button class="btn btn-success" style="background-color: #FFA9EB" type="submit">
+            <fmt:message key="button.main"/>
+        </button>
+    </p>
+</form>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
