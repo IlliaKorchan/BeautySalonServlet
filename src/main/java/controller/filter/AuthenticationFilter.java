@@ -66,41 +66,14 @@ public class AuthenticationFilter implements Filter {
                 request.getSession().setAttribute("user", user);
                 request.getSession().setAttribute("role", role);
 
-                setUserName(request, (User) request.getSession().getAttribute("user"));
-                moveToMenu(request, response, role);
+                request.getRequestDispatcher("/WEB-INF/view/menu/" + role + "-menu.jsp").forward(request, response);
             }
         } else {
             request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         }
     }
 
-    /**
-     * Move user to menu.
-     * If access 'admin' move to admin menu.
-     * If access 'master' move to user menu.
-     * If access 'user' move to user menu.
-     */
-    private void moveToMenu(final HttpServletRequest request, final HttpServletResponse response,
-                            final String role) throws ServletException, IOException {
-
-        request.getRequestDispatcher("/WEB-INF/view/menu/" + role + "-menu.jsp").forward(request, response);
-    }
-
     @Override
     public void destroy() {
-    }
-
-    /**
-     * Method for setting logged user and his/her role to the session
-     * @param request
-     * @param user logged in
-     */
-    private void setUserName(HttpServletRequest request, User user) {
-        String language = (String) request.getSession().getAttribute("language");
-
-        request.getSession().setAttribute("name", (language.equals("uk")) ? user.getNameUkr()
-                                                                             : user.getNameEn());
-        request.getSession().setAttribute("surname", (language.equals("uk")) ? user.getSurnameUkr()
-                : user.getSurnameEn());
     }
 }

@@ -42,7 +42,7 @@ To change this template use File | Settings | File Templates.
        style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.admin.reviews"/></a>
     <a href="${pageContext.request.contextPath}/logout" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt"><fmt:message key="navbar.logout"/></a>
-    <form>
+    <form method="get" action="${pageContext.request.contextPath}/change-language/salon/procedures">
         <label for="language"></label>
         <select id="language" name="language"
                 onchange="submit()" style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">

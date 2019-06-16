@@ -19,7 +19,7 @@
     </filter>
     <filter-mapping>
         <filter-name>LanguageFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/change-language/*</url-pattern>
     </filter-mapping>
 
     <filter>

@@ -38,13 +38,13 @@ To change this template use File | Settings | File Templates.
        style="color: deeppink; font-size:11pt"><fmt:message key="navbar.my.appointments"/></a>
     <a href="${pageContext.request.contextPath}/salon/client-master-schedule" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.user.appoint"/></a>
-    <a href="${pageContext.request.contextPath}/salon/client-procedures" class="navbar-brand letter"
+    <a href="${pageContext.request.contextPath}/salon/procedures" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.procedures"/></a>
     <a href="${pageContext.request.contextPath}/salon/client-reviews" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.user.review"/></a>
     <a href="${pageContext.request.contextPath}/logout" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt"><fmt:message key="navbar.logout"/></a>
-    <form>
+    <form method="get" action="${pageContext.request.contextPath}/change-language/salon/procedures">
         <label for="language"></label>
         <select id="language" name="language"
                 onchange="submit()" style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">

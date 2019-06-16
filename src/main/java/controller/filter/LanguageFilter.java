@@ -18,15 +18,14 @@ public class LanguageFilter implements Filter {
     }
 
     @Override
-    public void doFilter(final ServletRequest servletRequest,final ServletResponse servletResponse, final FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse, final FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         String language = (String) request.getSession().getAttribute("language");
 
-//        if(Objects.nonNull(language)) {
-//            request.getSession().setAttribute("language", language.equals("uk") ? "en" : "uk");
-//        }
+        request.getSession().setAttribute("language", language.equals("uk") ? "en" : "uk");
+
         filterChain.doFilter(request, response);
     }
 

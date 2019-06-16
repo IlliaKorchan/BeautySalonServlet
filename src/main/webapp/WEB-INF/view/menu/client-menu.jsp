@@ -25,7 +25,7 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
 
-    <title>${sessionScope.name} ${sessionScope.surname}</title>
+    <title><fmt:message key="title.main.menu"/></title>
     </head>
 
     <body>
@@ -44,7 +44,7 @@
         style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.user.review"/></a>
         <a href="${pageContext.request.contextPath}/logout" class="navbar-brand letter"
         style="color: deeppink; font-size:11pt"><fmt:message key="navbar.logout"/></a>
-        <form>
+        <form  method="get" action="${pageContext.request.contextPath}/change-language/salon/menu">
         <label for="language"></label>
         <select id="language" name="language"
         onchange="submit()" style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">

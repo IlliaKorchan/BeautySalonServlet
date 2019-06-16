@@ -24,7 +24,7 @@
         <img src="https://image.freepik.com/free-vector/_53876-43323.jpg" width="30" height="30" alt="logo">
     </a>
 
-    <form>
+    <form method="get" action="${pageContext.request.contextPath}/change-language/salon/change-password">
         <label for="language"></label>
         <select id="language" name="language"
                 onchange="submit()" style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">

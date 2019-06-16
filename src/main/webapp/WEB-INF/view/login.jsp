@@ -39,7 +39,7 @@
         <fmt:message key="button.sign-in"/>
     </a>
 
-    <form>
+    <form method="get" action="${pageContext.request.contextPath}/change-language/salon/login">
         <label for="language"></label>
         <select id="language" name="language"
                 onchange="submit()" style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">

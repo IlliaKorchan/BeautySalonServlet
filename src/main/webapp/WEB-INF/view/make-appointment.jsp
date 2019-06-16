@@ -44,14 +44,6 @@ To change this template use File | Settings | File Templates.
        style="color: deeppink; font-size:11pt" ><fmt:message key="navbar.user.review"/></a>
     <a href="${pageContext.request.contextPath}/logout" class="navbar-brand letter"
        style="color: deeppink; font-size:11pt"><fmt:message key="navbar.logout"/></a>
-    <form>
-        <label for="language"></label>
-        <select id="language" name="language"
-                onchange="submit()" style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
-            <option value="en" ${language == 'en' ? 'selected' : ''} style="color: deeppink">English</option>
-            <option value="uk" ${language == 'uk' ? 'selected' : ''} style="color: deeppink">Українська</option>
-        </select>
-    </form>
 </nav>
 <br>
 <form method="get" action="${pageContext.request.contextPath}/menu">
