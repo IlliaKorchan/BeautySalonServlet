@@ -2,6 +2,7 @@ package controller.servlet;
 
 import controller.command.*;
 import controller.command.account.processing.*;
+import controller.command.schedule.AdminMasterSchedule;
 import controller.command.schedule.ClientMasterSchedule;
 import controller.command.schedule.MasterSchedule;
 
@@ -39,6 +40,7 @@ public class MainServlet extends HttpServlet {
         commands.put("master-schedule", new MasterSchedule());
         commands.put("admin-reviews", new AdminReviews());
         commands.put("client-master-schedule", new ClientMasterSchedule());
+        commands.put("admin-master-schedule", new AdminMasterSchedule());
         commands.put("make-review", new MakeReview());
     }
 

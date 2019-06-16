@@ -1,9 +1,17 @@
 package controller.command.schedule;
 
 import controller.command.Command;
+import model.dao.AppointmentDao;
+import model.dao.DaoFactory;
+import model.entities.Appointment;
+import model.entities.UserDto;
+import model.services.impl.MasterFinderService;
 import model.services.impl.MasterScheduleProcessorService;
+import model.services.impl.ProceduresService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 import static string.containers.QueryContainer.FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_EN;
@@ -24,22 +32,36 @@ public class AdminMasterSchedule implements Command {
     @Override
     public String execute(HttpServletRequest req) {
         String language = (String) req.getSession().getAttribute("language");
-        MasterScheduleProcessorService masterScheduleService = new MasterScheduleProcessorService();
-
         String masterSurname = req.getParameter("masterSurname");
-
-//        Integer id =
-//
-//        req.setAttribute("workingDays", masterScheduleService.findDates(id,));
-
         String date = req.getParameter("date");
 
-        if (Objects.nonNull(date)) {
-            String query = language.equals("uk") ? FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_UKR
-                    : FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_EN;
-//            req.setAttribute("appointments", masterScheduleService
-//                    .findAppointmentsForMasterByDate(id, LocalDate.parse(date), query));
+        MasterScheduleProcessorService masterScheduleService = new MasterScheduleProcessorService();
+        List<UserDto> masters = new MasterFinderService().findAll(language);
+
+        req.setAttribute("masters", masters);
+
+        if (Objects.nonNull(masterSurname)) {
+            UserDto master = masters.stream().filter(mstr -> mstr.getName().equals(masterSurname))
+                    .findFirst()
+                    .get();
+            req.getSession().setAttribute("master", master);
+
+            req.setAttribute("workingDays", masterScheduleService.findDates(((UserDto) req.getSession()
+                    .getAttribute("master")).getUser().getId()));
         }
+
+
+        if (Objects.nonNull(date)) {
+            req.getSession().setAttribute("selectedDate", date);
+
+            Integer masterId = ((UserDto) req.getSession().getAttribute("master")).getUser().getId();
+
+            String query = language.equals("uk") ? FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_UKR
+                                                 : FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_EN;
+            req.setAttribute("appointments", masterScheduleService
+                    .findAppointmentsForMasterByDate(masterId, LocalDate.parse(date), query));
+        }
+
         return "/WEB-INF/view/schedule/admin-master-schedule.jsp";
     }
 }
