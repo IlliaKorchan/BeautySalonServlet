@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static string.containers.MessageContainer.*;
+import static string.containers.StringContainer.*;
 import static string.containers.RegexContainer.*;
 
 /**
@@ -56,10 +56,10 @@ public class RegistrationFilter implements Filter {
             new UserRegistrationService().register(user);
         } catch (LoginAlreadyExistsException e) {
             request.setAttribute("warning", LOGIN_EXISTS);
-            request.getRequestDispatcher("/WEB-INF/view/registration.jsp").forward(request, response);
+            request.getRequestDispatcher(REGISTRATION_PAGE).forward(request, response);
         }
 
-        request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+        request.getRequestDispatcher(LOGIN_PAGE).forward(request, response);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class RegistrationFilter implements Filter {
                               boolean matches, String warning) throws ServletException, IOException {
         if (!matches) {
             request.setAttribute("warning", warning);
-            request.getRequestDispatcher("/WEB-INF/view/registration.jsp").forward(request, response);
+            request.getRequestDispatcher(REGISTRATION_PAGE).forward(request, response);
         }
     }
 

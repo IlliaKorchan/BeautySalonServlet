@@ -7,6 +7,10 @@ import model.services.impl.AccountDeleteService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import static string.containers.StringContainer.INDEX_PAGE;
+import static string.containers.StringContainer.USER_LOGGED;
+import static string.containers.StringContainer.USER_LOGGED_ROLE;
+
 /**
  * Class for processing delete account procedure
  * @author Illia Korchan
@@ -23,10 +27,10 @@ public class DeleteAccount implements Command {
     public String execute(HttpServletRequest req) {
         HttpSession session = req.getSession();
 
-        new AccountDeleteService().delete((User) session.getAttribute("user"));
+        new AccountDeleteService().delete((User) session.getAttribute(USER_LOGGED));
 
-        session.removeAttribute("user");
-        session.removeAttribute("role");
-        return "/WEB-INF/view/index.jsp";
+        session.removeAttribute(USER_LOGGED);
+        session.removeAttribute(USER_LOGGED_ROLE);
+        return INDEX_PAGE;
     }
 }

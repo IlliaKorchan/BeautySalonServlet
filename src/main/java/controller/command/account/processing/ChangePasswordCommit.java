@@ -8,7 +8,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static string.containers.MessageContainer.INCORRECT_PASSWORD_WARNING;
+import static string.containers.StringContainer.*;
 
 /**
  * Class for processing password change
@@ -25,7 +25,7 @@ public class ChangePasswordCommit implements Command {
      */
     @Override
     public String execute(HttpServletRequest req) {
-        User user = (User) req.getSession().getAttribute("user");
+        User user = (User) req.getSession().getAttribute(USER_LOGGED);
 
         try {
             new UserUpdateService().updatePassword(user,
@@ -33,11 +33,11 @@ public class ChangePasswordCommit implements Command {
                                                 BCrypt.hashpw(req.getParameter("new-password"), BCrypt.gensalt()));
         } catch (IncorrectPasswordException e) {
             req.setAttribute("incorrect-password-warning", INCORRECT_PASSWORD_WARNING);
-            return "/WEB-INF/view/change-password.jsp";
+            return CHANGE_PASSWORD_PAGE;
         }
 
-        req.getSession().removeAttribute("user");
-        req.getSession().removeAttribute("role");
-        return "/WEB-INF/view/index.jsp";
+        req.getSession().removeAttribute(USER_LOGGED);
+        req.getSession().removeAttribute(USER_LOGGED_ROLE);
+        return INDEX_PAGE;
     }
 }

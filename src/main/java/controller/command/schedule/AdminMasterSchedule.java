@@ -16,6 +16,8 @@ import java.util.Objects;
 
 import static string.containers.QueryContainer.FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_EN;
 import static string.containers.QueryContainer.FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_UKR;
+import static string.containers.StringContainer.ADMIN_MASTER_SCHEDULE_PAGE;
+import static string.containers.StringContainer.LOCALE_UKR;
 
 /**
  * Class for processing admin request to get data about master schedule
@@ -56,13 +58,13 @@ public class AdminMasterSchedule implements Command {
 
             Integer masterId = ((UserDto) req.getSession().getAttribute("master")).getUser().getId();
 
-            String query = language.equals("uk") ? FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_UKR
+            String query = language.equals(LOCALE_UKR) ? FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_UKR
                                                  : FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_EN;
             req.setAttribute("appointments", masterScheduleService
                     .findAppointmentsForMasterByDate(masterId, LocalDate.parse(date), query));
         }
 
-        return "/WEB-INF/view/schedule/admin-master-schedule.jsp";
+        return ADMIN_MASTER_SCHEDULE_PAGE;
     }
 }
 

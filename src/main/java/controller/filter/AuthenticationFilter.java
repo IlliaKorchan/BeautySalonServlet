@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.Objects;
+
+import static string.containers.StringContainer.LOGIN_PAGE;
+import static string.containers.StringContainer.USER_LOGGED;
+import static string.containers.StringContainer.USER_LOGGED_ROLE;
 
 /**
  * Class for authentication processing
@@ -52,8 +55,8 @@ public class AuthenticationFilter implements Filter {
         final HttpSession session = request.getSession();
 
         if (Objects.nonNull(session) &&
-                Objects.nonNull(session.getAttribute("user")) &&
-                Objects.nonNull(session.getAttribute("role"))) {
+                Objects.nonNull(session.getAttribute(USER_LOGGED)) &&
+                Objects.nonNull(session.getAttribute(USER_LOGGED_ROLE))) {
 
             filterChain.doFilter(request, response);
 
@@ -63,13 +66,13 @@ public class AuthenticationFilter implements Filter {
             if (BCrypt.checkpw(password, user.getPassword())) {
                 final String role = user.getRole();
 
-                request.getSession().setAttribute("user", user);
-                request.getSession().setAttribute("role", role);
+                request.getSession().setAttribute(USER_LOGGED, user);
+                request.getSession().setAttribute(USER_LOGGED_ROLE, role);
 
                 request.getRequestDispatcher("/WEB-INF/view/menu/" + role + "-menu.jsp").forward(request, response);
             }
         } else {
-            request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+            request.getRequestDispatcher(LOGIN_PAGE).forward(request, response);
         }
     }
 

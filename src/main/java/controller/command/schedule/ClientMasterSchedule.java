@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
+import static string.containers.StringContainer.CLIENT_MASTER_SCHEDULE_PAGE;
+
 /**
  * Class for processing client request to get data about master schedule
  *
@@ -56,6 +58,6 @@ public class ClientMasterSchedule implements Command {
             req.setAttribute("freeTimes", masterScheduleService.findFreeTimes(masterId, LocalDate.parse(date)));
         }
 
-        return "/WEB-INF/view/schedule/client-master-schedule.jsp";
+        return CLIENT_MASTER_SCHEDULE_PAGE;
     }
 }

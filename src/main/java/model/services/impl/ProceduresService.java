@@ -9,6 +9,8 @@ import model.services.ProceduresFinder;
 import java.util.ArrayList;
 import java.util.List;
 
+import static string.containers.StringContainer.LOCALE_UKR;
+
 public class ProceduresService implements ProceduresFinder {
     @Override
     public List<ClientProcedureDto> getAllProcedures(String language) {
@@ -19,7 +21,7 @@ public class ProceduresService implements ProceduresFinder {
         procedures.forEach(procedure -> { procedure.setPrice(procedure.getPrice() / 100);
                                           procedureDtos.add(new ClientProcedureDto(procedure));});
 
-        procedureDtos.forEach(procedureDto -> procedureDto.setName(language.equals("uk")
+        procedureDtos.forEach(procedureDto -> procedureDto.setName(language.equals(LOCALE_UKR)
                                                                 ? procedureDto.getProcedure().getNameUkr()
                                                                 : procedureDto.getProcedure().getNameEn()));
         procedureDao.close();

@@ -4,6 +4,8 @@ import controller.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static string.containers.StringContainer.REGISTRATION_PAGE;
+
 /**
  * Class for redirecting to the registration page
  * @author Illia Korchan
@@ -12,6 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 public class Registration implements Command {
     @Override
     public String execute(HttpServletRequest req) {
-        return "/WEB-INF/view/registration.jsp";
+        return REGISTRATION_PAGE;
     }
 }

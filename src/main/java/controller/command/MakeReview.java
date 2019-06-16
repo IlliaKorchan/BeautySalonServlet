@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Objects;
 
+import static string.containers.StringContainer.*;
+
 /**
  * Class for processing reviews, sent by client
  * @author Illia Korchan
@@ -24,8 +26,7 @@ public class MakeReview implements Command {
     @Override
     public String execute(HttpServletRequest req) {
         String language = (String) req.getSession().getAttribute("language");
-        User user = (User) req.getSession().getAttribute("user");
-        String role = (String) req.getSession().getAttribute("role");
+        User user = (User) req.getSession().getAttribute(USER_LOGGED);
 
         List<UserDto> masters = new MasterFinderService().findAll(language);
 
@@ -40,8 +41,8 @@ public class MakeReview implements Command {
                     .get();
 
             new CreateReviewService().sendReview(user.getId(), master.getUser().getId(), reviewText);
-            return "/WEB-INF/view/menu/" + role + "-menu.jsp";
+            return CLIENT_MENU_PAGE;
         }
-        return "/WEB-INF/view/make-review.jsp";
+        return MAKE_REVIEW_PAGE;
     }
 }

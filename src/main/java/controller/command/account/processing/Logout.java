@@ -5,6 +5,10 @@ import controller.command.Command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import static string.containers.StringContainer.INDEX_PAGE;
+import static string.containers.StringContainer.USER_LOGGED;
+import static string.containers.StringContainer.USER_LOGGED_ROLE;
+
 /**
  * Class for removing logged account and it`s role from the session
  * @author Illia Korchan
@@ -15,9 +19,9 @@ public class Logout implements Command {
     public String execute(HttpServletRequest req) {
         final HttpSession session = req.getSession();
 
-        session.removeAttribute("user");
-        session.removeAttribute("role");
+        session.removeAttribute(USER_LOGGED);
+        session.removeAttribute(USER_LOGGED_ROLE);
 
-        return "/WEB-INF/view/index.jsp";
+        return INDEX_PAGE;
     }
 }

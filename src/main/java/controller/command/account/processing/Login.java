@@ -4,6 +4,8 @@ import controller.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static string.containers.StringContainer.LOGIN_PAGE;
+
 /**
  * Class for redirecting to the authorization page
  * @author Illia Korchan
@@ -12,6 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 public class Login implements Command {
     @Override
     public String execute(HttpServletRequest req) {
-        return "/WEB-INF/view/login.jsp";
+        return LOGIN_PAGE;
     }
 }

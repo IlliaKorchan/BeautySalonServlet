@@ -2,8 +2,6 @@ package model.services.impl;
 
 import model.dao.*;
 import model.entities.ClientAppointmentDto;
-import model.entities.MasterAppointmentsDto;
-import model.entities.UserDto;
 import model.entities.WorkingDay;
 import model.services.MasterScheduleProcessor;
 
@@ -49,23 +47,5 @@ public class MasterScheduleProcessorService implements MasterScheduleProcessor {
 
         appointmentDao.close();
         return workingHours;
-    }
-
-    public List<MasterAppointmentsDto> getSchedule(String language) {
-        List<MasterAppointmentsDto> schedule = new ArrayList<>();
-        List<UserDto> masters = new MasterFinderService().findAll(language);
-
-        AppointmentDao appointmentDao = DaoFactory.getInstance().createAppointmentDao();
-        WorkingDayDao workingDayDao = DaoFactory.getInstance().createWorkingDayDao();
-        masters.forEach(master -> schedule.add(new MasterAppointmentsDto(master,
-                                                                        workingDayDao.findByMasterId(master.getUser()
-                                                                                                            .getId()),
-                                                                        appointmentDao.findByMasterId(master.getUser()
-                                                                                                            .getId()))));
-
-        appointmentDao.close();
-        workingDayDao.close();
-
-        return schedule;
     }
 }

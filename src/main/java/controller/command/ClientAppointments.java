@@ -5,6 +5,9 @@ import model.services.impl.ClientAppointmentsService;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static string.containers.StringContainer.CLIENT_APPOINTMENTS_PAGE;
+import static string.containers.StringContainer.USER_LOGGED;
+
 /**
  * Class for processing client request for displaying his/her appointments
  * and redirecting to the page with results
@@ -21,11 +24,11 @@ public class ClientAppointments implements Command {
     @Override
     public String execute(HttpServletRequest req) {
         String language = (String) req.getSession().getAttribute("language");
-        Integer id = ((User) req.getSession().getAttribute("user")).getId();
+        Integer id = ((User) req.getSession().getAttribute(USER_LOGGED)).getId();
 
         req.setAttribute("clientAppointments", new ClientAppointmentsService()
                                                             .getAllClientAppointments(language, id));
 
-        return "/WEB-INF/view/client-appointments.jsp";
+        return CLIENT_APPOINTMENTS_PAGE;
     }
 }

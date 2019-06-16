@@ -4,16 +4,16 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.ResourceBundle;
+
+import static string.containers.StringContainer.LOCALE_EN;
+import static string.containers.StringContainer.LOCALE_UKR;
 
 /**
  * Filter for changing language
  */
 public class LanguageFilter implements Filter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 
@@ -24,7 +24,7 @@ public class LanguageFilter implements Filter {
 
         String language = (String) request.getSession().getAttribute("language");
 
-        request.getSession().setAttribute("language", language.equals("uk") ? "en" : "uk");
+        request.getSession().setAttribute("language", language.equals(LOCALE_UKR) ? LOCALE_EN : LOCALE_UKR);
 
         filterChain.doFilter(request, response);
     }

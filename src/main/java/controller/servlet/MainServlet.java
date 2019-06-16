@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static string.containers.StringContainer.INDEX_PAGE;
+
 /**
  * Main servlet, for processing all requests
  */
@@ -58,7 +60,7 @@ public class MainServlet extends HttpServlet {
         String path = req.getRequestURI();
         path = path.replaceAll(".*/" , "");
         path = path.replaceAll("\\?*" , "");
-        Command command = commands.getOrDefault(path , (r)->"/WEB-INF/view/index.jsp");
+        Command command = commands.getOrDefault(path , (r)-> INDEX_PAGE);
         String page = command.execute(req);
         req.getRequestDispatcher(page).forward(req,resp);
     }

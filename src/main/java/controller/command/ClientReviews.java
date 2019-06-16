@@ -5,6 +5,9 @@ import model.services.impl.ReviewsService;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static string.containers.StringContainer.CLIENT_REVIEWS_PAGE;
+import static string.containers.StringContainer.USER_LOGGED;
+
 /**
  * Class for processing client request for displaying his/her reviews
  * and redirecting to the page with results
@@ -20,11 +23,11 @@ public class ClientReviews implements Command {
      */
     @Override
     public String execute(HttpServletRequest req) {
-        User user = ((User) req.getSession().getAttribute("user"));
+        User user = ((User) req.getSession().getAttribute(USER_LOGGED));
         String language = (String) req.getSession().getAttribute("language");
 
         req.setAttribute("clientReviews", new ReviewsService().getClientReviews(user.getId(), language));
 
-        return "/WEB-INF/view/reviews/client-reviews.jsp";
+        return CLIENT_REVIEWS_PAGE;
     }
 }

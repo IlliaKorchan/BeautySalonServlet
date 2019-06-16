@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Objects;
 
+import static string.containers.StringContainer.ADMIN_REVIEWS_PAGE;
+
 /**
  * Class for processing admin request to find reviews about selected master
  * @author Illia Korchan
@@ -36,6 +38,6 @@ public class AdminReviews implements Command {
             req.setAttribute("adminReviews", new ReviewsService().getAdminReviews(master.getUser(), language));
         }
 
-        return "/WEB-INF/view/reviews/admin-reviews.jsp";
+        return ADMIN_REVIEWS_PAGE;
     }
 }
