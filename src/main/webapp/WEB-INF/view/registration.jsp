@@ -13,7 +13,6 @@
        scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="message"/>
-<link rel="stylesheet" href="../../css/styles.css"/>
 <!doctype html>
 <html lang="en">
 <head>
