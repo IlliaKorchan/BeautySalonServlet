@@ -1,6 +1,6 @@
 package model.dao.mapper;
 
-import model.entities.ClientAppointmentDto;
+import model.entities.ClientAppointment;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +14,7 @@ import java.util.Map;
  * @author Illia Korchan
  * @version 0.7.0
  */
-public class ClientAppointmentMapper implements ObjectMapper<ClientAppointmentDto> {
+public class ClientAppointmentMapper implements ObjectMapper<ClientAppointment> {
     /**
      * Method for fetching data from result set
      * @param rs, that contains data to fetch
@@ -22,7 +22,7 @@ public class ClientAppointmentMapper implements ObjectMapper<ClientAppointmentDt
      * @throws SQLException
      */
     @Override
-    public ClientAppointmentDto extractFromResultSet(ResultSet rs) throws SQLException {
+    public ClientAppointment extractFromResultSet(ResultSet rs) throws SQLException {
             Integer appointmentId = rs.getInt("appointment_id");
             String masterName = rs.getString("surname");
             LocalDate date = rs.getDate("appointment_date").toLocalDate();
@@ -30,21 +30,21 @@ public class ClientAppointmentMapper implements ObjectMapper<ClientAppointmentDt
             String procedureName = rs.getString("procedure_name");
             Long procedurePrice = rs.getLong("procedure_price") / 100;
 
-            return new ClientAppointmentDto(appointmentId, masterName, date, time, procedureName, procedurePrice);
+            return new ClientAppointment(appointmentId, masterName, date, time, procedureName, procedurePrice);
     }
 
     /**
-     * Method, that allows not to store repeating POJO objects. Method put {@param clientAppointmentDto}
+     * Method, that allows not to store repeating POJO objects. Method put {@param clientAppointment}
      * to {@param cache} if there is no object with the same id
      * @param cache storage of Appointment class instances
-     * @param clientAppointmentDto POJO object, that should be added to cache
-     * @return value from {@param cache} with the key id from {@param clientAppointmentDto}
+     * @param clientAppointment POJO object, that should be added to cache
+     * @return value from {@param cache} with the key id from {@param clientAppointment}
      */
     @Override
-    public ClientAppointmentDto makeUnique(Map<Integer, ClientAppointmentDto> cache,
-                                           ClientAppointmentDto clientAppointmentDto) {
-        cache.putIfAbsent(clientAppointmentDto.getId(), clientAppointmentDto);
+    public ClientAppointment makeUnique(Map<Integer, ClientAppointment> cache,
+                                        ClientAppointment clientAppointment) {
+        cache.putIfAbsent(clientAppointment.getId(), clientAppointment);
 
-        return cache.get(clientAppointmentDto.getId());
+        return cache.get(clientAppointment.getId());
     }
 }

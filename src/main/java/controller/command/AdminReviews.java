@@ -1,6 +1,6 @@
 package controller.command;
 
-import model.entities.UserDto;
+import model.dto.UserDto;
 import model.services.impl.MasterFinderService;
 import model.services.impl.ReviewsService;
 
@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static string.containers.StringContainer.ADMIN_REVIEWS_PAGE;
+import static string.containers.StringContainer.LANGUAGE;
 
 /**
  * Class for processing admin request to find reviews about selected master
@@ -24,7 +25,7 @@ public class AdminReviews implements Command {
      */
     @Override
     public String execute(HttpServletRequest req) {
-        String language = (String) req.getSession().getAttribute("language");
+        String language = (String) req.getSession().getAttribute(LANGUAGE);
 
         List<UserDto> masters = new MasterFinderService().findAll(language);
         req.setAttribute("masters", masters);
@@ -32,7 +33,8 @@ public class AdminReviews implements Command {
         String masterSurname = req.getParameter("masterSurname");
 
         if (Objects.nonNull(masterSurname)) {
-            UserDto master = masters.stream().filter(mstr -> mstr.getName().equals(masterSurname))
+            Integer masterId = Integer.valueOf(masterSurname);
+            UserDto master = masters.stream().filter(mstr -> mstr.getUser().getId().equals(masterId))
                                              .findFirst()
                                              .get();
             req.setAttribute("adminReviews", new ReviewsService().getAdminReviews(master.getUser(), language));

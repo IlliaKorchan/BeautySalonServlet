@@ -1,7 +1,7 @@
 package controller.command;
 
 import model.entities.User;
-import model.entities.UserDto;
+import model.dto.UserDto;
 import model.services.impl.CreateReviewService;
 import model.services.impl.MasterFinderService;
 
@@ -25,7 +25,7 @@ public class MakeReview implements Command {
      */
     @Override
     public String execute(HttpServletRequest req) {
-        String language = (String) req.getSession().getAttribute("language");
+        String language = (String) req.getSession().getAttribute(LANGUAGE);
         User user = (User) req.getSession().getAttribute(USER_LOGGED);
 
         List<UserDto> masters = new MasterFinderService().findAll(language);

@@ -78,9 +78,6 @@ public interface QueryContainer {
             " reviews.review_text FROM reviews JOIN users ON reviews.review_client_id = users.user_id " +
             "WHERE reviews.review_master_id = ?";
 
-    String FIND_MASTER_BY_SURNAME_UKR = "SELECT * FROM users WHERE user_surname_ukr = ? AND user_role = 'master'";
-    String FIND_MASTER_BY_SURNAME_EN = "SELECT * FROM users WHERE user_surname_en = ? AND user_role = 'master'";
-
     String FIND_APPOINTMENT_BY_MASTER_ID_DATE_TIME = "SELECT * FROM appointments WHERE appointment_master_id = ? " +
             "AND appointment_date = ? AND appointment_time = ? ";
 }

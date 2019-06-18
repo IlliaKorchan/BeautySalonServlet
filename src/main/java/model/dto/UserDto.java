@@ -1,4 +1,6 @@
-package model.entities;
+package model.dto;
+
+import model.entities.User;
 
 public class UserDto {
     private User user;

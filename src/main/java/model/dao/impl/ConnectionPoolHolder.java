@@ -4,6 +4,8 @@ import org.apache.commons.dbcp.BasicDataSource;
 
 import javax.sql.DataSource;
 
+import static string.containers.StringContainer.*;
+
 /**
  * Connection pool class
  * @author Illia Korchan
@@ -21,10 +23,10 @@ class ConnectionPoolHolder {
             synchronized (ConnectionPoolHolder.class) {
                 if (dataSource == null) {
                     BasicDataSource ds = new BasicDataSource();
-                    ds.setDriverClassName("com.mysql.jdbc.Driver");
-                    ds.setUrl("jdbc:mysql://localhost:3306/beauty_salon?useSSL=false&serverTimezone=UTC");
-                    ds.setUsername("root");
-                    ds.setPassword("root");
+                    ds.setDriverClassName(MYSQL_DRIVER);
+                    ds.setUrl(DATABASE);
+                    ds.setUsername(DATABASE_LOGIN);
+                    ds.setPassword(DATABASE_PASSWORD);
                     ds.setMaxOpenPreparedStatements(100);
                     dataSource = ds;
                 }

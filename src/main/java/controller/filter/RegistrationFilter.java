@@ -50,7 +50,7 @@ public class RegistrationFilter implements Filter {
 
         final String hashPassword = BCrypt.hashpw(password, BCrypt.gensalt());
         User user = new User(nameUkr, nameEn, surnameUkr, surnameEn,
-                login, hashPassword, gender, email, "client");
+                login, hashPassword, gender, email, CLIENT_ROLE);
 
         try {
             new UserRegistrationService().register(user);

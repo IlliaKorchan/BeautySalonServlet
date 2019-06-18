@@ -1,9 +1,9 @@
 package model.services;
 
-import model.entities.ClientAppointmentDto;
+import model.entities.ClientAppointment;
 
 import java.util.List;
 
 public interface ClientAppointmentsFinder {
-    List<ClientAppointmentDto> getAllClientAppointments(String language, Integer id);
+    List<ClientAppointment> getAllClientAppointments(String language, Integer id);
 }

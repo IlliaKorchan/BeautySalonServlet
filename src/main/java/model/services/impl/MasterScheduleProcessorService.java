@@ -1,7 +1,7 @@
 package model.services.impl;
 
 import model.dao.*;
-import model.entities.ClientAppointmentDto;
+import model.entities.ClientAppointment;
 import model.entities.WorkingDay;
 import model.services.MasterScheduleProcessor;
 
@@ -27,10 +27,10 @@ public class MasterScheduleProcessorService implements MasterScheduleProcessor {
     }
 
     @Override
-    public List<ClientAppointmentDto> findAppointmentsForMasterByDate(Integer id, LocalDate date, String query) {
-        ClientAppointmentDtoDao appointmentDtoDao = DaoFactory.getInstance().createClientAppointmentDao();
+    public List<ClientAppointment> findAppointmentsForMasterByDate(Integer id, LocalDate date, String query) {
+        ClientAppointmentDao appointmentDtoDao = DaoFactory.getInstance().createClientAppointmentDao();
 
-        List<ClientAppointmentDto> appointments = appointmentDtoDao.findByMasterIdAndDate(id, date, query);
+        List<ClientAppointment> appointments = appointmentDtoDao.findByMasterIdAndDate(id, date, query);
 
         appointmentDtoDao.close();
         return appointments;

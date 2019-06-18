@@ -1,7 +1,7 @@
 package controller.command.schedule;
 
 import controller.command.Command;
-import model.entities.UserDto;
+import model.dto.UserDto;
 import model.services.impl.MasterFinderService;
 import model.services.impl.MasterScheduleProcessorService;
 import model.services.impl.ProceduresService;
@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static string.containers.StringContainer.CLIENT_MASTER_SCHEDULE_PAGE;
+import static string.containers.StringContainer.LANGUAGE;
 
 /**
  * Class for processing client request to get data about master schedule
@@ -29,7 +30,8 @@ public class ClientMasterSchedule implements Command {
      */
     @Override
     public String execute(HttpServletRequest req) {
-        String language = (String) req.getSession().getAttribute("language");
+        String language = (String) req.getSession().getAttribute(LANGUAGE);
+
         String masterSurname = req.getParameter("masterSurname");
         String date = req.getParameter("date");
 
@@ -39,13 +41,13 @@ public class ClientMasterSchedule implements Command {
         req.setAttribute("masters", masters);
 
         if (Objects.nonNull(masterSurname)) {
-            UserDto master = masters.stream().filter(mstr -> mstr.getName().equals(masterSurname))
-                    .findFirst()
-                    .get();
+            Integer masterId = Integer.valueOf(masterSurname);
+            UserDto master = masters.stream().filter(mstr -> mstr.getUser().getId().equals(masterId))
+                                            .findFirst()
+                                            .get();
             req.getSession().setAttribute("master", master);
 
-            req.setAttribute("workingDays", masterScheduleService.findDates(((UserDto) req.getSession()
-                    .getAttribute("master")).getUser().getId()));
+            req.setAttribute("workingDays", masterScheduleService.findDates(masterId));
         }
 
 

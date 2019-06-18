@@ -1,6 +1,6 @@
 package model.services;
 
-import model.entities.ClientProcedureDto;
+import model.dto.ClientProcedureDto;
 
 import java.util.List;
 

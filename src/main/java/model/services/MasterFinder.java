@@ -1,6 +1,6 @@
 package model.services;
 
-import model.entities.UserDto;
+import model.dto.UserDto;
 
 import java.util.List;
 

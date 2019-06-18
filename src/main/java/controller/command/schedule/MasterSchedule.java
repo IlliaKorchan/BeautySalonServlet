@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import static string.containers.StringContainer.LOCALE_UKR;
-import static string.containers.StringContainer.MASTER_SCHEDULE_PAGE;
-import static string.containers.StringContainer.USER_LOGGED;
 import static string.containers.QueryContainer.FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_EN;
 import static string.containers.QueryContainer.FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_UKR;
+import static string.containers.StringContainer.*;
 
 /**
  * Class for processing request by master to get data about his/her schedule
@@ -30,7 +28,7 @@ public class MasterSchedule implements Command {
     @Override
     public String execute(HttpServletRequest req) {
         Integer id = ((User) req.getSession().getAttribute(USER_LOGGED)).getId();
-        String language = (String) req.getSession().getAttribute("language");
+        String language = (String) req.getSession().getAttribute(LANGUAGE);
         MasterScheduleProcessor masterScheduleService = new MasterScheduleProcessorService();
 
         req.setAttribute("workingDays", masterScheduleService.findDates(id));

@@ -6,6 +6,7 @@ import model.services.impl.ReviewsService;
 import javax.servlet.http.HttpServletRequest;
 
 import static string.containers.StringContainer.CLIENT_REVIEWS_PAGE;
+import static string.containers.StringContainer.LANGUAGE;
 import static string.containers.StringContainer.USER_LOGGED;
 
 /**
@@ -24,7 +25,7 @@ public class ClientReviews implements Command {
     @Override
     public String execute(HttpServletRequest req) {
         User user = ((User) req.getSession().getAttribute(USER_LOGGED));
-        String language = (String) req.getSession().getAttribute("language");
+        String language = (String) req.getSession().getAttribute(LANGUAGE);
 
         req.setAttribute("clientReviews", new ReviewsService().getClientReviews(user.getId(), language));
 

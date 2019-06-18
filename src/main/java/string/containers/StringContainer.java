@@ -13,8 +13,15 @@ public interface StringContainer {
 
     String USER_LOGGED = "user";
     String USER_LOGGED_ROLE = "role";
-    String LOCALE_UKR = "ukr";
+    String CLIENT_ROLE = "client";
+    String MASTER_ROLE = "master";
+    String LOCALE_UKR = "uk";
     String LOCALE_EN = "en";
+    String LANGUAGE = "language";
+    String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
+    String DATABASE = "jdbc:mysql://localhost:3306/beauty_salon?useSSL=false&serverTimezone=UTC";
+    String DATABASE_LOGIN = "root";
+    String DATABASE_PASSWORD = "root";
 
     String CHANGE_PASSWORD_PAGE = "/WEB-INF/view/change-password.jsp";
     String INDEX_PAGE = "/WEB-INF/view/index.jsp";
@@ -34,5 +41,4 @@ public interface StringContainer {
     String MAKE_REVIEW_PAGE = "/WEB-INF/view/make-review.jsp";
 
     String CLIENT_MENU_PAGE = "/WEB-INF/view/menu/client-menu.jsp";
-
 }

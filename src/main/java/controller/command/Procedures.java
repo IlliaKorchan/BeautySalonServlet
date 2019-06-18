@@ -4,6 +4,7 @@ import model.services.impl.ProceduresService;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static string.containers.StringContainer.LANGUAGE;
 import static string.containers.StringContainer.USER_LOGGED_ROLE;
 
 /**
@@ -20,7 +21,7 @@ public class Procedures implements Command {
      */
     @Override
     public String execute(HttpServletRequest req) {
-        String language = (String) req.getSession().getAttribute("language");
+        String language = (String) req.getSession().getAttribute(LANGUAGE);
         String role = (String) req.getSession().getAttribute(USER_LOGGED_ROLE);
 
         req.setAttribute("procedures", new ProceduresService().getAllProcedures(language));

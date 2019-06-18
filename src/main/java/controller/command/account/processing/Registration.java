@@ -14,6 +14,6 @@ import static string.containers.StringContainer.REGISTRATION_PAGE;
 public class Registration implements Command {
     @Override
     public String execute(HttpServletRequest req) {
-        return REGISTRATION_PAGE ;
+        return REGISTRATION_PAGE;
     }
 }

@@ -3,6 +3,7 @@ package model.dao.impl;
 import model.dao.ReviewDao;
 import model.dao.mapper.ReviewMapper;
 import model.entities.Review;
+import model.entities.ReviewDto;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -11,10 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static string.containers.QueryContainer.FIND_ALL_REVIEWS;
-import static string.containers.QueryContainer.FIND_REVIEW_BY_ID;
-import static string.containers.QueryContainer.UPDATE_REVIEW;
-import static string.containers.QueryContainer.CREATE_REVIEW;
+import static string.containers.QueryContainer.*;
 
 
 /**
@@ -53,6 +51,7 @@ public class JDBCReviewDao implements ReviewDao {
 
     /**
      * Method for searching for review by id
+     *
      * @param id
      * @return review found
      */
@@ -80,6 +79,7 @@ public class JDBCReviewDao implements ReviewDao {
 
     /**
      * Method for fetching all reviews from the table
+     *
      * @return list of all reviews in db
      */
     @Override
@@ -102,6 +102,7 @@ public class JDBCReviewDao implements ReviewDao {
 
     /**
      * Method for updating text of review
+     *
      * @param entity
      */
     @Override

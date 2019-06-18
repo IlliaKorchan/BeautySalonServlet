@@ -1,4 +1,6 @@
-package model.entities;
+package model.dto;
+
+import model.entities.Procedure;
 
 public class ClientProcedureDto {
     private Procedure procedure;

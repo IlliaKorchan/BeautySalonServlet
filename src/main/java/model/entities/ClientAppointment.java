@@ -3,7 +3,7 @@ package model.entities;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class ClientAppointmentDto {
+public class ClientAppointment {
     private Integer id;
     private String surname;
     private LocalDate date;
@@ -11,11 +11,11 @@ public class ClientAppointmentDto {
     private String procedureName;
     private Long procedurePrice;
 
-    public ClientAppointmentDto() {
+    public ClientAppointment() {
     }
 
-    public ClientAppointmentDto(Integer id, String surname, LocalDate date, LocalTime time,
-                                String procedureName, Long procedurePrice) {
+    public ClientAppointment(Integer id, String surname, LocalDate date, LocalTime time,
+                             String procedureName, Long procedurePrice) {
         this.id = id;
         this.surname = surname;
         this.date = date;
