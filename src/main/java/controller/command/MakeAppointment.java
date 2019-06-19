@@ -15,8 +15,7 @@ import java.time.LocalTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import static string.containers.QueryContainer.FIND_PROCEDURE_BY_NAME_EN;
-import static string.containers.QueryContainer.FIND_PROCEDURE_BY_NAME_UKR;
+import static string.containers.QueryContainer.FIND_PROCEDURE_BY_NAME;
 import static string.containers.StringContainer.*;
 
 /**

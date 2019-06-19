@@ -9,10 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import static string.containers.QueryContainer.FIND_ALL_CLIENT_APPOINTMENTS_EN;
-import static string.containers.QueryContainer.FIND_ALL_CLIENT_APPOINTMENTS_UKR;
-import static string.containers.StringContainer.FIND_ALL_CLIENT_APPOINTMENTS;
-import static string.containers.StringContainer.LOCALE_UKR;
+import static string.containers.QueryContainer.FIND_ALL_CLIENT_APPOINTMENTS;
 import static string.containers.StringContainer.QUERIES_BUNDLE;
 
 public class ClientAppointmentsService implements ClientAppointmentsFinder {

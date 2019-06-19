@@ -10,9 +10,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import static string.containers.StringContainer.FIND_REVIEWS_BY_CLIENT_ID;
-import static string.containers.StringContainer.FIND_REVIEWS_BY_MASTER_ID;
-
+import static string.containers.QueryContainer.FIND_REVIEWS_BY_CLIENT_ID;
+import static string.containers.QueryContainer.FIND_REVIEWS_BY_MASTER_ID;
 
 public class ReviewsService implements ReviewsFinder {
     @Override
