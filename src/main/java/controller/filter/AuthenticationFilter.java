@@ -48,6 +48,7 @@ public class AuthenticationFilter implements Filter {
         final String login = request.getParameter("login");
         final String password = request.getParameter("password");
 
+
         @SuppressWarnings("unchecked")
         final AtomicReference<UserDao> userDao = (AtomicReference<UserDao>) request.getServletContext()
                 .getAttribute("userDao");

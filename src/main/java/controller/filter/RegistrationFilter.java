@@ -1,6 +1,7 @@
 package controller.filter;
 
 import model.entities.User;
+import model.exceptions.IncorrectDataInputException;
 import model.exceptions.LoginAlreadyExistsException;
 import model.services.impl.UserRegistrationService;
 import org.mindrot.jbcrypt.BCrypt;
@@ -40,13 +41,19 @@ public class RegistrationFilter implements Filter {
         final String gender = request.getParameter("userGender");
         final String email = request.getParameter("userEmail");
 
-        checkByRegex(request, response, nameUkr.matches(UKR_NAME_SURNAME_REGEX), USER_NAME_UKR_INCORRECT);
-        checkByRegex(request, response, nameEn.matches(LAT_NAME_SURNAME_REGEX), USER_NAME_LAT_INCORRECT);
-        checkByRegex(request, response, surnameUkr.matches(UKR_NAME_SURNAME_REGEX), USER_SURNAME_UKR_INCORRECT);
-        checkByRegex(request, response, surnameEn.matches(LAT_NAME_SURNAME_REGEX), USER_SURNAME_LAT_INCORRECT);
-        checkByRegex(request, response, login.matches(LOGIN_PASSWORD_REGEX), LOGIN_INCORRECT);
-        checkByRegex(request, response, password.matches(LOGIN_PASSWORD_REGEX), PASSWORD_INCORRECT);
-        checkByRegex(request, response, email.matches(EMAIL_REGEX), EMAIL_INCORRECT);
+        try {
+            checkByRegex(nameUkr, UKR_NAME_SURNAME_REGEX, USER_NAME_UKR_INCORRECT);
+            checkByRegex(nameEn, LAT_NAME_SURNAME_REGEX, USER_NAME_LAT_INCORRECT);
+            checkByRegex(surnameUkr, UKR_NAME_SURNAME_REGEX, USER_SURNAME_UKR_INCORRECT);
+            checkByRegex(surnameEn, LAT_NAME_SURNAME_REGEX, USER_SURNAME_LAT_INCORRECT);
+            checkByRegex(login, LOGIN_PASSWORD_REGEX, LOGIN_INCORRECT);
+            checkByRegex(password, LOGIN_PASSWORD_REGEX, PASSWORD_INCORRECT);
+            checkByRegex(email, EMAIL_REGEX, EMAIL_INCORRECT);
+
+        } catch (IncorrectDataInputException e) {
+            request.setAttribute("warning", e.getMessage());
+            request.getRequestDispatcher(REGISTRATION_PAGE).forward(request, response);
+        }
 
         final String hashPassword = BCrypt.hashpw(password, BCrypt.gensalt());
         User user = new User(nameUkr, nameEn, surnameUkr, surnameEn,
@@ -67,11 +74,9 @@ public class RegistrationFilter implements Filter {
 
     }
 
-    private void checkByRegex(HttpServletRequest request, HttpServletResponse response,
-                              boolean matches, String warning) throws ServletException, IOException {
-        if (!matches) {
-            request.setAttribute("warning", warning);
-            request.getRequestDispatcher(REGISTRATION_PAGE).forward(request, response);
+    private void checkByRegex(String dataToCheck, String regex, String warning) throws IncorrectDataInputException {
+        if (!dataToCheck.matches(regex)) {
+            throw new IncorrectDataInputException(warning);
         }
     }
 

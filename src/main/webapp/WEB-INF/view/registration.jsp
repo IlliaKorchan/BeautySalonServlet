@@ -71,7 +71,9 @@
                 </select><br>
                 <a class="navbar-brand letter" style="color: deeppink; font-size:11pt"><fmt:message key="field.user.email"/>:</a>
                 <input type="text" required placeholder="email" name="userEmail"><br>
-                <fmt:message key="${requestScope.warning}"/>
+                <c:if test="${not empty requestScope.warning}">
+                    <fmt:message key="${requestScope.warning}"/>
+                </c:if>
                 <small id="help" class="form-text text-muted"><fmt:message key="warn.required.fields"/></small>
 
                 <button class="btn btn-success" style="background-color: #FFA9EB"><fmt:message key="button.sign-up"/></button>
