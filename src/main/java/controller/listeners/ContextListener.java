@@ -1,4 +1,4 @@
-package controller;
+package controller.listeners;
 
 import model.dao.DaoFactory;
 import model.dao.UserDao;

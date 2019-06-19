@@ -12,6 +12,8 @@ import model.services.impl.EmailInvitationService;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static string.containers.QueryContainer.FIND_PROCEDURE_BY_NAME_EN;
 import static string.containers.QueryContainer.FIND_PROCEDURE_BY_NAME_UKR;
@@ -30,14 +32,18 @@ public class MakeAppointment implements Command {
         LocalTime time = LocalTime.parse(req.getParameter("time"));
         String procedureName = req.getParameter("selectedProcedure");
         User client = (User) req.getSession().getAttribute(USER_LOGGED);
+
         String language = (String) req.getSession().getAttribute(LANGUAGE);
+        ResourceBundle queriesBundle = ResourceBundle.getBundle(QUERIES_BUNDLE, new Locale(language));
 
         ProcedureDao procedureDao = DaoFactory.getInstance().createProcedureDao();
         AppointmentDao appointmentDao = DaoFactory.getInstance().createAppointmentDao();
 
-        Procedure procedure = procedureDao.findByName(procedureName, language.equals(LOCALE_UKR) ? FIND_PROCEDURE_BY_NAME_UKR
-                                                                                            : FIND_PROCEDURE_BY_NAME_EN);
-        Appointment appointment = new Appointment(client.getId(), master.getUser().getId(), date, time, procedure.getId());
+        String query = queriesBundle.getString(FIND_PROCEDURE_BY_NAME);
+
+        Procedure procedure = procedureDao.findByName(procedureName, query);
+        Appointment appointment = new Appointment(client.getId(), master.getUser().getId(),
+                                                    date, time, procedure.getId());
         appointmentDao.create(appointment);
 
         new EmailInvitationService().sendInvitation(client.getEmail());

@@ -14,7 +14,7 @@
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle basename="message"/>
 <!doctype html>
-<html lang="en">
+<html lang="${language}">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">

@@ -11,6 +11,13 @@ public interface StringContainer {
     String LOGIN_EXISTS = "warn.login.exists";
     String INCORRECT_PASSWORD_WARNING = "warn.incorrect.password";
 
+    String FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE = "find.appointments.by.master.id.and.date";
+    String FIND_ALL_CLIENT_APPOINTMENTS = "find.appointments.all.client";
+    String FIND_REVIEWS_BY_CLIENT_ID = "find.reviews.by.client.id";
+    String FIND_REVIEWS_BY_MASTER_ID = "find.reviews.by.master.id";
+    String FIND_PROCEDURE_BY_NAME = "find.procedure.by.name";
+
+    String QUERIES_BUNDLE = "queries";
     String USER_LOGGED = "user";
     String USER_LOGGED_ROLE = "role";
     String CLIENT_ROLE = "client";

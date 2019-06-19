@@ -8,7 +8,9 @@ import model.services.impl.MasterScheduleProcessorService;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 import static string.containers.QueryContainer.FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_EN;
 import static string.containers.QueryContainer.FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_UKR;
@@ -29,6 +31,8 @@ public class AdminMasterSchedule implements Command {
     @Override
     public String execute(HttpServletRequest req) {
         String language = (String) req.getSession().getAttribute(LANGUAGE);
+        ResourceBundle queriesBundle = ResourceBundle.getBundle("queries", new Locale(language));
+
         String masterSurname = req.getParameter("masterSurname");
         String date = req.getParameter("date");
 
@@ -53,8 +57,8 @@ public class AdminMasterSchedule implements Command {
 
             Integer masterId = ((UserDto) req.getSession().getAttribute("master")).getUser().getId();
 
-            String query = language.equals(LOCALE_UKR) ? FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_UKR
-                                                 : FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE_EN;
+            String query = queriesBundle.getString(FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE);
+
             req.setAttribute("appointments", masterScheduleService
                     .findAppointmentsForMasterByDate(masterId, LocalDate.parse(date), query));
         }
