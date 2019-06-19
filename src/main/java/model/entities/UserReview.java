@@ -2,13 +2,13 @@ package model.entities;
 
 import java.time.LocalDate;
 
-public class ReviewDto {
+public class UserReview {
     private Integer id;
     private LocalDate date;
     private String name;
     private String text;
 
-    public ReviewDto(Integer id, LocalDate date, String name, String text) {
+    public UserReview(Integer id, LocalDate date, String name, String text) {
         this.id = id;
         this.date = date;
         this.name = name;

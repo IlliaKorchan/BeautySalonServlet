@@ -1,11 +1,11 @@
 package model.services;
 
-import model.entities.ReviewDto;
+import model.entities.UserReview;
 import model.entities.User;
 
 import java.util.List;
 
 public interface ReviewsFinder {
-    List<ReviewDto> getClientReviews(Integer id, String language);
-    List<ReviewDto> getAdminReviews(User master, String language);
+    List<UserReview> getClientReviews(Integer id, String language);
+    List<UserReview> getAdminReviews(User master, String language);
 }

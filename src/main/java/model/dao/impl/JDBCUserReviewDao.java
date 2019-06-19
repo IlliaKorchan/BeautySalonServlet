@@ -1,8 +1,8 @@
 package model.dao.impl;
 
-import model.dao.ReviewDtoDao;
-import model.dao.mapper.ReviewDtoMapper;
-import model.entities.ReviewDto;
+import model.dao.UserReviewDao;
+import model.dao.mapper.UserReviewMapper;
+import model.entities.UserReview;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,22 +18,22 @@ import java.util.Map;
  * @author Illia Korchan
  * @version 0.7.0
  */
-public class JDBCReviewDtoDao implements ReviewDtoDao {
+public class JDBCUserReviewDao implements UserReviewDao {
     private Connection connection;
-    private ReviewDtoMapper reviewDtoMapper = new ReviewDtoMapper();
-    private Map<Integer, ReviewDto> reviewDtos = new HashMap<>();
+    private UserReviewMapper userReviewMapper = new UserReviewMapper();
+    private Map<Integer, UserReview> reviewDtos = new HashMap<>();
 
-    public JDBCReviewDtoDao(Connection connection) {
+    public JDBCUserReviewDao(Connection connection) {
         this.connection = connection;
     }
 
     @Override
-    public void create(ReviewDto entity) {
+    public void create(UserReview entity) {
 
     }
 
     @Override
-    public ReviewDto findById(int id) {
+    public UserReview findById(int id) {
         return null;
     }
 
@@ -44,15 +44,15 @@ public class JDBCReviewDtoDao implements ReviewDtoDao {
      * @return list of reviews found
      */
     @Override
-    public List<ReviewDto> findAllById(Integer id, String query) {
+    public List<UserReview> findAllById(Integer id, String query) {
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, id);
 
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                ReviewDto review = reviewDtoMapper.extractFromResultSet(resultSet);
-                reviewDtoMapper.makeUnique(reviewDtos, review);
+                UserReview review = userReviewMapper.extractFromResultSet(resultSet);
+                userReviewMapper.makeUnique(reviewDtos, review);
             }
             resultSet.close();
 
@@ -64,12 +64,12 @@ public class JDBCReviewDtoDao implements ReviewDtoDao {
     }
 
     @Override
-    public List<ReviewDto> findAll() {
+    public List<UserReview> findAll() {
         return null;
     }
 
     @Override
-    public void update(ReviewDto entity) {
+    public void update(UserReview entity) {
 
     }
 

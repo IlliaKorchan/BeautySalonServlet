@@ -1,6 +1,6 @@
 package model.dao.mapper;
 
-import model.entities.ReviewDto;
+import model.entities.UserReview;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +13,7 @@ import java.util.Map;
  * @author Illia Korchan
  * @version 0.7.0
  */
-public class ReviewDtoMapper implements ObjectMapper<ReviewDto> {
+public class UserReviewMapper implements ObjectMapper<UserReview> {
     /**
      * Method for fetching data from result set
      * @param rs, that contains data to fetch
@@ -21,26 +21,26 @@ public class ReviewDtoMapper implements ObjectMapper<ReviewDto> {
      * @throws SQLException
      */
     @Override
-    public ReviewDto extractFromResultSet(ResultSet rs) throws SQLException {
+    public UserReview extractFromResultSet(ResultSet rs) throws SQLException {
         Integer id = rs.getInt("review_id");
         LocalDate date = rs.getDate("review_date").toLocalDate();
         String masterSurname = rs.getString("surname");
         String text = rs.getString("review_text");
 
-        return new ReviewDto(id, date, masterSurname, text);
+        return new UserReview(id, date, masterSurname, text);
     }
 
     /**
-     * Method, that allows not to store repeating POJO objects. Method put {@param reviewDto} to {@param cache}
+     * Method, that allows not to store repeating POJO objects. Method put {@param userReview} to {@param cache}
      * if there is no object with the same id
      * @param cache storage of Appointment class instances
-     * @param reviewDto POJO object, that should be added to cache
-     * @return value from {@param cache} with the key id from {@param reviewDto}
+     * @param userReview POJO object, that should be added to cache
+     * @return value from {@param cache} with the key id from {@param userReview}
      */
     @Override
-    public ReviewDto makeUnique(Map<Integer, ReviewDto> cache, ReviewDto reviewDto) {
-        cache.putIfAbsent(reviewDto.getId(), reviewDto);
+    public UserReview makeUnique(Map<Integer, UserReview> cache, UserReview userReview) {
+        cache.putIfAbsent(userReview.getId(), userReview);
 
-        return cache.get(reviewDto.getId());
+        return cache.get(userReview.getId());
     }
 }

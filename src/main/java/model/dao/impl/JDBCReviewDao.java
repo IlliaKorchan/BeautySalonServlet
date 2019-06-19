@@ -3,10 +3,8 @@ package model.dao.impl;
 import model.dao.ReviewDao;
 import model.dao.mapper.ReviewMapper;
 import model.entities.Review;
-import model.entities.ReviewDto;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
