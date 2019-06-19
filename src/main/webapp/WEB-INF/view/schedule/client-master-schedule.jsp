@@ -57,7 +57,7 @@ To change this template use File | Settings | File Templates.
 
 <form method="post" action="${pageContext.request.contextPath}/salon/client-master-schedule">
     <p align="center" style="color: deeppink"><fmt:message key="choose.master"/><br>
-        <select id="masterSurname" name="masterSurname"
+        <select id="masterId" name="masterId"
                 style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
             <c:forEach var="master" items="${requestScope.masters}">
                 <option value="${master.user.id}" style="color: deeppink">${master.name}</option>

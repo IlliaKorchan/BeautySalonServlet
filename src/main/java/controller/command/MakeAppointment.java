@@ -8,6 +8,7 @@ import model.entities.Procedure;
 import model.entities.User;
 import model.dto.UserDto;
 import model.services.impl.EmailInvitationService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ import static string.containers.StringContainer.*;
  * @version 0.6.5
  */
 public class MakeAppointment implements Command {
+    private static final Logger LOGGER = Logger.getLogger(MakeAppointment.class.getSimpleName());
     @Override
     public String execute(HttpServletRequest req) {
         UserDto master = (UserDto) req.getSession().getAttribute("master");
@@ -46,6 +48,8 @@ public class MakeAppointment implements Command {
         appointmentDao.create(appointment);
 
         new EmailInvitationService().sendInvitation(client.getEmail());
+        LOGGER.info(client.getLogin() + " made an appointment to master " + master.getUser().getLogin());
+        LOGGER.info("Invitation to the email " + client.getEmail() + " sent");
         return MAKE_APPOINTMENT_PAGE;
     }
 }

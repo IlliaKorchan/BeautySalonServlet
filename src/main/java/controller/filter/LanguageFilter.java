@@ -1,9 +1,12 @@
 package controller.filter;
 
+import org.apache.log4j.Logger;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.LogManager;
 
 import static string.containers.StringContainer.*;
 
@@ -11,6 +14,8 @@ import static string.containers.StringContainer.*;
  * Filter for changing language
  */
 public class LanguageFilter implements Filter {
+    private static final Logger LOGGER = Logger.getLogger(LanguageFilter.class.getSimpleName());
+
     @Override
     public void init(FilterConfig filterConfig) {
 
@@ -27,6 +32,7 @@ public class LanguageFilter implements Filter {
 
         request.getSession().setAttribute(LANGUAGE, language.equals(LOCALE_UKR) ? LOCALE_EN : LOCALE_UKR);
 
+        LOGGER.info("Language changed to " + request.getSession().getAttribute(LANGUAGE));
         filterChain.doFilter(request, response);
     }
 

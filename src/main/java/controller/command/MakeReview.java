@@ -4,6 +4,7 @@ import model.entities.User;
 import model.dto.UserDto;
 import model.services.impl.CreateReviewService;
 import model.services.impl.MasterFinderService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -17,6 +18,7 @@ import static string.containers.StringContainer.*;
  * @version 0.6.6
  */
 public class MakeReview implements Command {
+    private static final Logger LOGGER = Logger.getLogger(MakeAppointment.class.getSimpleName());
     /**
      * Method, that sends list of masters to the jsp and receives master surname and review text from client
      * and sends it to the service for creating review
@@ -41,6 +43,7 @@ public class MakeReview implements Command {
                     .get();
 
             new CreateReviewService().sendReview(user.getId(), master.getUser().getId(), reviewText);
+            LOGGER.info(user.getLogin() + " made a review about master " + master.getUser().getLogin());
             return CLIENT_MENU_PAGE;
         }
         return MAKE_REVIEW_PAGE;

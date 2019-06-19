@@ -5,9 +5,7 @@ import controller.command.Command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static string.containers.StringContainer.INDEX_PAGE;
-import static string.containers.StringContainer.USER_LOGGED;
-import static string.containers.StringContainer.USER_LOGGED_ROLE;
+import static string.containers.StringContainer.*;
 
 /**
  * Class for removing logged account and it`s role from the session

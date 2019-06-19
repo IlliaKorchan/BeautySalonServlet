@@ -2,6 +2,7 @@ package controller.filter;
 
 import model.dao.UserDao;
 import model.entities.User;
+import org.apache.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.*;
@@ -9,12 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
-import static string.containers.StringContainer.LOGIN_PAGE;
-import static string.containers.StringContainer.USER_LOGGED;
-import static string.containers.StringContainer.USER_LOGGED_ROLE;
+import static string.containers.StringContainer.*;
 
 /**
  * Class for authentication processing
@@ -22,6 +21,7 @@ import static string.containers.StringContainer.USER_LOGGED_ROLE;
  * @version 0.6.5
  */
 public class AuthenticationFilter implements Filter {
+    private static final Logger LOGGER = Logger.getLogger(AuthenticationFilter.class.getSimpleName());
 
     @Override
     public void init(FilterConfig filterConfig) {
@@ -70,6 +70,7 @@ public class AuthenticationFilter implements Filter {
                 request.getSession().setAttribute(USER_LOGGED, user);
                 request.getSession().setAttribute(USER_LOGGED_ROLE, role);
 
+                LOGGER.info(role + " authorized");
                 request.getRequestDispatcher("/WEB-INF/view/menu/" + role + "-menu.jsp").forward(request, response);
             }
         } else {

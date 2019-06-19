@@ -1,6 +1,7 @@
 package model.services.impl;
 
 import model.dao.*;
+import model.dto.UserDto;
 import model.entities.ClientAppointment;
 import model.entities.WorkingDay;
 import model.services.MasterScheduleProcessor;

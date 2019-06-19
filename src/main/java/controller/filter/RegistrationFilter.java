@@ -4,6 +4,7 @@ import model.entities.User;
 import model.exceptions.IncorrectDataInputException;
 import model.exceptions.LoginAlreadyExistsException;
 import model.services.impl.UserRegistrationService;
+import org.apache.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.*;
@@ -20,6 +21,8 @@ import static string.containers.RegexContainer.*;
  * @version 0.6.6
  */
 public class RegistrationFilter implements Filter {
+    private static final Logger LOGGER = Logger.getLogger(RegistrationFilter.class.getSimpleName());
+
     @Override
     public void init(FilterConfig filterConfig) {
 
@@ -52,6 +55,7 @@ public class RegistrationFilter implements Filter {
 
         } catch (IncorrectDataInputException e) {
             request.setAttribute("warning", e.getMessage());
+            LOGGER.info("Incorrect input data");
             request.getRequestDispatcher(REGISTRATION_PAGE).forward(request, response);
         }
 
@@ -63,6 +67,7 @@ public class RegistrationFilter implements Filter {
             new UserRegistrationService().register(user);
         } catch (LoginAlreadyExistsException e) {
             request.setAttribute("warning", LOGIN_EXISTS);
+            LOGGER.warn("Attempt to register already registered user");
             request.getRequestDispatcher(REGISTRATION_PAGE).forward(request, response);
         }
 

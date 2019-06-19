@@ -36,6 +36,7 @@ public class ChangePasswordCommit implements Command {
             return CHANGE_PASSWORD_PAGE;
         }
 
+
         req.getSession().removeAttribute(USER_LOGGED);
         req.getSession().removeAttribute(USER_LOGGED_ROLE);
         return INDEX_PAGE;
