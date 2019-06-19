@@ -55,7 +55,7 @@ public class RegistrationFilter implements Filter {
 
         } catch (IncorrectDataInputException e) {
             request.setAttribute("warning", e.getMessage());
-            LOGGER.info("Incorrect input data");
+            LOGGER.error("Incorrect input data on registration page");
             request.getRequestDispatcher(REGISTRATION_PAGE).forward(request, response);
         }
 

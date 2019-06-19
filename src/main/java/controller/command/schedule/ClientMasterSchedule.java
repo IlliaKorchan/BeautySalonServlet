@@ -32,7 +32,7 @@ public class ClientMasterSchedule implements Command {
     public String execute(HttpServletRequest req) {
         String language = (String) req.getSession().getAttribute(LANGUAGE);
 
-        String masterSurname = req.getParameter("masterSurname");
+        String selectedMaster = req.getParameter("masterId");
         String date = req.getParameter("date");
 
         MasterScheduleProcessorService masterScheduleService = new MasterScheduleProcessorService();
@@ -40,8 +40,8 @@ public class ClientMasterSchedule implements Command {
 
         req.setAttribute("masters", masters);
 
-        if (Objects.nonNull(masterSurname)) {
-            Integer masterId = Integer.valueOf(masterSurname);
+        if (Objects.nonNull(selectedMaster)) {
+            Integer masterId = Integer.valueOf(selectedMaster);
             UserDto master = masters.stream().filter(mstr -> mstr.getUser().getId().equals(masterId))
                                             .findFirst()
                                             .get();

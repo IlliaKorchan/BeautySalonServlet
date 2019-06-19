@@ -2,6 +2,7 @@ package controller.command.account.processing;
 
 import controller.command.Command;
 import model.entities.User;
+import model.exceptions.IncorrectDataInputException;
 import model.exceptions.IncorrectPasswordException;
 import model.services.impl.UserUpdateService;
 import org.mindrot.jbcrypt.BCrypt;
@@ -29,10 +30,11 @@ public class ChangePasswordCommit implements Command {
 
         try {
             new UserUpdateService().updatePassword(user,
-                                                BCrypt.hashpw(req.getParameter("current-password"), BCrypt.gensalt()),
-                                                BCrypt.hashpw(req.getParameter("new-password"), BCrypt.gensalt()));
-        } catch (IncorrectPasswordException e) {
-            req.setAttribute("incorrect-password-warning", INCORRECT_PASSWORD_WARNING);
+                    req.getParameter("current-password"),
+                    req.getParameter("new-password"));
+
+        } catch (IncorrectPasswordException | IncorrectDataInputException e) {
+            req.setAttribute("warning", e.getMessage());
             return CHANGE_PASSWORD_PAGE;
         }
 

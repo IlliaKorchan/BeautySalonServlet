@@ -57,7 +57,7 @@ To change this template use File | Settings | File Templates.
 
 <form method="post" action="${pageContext.request.contextPath}/salon/client-master-schedule">
     <p align="center" style="color: deeppink"><fmt:message key="choose.master"/><br>
-        <select id="masterId" name="masterId"
+        <select required id="masterId" name="masterId"
                 style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
             <c:forEach var="master" items="${requestScope.masters}">
                 <option value="${master.user.id}" style="color: deeppink">${master.name}</option>
@@ -72,7 +72,7 @@ To change this template use File | Settings | File Templates.
 
 <form method="post" action="${pageContext.request.contextPath}/salon/client-master-schedule">
     <p style="color: deeppink" align="center"><fmt:message key="choose.date"/><br>
-        <select id="date" name="date"
+        <select required id="date" name="date"
                 style="font-size: 11pt; background-color: #FFE3F5; color: deeppink" onchange="">
             <c:forEach var="day" items="${requestScope.workingDays}">
                 <option value="${day}" style="color: deeppink">${day}</option>
@@ -87,7 +87,7 @@ To change this template use File | Settings | File Templates.
 
 <form method="post" action="${pageContext.request.contextPath}/salon/make-appointment">
     <p align="center"><fmt:message key="choose.procedure"/><br>
-        <select id="selectedProcedure" name="selectedProcedure"
+        <select required id="selectedProcedure" name="selectedProcedure"
                 style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
             <c:forEach var="procedure" items="${requestScope.procedures}">
                 <option value="${procedure.name}" style="color: deeppink">${procedure.name}</option>
@@ -96,7 +96,7 @@ To change this template use File | Settings | File Templates.
         <br><br>
     </p>
     <p align="center"><fmt:message key="choose.time"/><br>
-        <select id="time" name="time"
+        <select required id="time" name="time"
                 style="font-size: 11pt; background-color: #FFE3F5; color: deeppink">
             <c:forEach var="time" items="${requestScope.freeTimes}">
                 <option value="${time}" style="color: deeppink">${time}</option>

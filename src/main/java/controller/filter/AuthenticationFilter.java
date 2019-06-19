@@ -2,6 +2,7 @@ package controller.filter;
 
 import model.dao.UserDao;
 import model.entities.User;
+import model.exceptions.IncorrectDataInputException;
 import org.apache.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static string.containers.RegexContainer.LOGIN_PASSWORD_REGEX;
 import static string.containers.StringContainer.*;
 
 /**
@@ -48,6 +50,16 @@ public class AuthenticationFilter implements Filter {
         final String login = request.getParameter("login");
         final String password = request.getParameter("password");
 
+        if (Objects.nonNull(login) && Objects.nonNull(password)) {
+            try {
+                checkByRegex(login, LOGIN_INCORRECT);
+                checkByRegex(password, PASSWORD_INCORRECT);
+            } catch (IncorrectDataInputException e) {
+                LOGGER.error("Incorrect input data on login page");
+                request.setAttribute("warning", e.getMessage());
+                request.getRequestDispatcher(LOGIN_PAGE).forward(request, response);
+            }
+        }
 
         @SuppressWarnings("unchecked")
         final AtomicReference<UserDao> userDao = (AtomicReference<UserDao>) request.getServletContext()
@@ -80,5 +92,11 @@ public class AuthenticationFilter implements Filter {
 
     @Override
     public void destroy() {
+    }
+
+    private void checkByRegex(String dataToCheck, String warning) throws IncorrectDataInputException {
+        if (!dataToCheck.matches(LOGIN_PASSWORD_REGEX)) {
+            throw new IncorrectDataInputException(warning);
+        }
     }
 }

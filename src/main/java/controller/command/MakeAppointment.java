@@ -28,10 +28,13 @@ public class MakeAppointment implements Command {
     private static final Logger LOGGER = Logger.getLogger(MakeAppointment.class.getSimpleName());
     @Override
     public String execute(HttpServletRequest req) {
+
         UserDto master = (UserDto) req.getSession().getAttribute("master");
+
         LocalDate date = LocalDate.parse((String) req.getSession().getAttribute("selectedDate"));
         LocalTime time = LocalTime.parse(req.getParameter("time"));
         String procedureName = req.getParameter("selectedProcedure");
+
         User client = (User) req.getSession().getAttribute(USER_LOGGED);
 
         String language = (String) req.getSession().getAttribute(LANGUAGE);

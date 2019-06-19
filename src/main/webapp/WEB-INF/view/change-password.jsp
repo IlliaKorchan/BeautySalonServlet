@@ -41,6 +41,9 @@
         <p align="center">
             <fmt:message key="field.enter.current.password"/>: <input type="password" required placeholder="password" name="current-password"><br>
             <fmt:message key="field.enter.new.password"/>: <input type="password" required placeholder="new password" name="new-password"><br><br>
+            <c:if test="${not empty requestScope.warning}">
+                <fmt:message key="${requestScope.warning}"/>
+            </c:if><br>
             <button class="btn btn-success" style="background-color: #FFA9EB"><fmt:message key="button.edit.password"/></button>
         </p>
     </form>

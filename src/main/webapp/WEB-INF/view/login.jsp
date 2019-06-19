@@ -56,6 +56,9 @@
         <p align="center">
         <input type="text" required placeholder="login" name="login"><br>
         <input type="password" required placeholder="password" name="password"><br><br>
+            <c:if test="${not empty requestScope.warning}">
+                <fmt:message key="${requestScope.warning}"/>
+            </c:if><br>
             <button class="btn btn-success" style="background-color: #FFA9EB"><fmt:message key="button.sign-in"/></button>
         </p>
     </form>
