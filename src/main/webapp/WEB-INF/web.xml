@@ -23,6 +23,15 @@
     </filter-mapping>
 
     <filter>
+        <filter-name>NoCacheFilter</filter-name>
+        <filter-class>controller.filter.NoCacheFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>NoCacheFilter</filter-name>
+        <url-pattern>/salon/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>AuthenticationFilter</filter-name>
         <filter-class>controller.filter.AuthenticationFilter</filter-class>
     </filter>
