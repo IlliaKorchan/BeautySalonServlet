@@ -42,10 +42,11 @@ public class AdminMasterSchedule implements Command {
 
         if (Objects.nonNull(masterSurname)) {
             Integer masterId = Integer.valueOf(masterSurname);
-            UserDto master = masters.stream().filter(mstr -> mstr.getUser().getId().equals(masterId))
-                                            .findFirst()
-                                            .get();
-            req.getSession().setAttribute("master", master);
+
+            req.getSession().setAttribute("master", masters.stream()
+                                                    .filter(m -> m.getUser().getId().equals(masterId))
+                                                    .findFirst()
+                                                    .get());
 
             req.setAttribute("workingDays", masterScheduleService.findDates(masterId));
         }
