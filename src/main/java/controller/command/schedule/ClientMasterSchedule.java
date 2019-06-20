@@ -8,11 +8,11 @@ import model.services.impl.ProceduresService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import static string.containers.StringContainer.CLIENT_MASTER_SCHEDULE_PAGE;
-import static string.containers.StringContainer.LANGUAGE;
+import static string.containers.StringContainer.*;
 
 /**
  * Class for processing client request to get data about master schedule
@@ -21,6 +21,8 @@ import static string.containers.StringContainer.LANGUAGE;
  * @version 0.6.5
  */
 public class ClientMasterSchedule implements Command {
+    private String[] hadAccess = {CLIENT_ROLE};
+
     /**
      * Method, that sends list of masters to the jsp and fetches master surname, chosen by client, date
      * and sends it to the master schedule service
@@ -61,5 +63,10 @@ public class ClientMasterSchedule implements Command {
         }
 
         return CLIENT_MASTER_SCHEDULE_PAGE;
+    }
+
+    @Override
+    public boolean checkRole(String role) {
+        return Arrays.asList(hadAccess).contains(role);
     }
 }

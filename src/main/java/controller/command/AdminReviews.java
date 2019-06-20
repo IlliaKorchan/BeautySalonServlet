@@ -5,10 +5,12 @@ import model.services.impl.MasterFinderService;
 import model.services.impl.ReviewsService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 import static string.containers.StringContainer.ADMIN_REVIEWS_PAGE;
+import static string.containers.StringContainer.ADMIN_ROLE;
 import static string.containers.StringContainer.LANGUAGE;
 
 /**
@@ -17,6 +19,7 @@ import static string.containers.StringContainer.LANGUAGE;
  * @version 0.6.5
  */
 public class AdminReviews implements Command {
+    private String[] hadAccess = {ADMIN_ROLE};
     /**
      * Method, that sends list of masters to the jsp, fetches surname of master, selected by admin,
      * and send it to the reviews service for admin
@@ -41,5 +44,10 @@ public class AdminReviews implements Command {
         }
 
         return ADMIN_REVIEWS_PAGE;
+    }
+
+    @Override
+    public boolean checkRole(String role) {
+        return Arrays.asList(hadAccess).contains(role);
     }
 }

@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -25,7 +26,9 @@ import static string.containers.StringContainer.*;
  * @version 0.6.5
  */
 public class MakeAppointment implements Command {
+    private String[] hadAccess = {CLIENT_ROLE};
     private static final Logger LOGGER = Logger.getLogger(MakeAppointment.class.getSimpleName());
+
     @Override
     public String execute(HttpServletRequest req) {
         UserDto master = (UserDto) req.getSession().getAttribute("master");
@@ -53,5 +56,10 @@ public class MakeAppointment implements Command {
         LOGGER.info(client.getLogin() + " made an appointment to master " + master.getUser().getLogin());
         LOGGER.info("Invitation to the email " + client.getEmail() + " sent");
         return MAKE_APPOINTMENT_PAGE;
+    }
+
+    @Override
+    public boolean checkRole(String role) {
+        return Arrays.asList(hadAccess).contains(role);
     }
 }

@@ -5,6 +5,8 @@ import controller.command.Command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.util.Arrays;
+
 import static string.containers.StringContainer.*;
 
 /**
@@ -13,6 +15,7 @@ import static string.containers.StringContainer.*;
  * @version 0.6.5
  */
 public class Logout implements Command {
+    private String[] hadAccess = {CLIENT_ROLE, MASTER_ROLE, ADMIN_ROLE};
     @Override
     public String execute(HttpServletRequest req) {
         final HttpSession session = req.getSession();
@@ -21,5 +24,10 @@ public class Logout implements Command {
         session.removeAttribute(USER_LOGGED_ROLE);
 
         return INDEX_PAGE;
+    }
+
+    @Override
+    public boolean checkRole(String role) {
+        return Arrays.asList(hadAccess).contains(role);
     }
 }

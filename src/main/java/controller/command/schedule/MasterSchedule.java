@@ -7,6 +7,7 @@ import model.services.impl.MasterScheduleProcessorService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -20,6 +21,7 @@ import static string.containers.StringContainer.*;
  * @version 0.6.5
  */
 public class MasterSchedule implements Command {
+    private String[] hadAccess = {MASTER_ROLE};
     /**
      * Method, that fetches master account from session, date, chosen by master
      * and sends it to the master schedule service
@@ -45,5 +47,10 @@ public class MasterSchedule implements Command {
                                                     .findAppointmentsForMasterByDate(id, LocalDate.parse(date), query));
         }
         return MASTER_SCHEDULE_PAGE;
+    }
+
+    @Override
+    public boolean checkRole(String role) {
+        return Arrays.asList(hadAccess).contains(role);
     }
 }

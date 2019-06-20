@@ -16,6 +16,7 @@ public interface StringContainer {
     String USER_LOGGED_ROLE = "role";
     String CLIENT_ROLE = "client";
     String MASTER_ROLE = "master";
+    String ADMIN_ROLE = "admin";
     String LOCALE_UKR = "uk";
     String LOCALE_EN = "en";
     String LANGUAGE = "language";

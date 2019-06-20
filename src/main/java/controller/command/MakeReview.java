@@ -7,6 +7,7 @@ import model.services.impl.MasterFinderService;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,6 +19,7 @@ import static string.containers.StringContainer.*;
  * @version 0.6.6
  */
 public class MakeReview implements Command {
+    private String[] hadAccess = {CLIENT_ROLE};
     private static final Logger LOGGER = Logger.getLogger(MakeAppointment.class.getSimpleName());
     /**
      * Method, that sends list of masters to the jsp and receives master surname and review text from client
@@ -47,5 +49,10 @@ public class MakeReview implements Command {
             return CLIENT_MENU_PAGE;
         }
         return MAKE_REVIEW_PAGE;
+    }
+
+    @Override
+    public boolean checkRole(String role) {
+        return Arrays.asList(hadAccess).contains(role);
     }
 }

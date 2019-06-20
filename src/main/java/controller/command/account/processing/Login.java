@@ -4,6 +4,8 @@ import controller.command.Command;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.Objects;
+
 import static string.containers.StringContainer.LOGIN_PAGE;
 
 /**
@@ -15,5 +17,10 @@ public class Login implements Command {
     @Override
     public String execute(HttpServletRequest req) {
         return LOGIN_PAGE;
+    }
+
+    @Override
+    public boolean checkRole(String role) {
+        return true;
     }
 }

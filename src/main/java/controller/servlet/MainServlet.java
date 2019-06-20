@@ -5,6 +5,7 @@ import controller.command.account.processing.*;
 import controller.command.schedule.AdminMasterSchedule;
 import controller.command.schedule.ClientMasterSchedule;
 import controller.command.schedule.MasterSchedule;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,12 +15,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static string.containers.StringContainer.INDEX_PAGE;
+import static string.containers.StringContainer.USER_LOGGED_ROLE;
 
 /**
  * Main servlet, for processing all requests
  */
 public class MainServlet extends HttpServlet {
+    private final static Logger LOGGER = org.apache.log4j.Logger.getLogger(MainServlet.class.getSimpleName());
     private Map<String, Command> commands;
 
     /**
@@ -60,8 +62,17 @@ public class MainServlet extends HttpServlet {
         String path = req.getRequestURI();
         path = path.replaceAll(".*/" , "");
         path = path.replaceAll("\\?*" , "");
-        Command command = commands.getOrDefault(path , (r)-> INDEX_PAGE);
-        String page = command.execute(req);
+
+        String role = (String) req.getSession().getAttribute(USER_LOGGED_ROLE);
+
+        Command command = commands.getOrDefault(path,  commands.get("menu"));
+        String page;
+        if (command.checkRole(role)) {
+           page  = command.execute(req);
+        } else {
+            LOGGER.error("Attempt of moving to forbidden page");
+            page = "/WEB-INF/view/errors/error403.jsp";
+        }
         req.getRequestDispatcher(page).forward(req,resp);
     }
 

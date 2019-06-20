@@ -5,9 +5,9 @@ import model.services.impl.ReviewsService;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static string.containers.StringContainer.CLIENT_REVIEWS_PAGE;
-import static string.containers.StringContainer.LANGUAGE;
-import static string.containers.StringContainer.USER_LOGGED;
+import java.util.Arrays;
+
+import static string.containers.StringContainer.*;
 
 /**
  * Class for processing client request for displaying his/her reviews
@@ -16,6 +16,8 @@ import static string.containers.StringContainer.USER_LOGGED;
  * @version 0.6.5
  */
 public class ClientReviews implements Command {
+    private String[] hadAccess = {CLIENT_ROLE};
+
     /**
      * Method, that fetches id of logged user and sends it to the client reviews service.
      * Then, sends the results to the jsp
@@ -30,5 +32,10 @@ public class ClientReviews implements Command {
         req.setAttribute("clientReviews", new ReviewsService().getClientReviews(user.getId(), language));
 
         return CLIENT_REVIEWS_PAGE;
+    }
+
+    @Override
+    public boolean checkRole(String role) {
+        return Arrays.asList(hadAccess).contains(role);
     }
 }

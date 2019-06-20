@@ -8,9 +8,9 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import static string.containers.StringContainer.INDEX_PAGE;
-import static string.containers.StringContainer.USER_LOGGED;
-import static string.containers.StringContainer.USER_LOGGED_ROLE;
+import java.util.Arrays;
+
+import static string.containers.StringContainer.*;
 
 /**
  * Class for processing delete account procedure
@@ -18,6 +18,8 @@ import static string.containers.StringContainer.USER_LOGGED_ROLE;
  * @version 0.6.5
  */
 public class DeleteAccount implements Command {
+    private String[] hadAccess = {CLIENT_ROLE};
+
     private static final Logger LOGGER = Logger.getLogger(DeleteAccount.class.getSimpleName());
     /**
      * Method, that fetches current user logged in, sends it to the account delete service
@@ -36,5 +38,10 @@ public class DeleteAccount implements Command {
         session.removeAttribute(USER_LOGGED);
         session.removeAttribute(USER_LOGGED_ROLE);
         return INDEX_PAGE;
+    }
+
+    @Override
+    public boolean checkRole(String role) {
+        return Arrays.asList(hadAccess).contains(role);
     }
 }

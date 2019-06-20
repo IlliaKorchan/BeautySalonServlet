@@ -16,4 +16,9 @@ public class Registration implements Command {
     public String execute(HttpServletRequest req) {
         return REGISTRATION_PAGE;
     }
+
+    @Override
+    public boolean checkRole(String role) {
+        return true;
+    }
 }

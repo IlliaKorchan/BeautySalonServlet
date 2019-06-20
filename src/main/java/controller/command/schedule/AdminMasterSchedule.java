@@ -7,10 +7,7 @@ import model.services.impl.MasterScheduleProcessorService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static string.containers.QueryContainer.FIND_APPOINTMENTS_BY_MASTER_ID_AND_DATE;
 import static string.containers.StringContainer.*;
@@ -21,6 +18,8 @@ import static string.containers.StringContainer.*;
  * @version 0.6.5
  */
 public class AdminMasterSchedule implements Command {
+    private String[] hadAccess = {ADMIN_ROLE};
+
     /**
      * Method, that sends list of masters to the jsp, fetches master surname, chosen by admin, date
      * and sends it to the master schedule service
@@ -64,6 +63,11 @@ public class AdminMasterSchedule implements Command {
         }
 
         return ADMIN_MASTER_SCHEDULE_PAGE;
+    }
+
+    @Override
+    public boolean checkRole(String role) {
+        return Arrays.asList(hadAccess).contains(role);
     }
 }
 

@@ -9,6 +9,8 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.Arrays;
+
 import static string.containers.StringContainer.*;
 
 /**
@@ -17,6 +19,7 @@ import static string.containers.StringContainer.*;
  * @version 0.6.5
  */
 public class ChangePasswordCommit implements Command {
+    private String[] hadAccess = {CLIENT_ROLE};
 
     /**
      * Method, that receives current password and new password and sends them
@@ -42,5 +45,10 @@ public class ChangePasswordCommit implements Command {
         req.getSession().removeAttribute(USER_LOGGED);
         req.getSession().removeAttribute(USER_LOGGED_ROLE);
         return INDEX_PAGE;
+    }
+
+    @Override
+    public boolean checkRole(String role) {
+        return Arrays.asList(hadAccess).contains(role);
     }
 }

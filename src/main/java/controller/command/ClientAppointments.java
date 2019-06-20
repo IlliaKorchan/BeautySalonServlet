@@ -5,9 +5,9 @@ import model.services.impl.ClientAppointmentsService;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static string.containers.StringContainer.CLIENT_APPOINTMENTS_PAGE;
-import static string.containers.StringContainer.LANGUAGE;
-import static string.containers.StringContainer.USER_LOGGED;
+import java.util.Arrays;
+
+import static string.containers.StringContainer.*;
 
 /**
  * Class for processing client request for displaying his/her appointments
@@ -16,6 +16,7 @@ import static string.containers.StringContainer.USER_LOGGED;
  * @version 0.6.5
  */
 public class ClientAppointments implements Command {
+    private String[] hadAccess = {CLIENT_ROLE};
     /**
      * Method, that fetches id of logged user and sends it to the client appointment service.
      * Then, sends the results to the jsp
@@ -31,5 +32,10 @@ public class ClientAppointments implements Command {
                                                             .getAllClientAppointments(language, id));
 
         return CLIENT_APPOINTMENTS_PAGE;
+    }
+
+    @Override
+    public boolean checkRole(String role) {
+        return Arrays.asList(hadAccess).contains(role);
     }
 }

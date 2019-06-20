@@ -9,3 +9,4 @@
 2019-06-20 10:15:54 ERROR [http-nio-8080-exec-1]: Incorrect input data on login page
 2019-06-20 10:16:01 INFO  [http-nio-8080-exec-3]: admin authorized
 2019-06-20 10:17:40 INFO  [http-nio-8080-exec-7]: admin authorized
+2019-06-20 10:47:25 INFO  [http-nio-8080-exec-10]: admin authorized
